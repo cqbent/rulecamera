@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+	<node>
+		<id><![CDATA[4323]]></id>
+		<manufacturer><![CDATA[AAdynTech]]></manufacturer>
+		<manufacturer_id><![CDATA[1287]]></manufacturer_id>
+		<categories><![CDATA[Rentals > Lighting & Grip > LED]]></categories>
+		<manufacturermodelid><![CDATA[R-AADT-KIT-JAB-D03]]></manufacturermodelid>
+		<skuakamodelname><![CDATA[JAB Daylight]]></skuakamodelname>
+		<titleakacombo_field><![CDATA[AAdynTech JAB Daylight LED Light]]></titleakacombo_field>
+		<rentable><![CDATA[1]]></rentable>
+		<rental_price><![CDATA[165]]></rental_price>
+		<call_for_rental_quote><![CDATA[0]]></call_for_rental_quote>
+		<salable><![CDATA[0]]></salable>
+		<call_for_sale_quote><![CDATA[0]]></call_for_sale_quote>
+		<list_price><![CDATA[]]></list_price>
+		<sale_price><![CDATA[]]></sale_price>
+		<productalertcurrentlycalledshortdescription><![CDATA[]]></productalertcurrentlycalledshortdescription>
+		<productdescription><![CDATA[The JAB Daylight is the most powerful compact LED light on the market today, 1,854 fc @ 10 feet, all while using 1.7 amps of power, 187 watts! This JAB series is the Daylight models. AadynTech has developed, engineered & assembled these color-corrected, single-source LED white lights right here in the USA. This Luminaire is so versatile that you can use it with either AC or 30v DC.
+<p>
+The JAB is convection cooled, and is IP61 Rated. Optical efficiency allows for a single light source and eliminates multiple shadows. Special effects include variable lightning and strob+e, which has made lightning strikes inefficient. Quick change lens which vary between spot and flood (and still keep an even field with high output!)]]></productdescription>
+		<features><![CDATA[1,854 foot candle output @ 10 feet
+5600°K color temperature
+Draws only 1.77 amp at full output
+Auto range voltage – 100/277 VAC – 50/60Hz
+Up to 90% energy savings
+Precise brightness control with no color shift
+Single light source eliminates multiple shadows
+No heat generation – operates cool to the touch
+Douse button (momentary off)
+Included 15°, 30°, 55° lenses to vary beam angle
+5° lens optional
+No head cables, ballast or spare lamps
+Optional digital User Interface Module (UIM) control
+Recalibration countdown hour ‘smart’ meter (with UIM)
+Full DMX control w/ DMX loop-thru
+ 5-pin XLR DMX In/Out
+Programmable multiple lightening and strobe effects(with UIM)
+Multiple user memory storage with recall (with UIM)
+*Unprecedented 60,000 hour warranty on the LED’s
+*No UV or IR emissions
+*Operating Temperature -20c to +50c (-4F to 122F)
+*DMX compatible | loop through
+*Full brightness control (dimmable) without color shift
+1,854 foot-candles @ 10ft.
+*Quick-change lenses to adjust beam spread
+*Draws 1.77 amps of power @ 110v AC
+*Run on 30v DC power for hours w/ battery source
+90% energy savings
+*Single light-source that eliminates multiple shadows
+*Douse (Intermittent off) Switch
+*Convection cooled with no fans
+*Operates cool-to-the-touch and runs silent]]></features>
+		<specifications><![CDATA[Control	Local, UIM, DMX
+Source	LED, 5600°K
+Life Expectancy	60,000 Hours
+Cooling	Passive
+Mounting	Baby Pin]]></specifications>
+		<whatsinthebox2014><![CDATA[JAB Daylight Head & Yoke
+LED Driver Power Supply
+Remote Interface Controller
+Four Leaf Barndoors
+Manual
+Scrim / Lens Bag
+15 Degree Diffusion Lens
+30 Degree Diffusion Lens
+55 Degree Diffusion Lens
+Gel Frame]]></whatsinthebox2014>
+	</node>
+	<node>
+		<id><![CDATA[4245]]></id>
+		<manufacturer><![CDATA[Aja Video Systems, Inc.]]></manufacturer>
+		<manufacturer_id><![CDATA[2]]></manufacturer_id>
+		<categories><![CDATA[Sales > Routers & Switchers > Accessories]]></categories>
+		<manufacturermodelid><![CDATA[R-AJA-KIPROQUAD]]></manufacturermodelid>
+		<skuakamodelname><![CDATA[Ki Pro Quad]]></skuakamodelname>
+		<titleakacombo_field><![CDATA[AJA Ki Pro Quad Solid State Recorder]]></titleakacombo_field>
+		<rentable><![CDATA[1]]></rentable>
+		<rental_price><![CDATA[150]]></rental_price>
+		<call_for_rental_quote><![CDATA[0]]></call_for_rental_quote>
+		<salable><![CDATA[0]]></salable>
+		<call_for_sale_quote><![CDATA[0]]></call_for_sale_quote>
+		<list_price><![CDATA[]]></list_price>
+		<sale_price><![CDATA[]]></sale_price>
+		<productalertcurrentlycalledshortdescription><![CDATA[]]></productalertcurrentlycalledshortdescription>
+		<productdescription><![CDATA[The AJA Ki Pro Quad 4K Solid State Recorder ingests raw footage from a camera, and performs up to all three of the following functions simultaneously: stores the footage to an SSD, transfers the footage to a RAID or Thunderbolt-enabled computer, and outputs the footage to up to two displays for monitoring.
+
+Footage can be captured RAW and in 4K, Quad HD, 2K, and HD resolutions. Captured RAW, it can be transferred RAW to a RAID or computer. Color depth supported is 10-bit 4:4:4 and 10-bit 4:2:2. In cases of storing to an SSD, the Ki Pro Quad can record in 4K, 2K and HD ProRes formats, which are friendly to Final Cut, Premiere and Avid. Two SSD slots are available.
+
+A diverse set of connections includes SDI, HDMI, balanced audio, Thunderbolt, and Ethernet. A 4-pin XLR port is also available on the bottom of the device. For monitoring, a 4K display and an HD display can be connected by dedicated SDI and HDMI monitor connectors.
+
+The Ki Pro Quad also usefully features a playback-capable display monitor that would allow you to see what you're recording.]]></productdescription>
+		<features><![CDATA[Multi-Function Solid State Recorder
+Captures, records and outputs 4K, Quad HD, 2K, and HD Supports 10-bit 4:4:4 and 10-bit 4:2:2 / Can capture and transfer RAW Records to edit-friendly 4K, 2K, or HD ProRes files on removable SSD media Features SDI, HDMI, Thunderbolt, XLR, Ethernet and balanced audio connections
+
+Output
+Real-time transfer of RAW to a RAID or Thunderbolt-enabled computer Uncompressed and debayered output to 2 displays by dedicated SDI / HDMI connectors
+
+Debayer Processing
+Performs debayer processing of RAW (RAW can further be manipulated by software tools) Debayered image is used for 4K monitoring, scaled/cropped HD monitoring, and on-board compressed storage to SSD media]]></features>
+		<specifications><![CDATA[Capture Resolutions	 4K (4096 x 2160) 
+Quad HD (3840 x 2160) 
+2K (2048 x 1080) 
+HD (1920 x 1080)
+Recording Formats	 4K, 2K, or HD ProRes
+Color Support	 10-bit 4:4:4 and 10-bit 4:2:2
+Connections	 SDI inputs x4 
+SDI outputs x4 
+SDI monitor x1 
+HDMI monitor x1 
+LTC input x1 BNC 
+Ref input x1 BNC 
+Thunderbolt x1 
++48V Mic Line x2 (left / right) 
+4-pin XLR x1 
+RJ45 x1
+Monitoring	 4K and scaled/cropped HD monitoring on up to two displays via dedicated SDI / HDMI connectors
+Media Card Slots	 2 SSD slots]]></specifications>
+		<whatsinthebox2014><![CDATA[Ki Pro Quad
+Small LCD Hood
+Genus Mounting Plate
+15mm Rod Mount
+Anton Bauer Plate
+SSD Pak Dock
+Power Supply For Ki Pro Quad
+Power Supply For Pak Dock
+(2) AC Cable
+Thunderbolt Cable
+USB 3.0 to USB 3.0 Micro B Cable
+
+Manual]]></whatsinthebox2014>
+	</node>
+</data>

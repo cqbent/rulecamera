@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+	<node>
+		<name><![CDATA[GoPro Hero4 Black Edition SDHC H.264 Camera]]></name>
+		<price><![CDATA[75]]></price>
+		<description><![CDATA[The GoPro HERO4 Black features improved image quality and a 2x more powerful processor with 2x faster video frame rates. Incredible high-resolution 4K30 and 2.7K50 video and high frame rate 1080p120 video enable stunning, immersive footage of you and your world.  <p> New Protune™ settings for both photos and video unlock manual control of Color, ISO Limit, Exposure and more. Waterproof to 131’ (40m) with 12MP photos at 30 frames per second and improved audio. <p> This kit includes the LCD BacPac, extra rechargeable batteries and a dual battery charger. We also have additional mounting solutions available for different shooting scenarios.]]></description>
+		<features><![CDATA[ *Supports 4K30, 2.7K50, and 1080p Video *Capture 12MP Photos at 30 fps *Ultra Wide Angle Glass Lens + SuperView *Camera Housing Waterproof to 131ft *Wi-Fi and Bluetooth Connectivity *Interval Capture for Time Lapse *Protune Mode for Video and Photo *One-Button Operation with QuikCapture *Auto Low Light and Night Photo Modes]]></features>
+		<casecard><![CDATA["Camera & Standard Housing Touch LCD Screen Membrane Touch LCD Door Solid Touch LCD Door Skeleton Touch LCD Door Solid Standard Housing Door Quick Release Buckle (1) Straight & (1) Short Bracket (2) Short & (1) Long Thumbscrew (4) 3.8V Hero4 Batteries Dual Slot Battery Charger USB Power Supply/Charger (2) USB Type (A) - Mini (B) USB Card Reader (2) Tripod Mount (2 Types) WiFi Remote Charge Cable For WiFi Remote"]]></casecard>
+		<category><![CDATA[2 Categories: 1) Rentals>Cameras>Compact HD and 2) Rentals>Cameras>Video]]></category>
+		<photo1><![CDATA[GoPro Hero4 Black Edition SDHC H.264 Camera.1.jpg]]></photo1>
+		<photo2><![CDATA[GoPro Hero4 Black Edition SDHC H.264 Camera.2.jpg]]></photo2>
+		<photo3><![CDATA[]]></photo3>
+		<photo4><![CDATA[]]></photo4>
+		<photo5><![CDATA[]]></photo5>
+		<manual><![CDATA[GoPro Hero4 Black Edition SDHC H.264 Camera.manual.pdf]]></manual>
+	</node>
+	<node>
+		<name><![CDATA[Canon 1D C EOS SLR Camera]]></name>
+		<price><![CDATA[50]]></price>
+		<description><![CDATA[The Canon EOS-1D C is flexible, rugged and compact, offering onboard 4K image capture, industry-standard codecs and interfaces, and incredible low-light performance. <p> The EOS-1D C features an 18.1-megapixel full frame CMOS image sensor that offers a wide range of image acquisition options, including 4K (4096 x 2160), HD (1920 x 1080), or 18-megapixel (5184 x 3456) still images. The 4K is recorded as Motion JPEG; the HD is recorded as H.264; and the still images are recorded as RAW or JPEG. All of the selected motion imaging formats can be recorded as normal gamma-corrected video or with Canon Log. In addition, like with other Cinema EOS products, the EOS-1D C exhibits incredible low-light performance, ensuring optimum image quality under conditions of extremely low scene illumination, essential for natural-looking image capture when shooting in challenging environments. <p>]]></description>
+		<features><![CDATA[18.1 Megapixel Full-Frame CMOS Sensor<p> 4K Cinematic Quality Video<p> Full 1920 x 1080 HD Recording and Super 35mm Crop Mode<p> Dual DIGIC 5+ Image Processors<p> 3.2" LCD Screen<p> Eye-Level Pentaprism Viewfinder<p> Dual CF Card Recording Media<p> Canon EF Lens Mount<p> Magnesium Alloy Body<p> 61-Point High Density Auto Focus<p> Built-In Headphone Terminal<p>]]></features>
+		<casecard><![CDATA["Camera Body Eye Cup EF Port Cavity Cap Camera Strap<p> Arri 15mm LWS Baseplate (3 PCS)<p> (2) 15mm Aluminum Rods<p> A/V Canon Breakout Cable<p> USB Type (A) - Mini (B) Cable<p> HDMI Type (A) -  Mini (C) Cable<p> Canon LP-E4 Charger<p> (4) Canon LP-E4 Battery<p> Canon AC-E4 AC Adapter<p> Canon DR-E4 DC Coupler<p> (2) AC Cable<p> USB Card Reader<p> Connector Accessory Kit<p> Manual<p>]]></casecard>
+		<category><![CDATA[2 Categories: 1) Rentals>Cameras>HDSLR and 2) Rentals>Cameras>Digital Cinema]]></category>
+		<photo1><![CDATA[]]></photo1>
+		<photo2><![CDATA[]]></photo2>
+		<photo3><![CDATA[]]></photo3>
+		<photo4><![CDATA[]]></photo4>
+		<photo5><![CDATA[]]></photo5>
+		<manual><![CDATA[]]></manual>
+	</node>
+</data>
