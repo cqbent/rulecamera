@@ -28,3 +28,5 @@ function add_features_fields() {
     print $content;
 }
 add_action( 'woocommerce_after_single_product_summary', 'add_features_fields', 10 );
+
+
