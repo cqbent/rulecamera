@@ -29,4 +29,29 @@ function add_features_fields() {
 }
 add_action( 'woocommerce_after_single_product_summary', 'add_features_fields', 10 );
 
+// register content widget area
+function rule_widgets_init() {
 
+    register_sidebar( array(
+        'name'          => 'Rule Content Sidebar',
+        'id'            => 'content_area_widget',
+        'before_widget' => '<div class="content-area-widget">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h2>',
+        'after_title'   => '</h2>',
+    ) );
+
+}
+add_action( 'widgets_init', 'rule_widgets_init' );
+
+// show latest posts
+function show_latest_posts() {
+    $recent_posts = wp_get_recent_posts();
+    foreach( $recent_posts as $recent ) {
+        echo '<article>
+            <h2><a href="' . get_permalink($recent['ID']) . '">' . $recent["post_title"] . '</a></h2>
+            </article>';
+    }
+}
+
+add_shortcode( 'latest_posts', 'show_latest_posts' );

@@ -37,6 +37,20 @@ get_header(); ?>
 
 			?>
 
+			<?php while ( have_posts() ) : the_post(); ?>
+
+				<?php the_content(); ?>
+
+			<?php endwhile; // end of the loop. ?>
+
+			<?php
+				dynamic_sidebar('content_area_widget');
+				echo do_shortcode('[featured_product_categories cats="12" per_cat="1" columns="1"]');
+				echo do_shortcode('[featured_product_categories cats="8" per_cat="1" columns="1"]');
+			?>
+
+
+
 		</main><!-- #main -->
 	</div><!-- #primary -->
 <?php get_footer(); ?>

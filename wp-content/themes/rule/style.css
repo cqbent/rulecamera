@@ -13,5 +13,51 @@ Tags:         	black, white, light, two-columns, left-sidebar, right-sidebar, re
 
 
 */
+.site-header, .site-footer {
+  padding: 0;
+  background-color: #2c2d33; }
+  .site-header .col-full, .site-footer .col-full {
+    background-color: #000;
+    padding: 20px; }
+
+#content {
+  background-color: #2c2d33; }
+  #content .col-full {
+    background-color: #fff;
+    margin-bottom: 0;
+    padding: 0 20px; }
+
+.page-template-template-homepage #content .col-full {
+  padding: 0; }
+.page-template-template-homepage #main {
+  padding-top: 0; }
+  .page-template-template-homepage #main p {
+    margin: 0; }
+  .page-template-template-homepage #main .content-area-widget .home-nav {
+    background-color: #000;
+    color: #fff; }
+    .page-template-template-homepage #main .content-area-widget .home-nav:after {
+      content: "";
+      display: table;
+      clear: both; }
+    .page-template-template-homepage #main .content-area-widget .home-nav div {
+      float: left;
+      width: 33.3333%;
+      background-repeat: no-repeat;
+      background-position: center;
+      height: 250px;
+      padding: 20px; }
+      .page-template-template-homepage #main .content-area-widget .home-nav div img {
+        width: 100px; }
+      .page-template-template-homepage #main .content-area-widget .home-nav div p {
+        margin-left: 50px; }
+      .page-template-template-homepage #main .content-area-widget .home-nav div a {
+        color: #fff; }
+    .page-template-template-homepage #main .content-area-widget .home-nav .buy {
+      background-color: #0077c5; }
+    .page-template-template-homepage #main .content-area-widget .home-nav .rent {
+      background-color: #f8b812; }
+    .page-template-template-homepage #main .content-area-widget .home-nav .learn {
+      background-color: #54b59f; }
 
 /*# sourceMappingURL=style.css.map */

@@ -14,3 +14,91 @@ Tags:         	black, white, light, two-columns, left-sidebar, right-sidebar, re
 
 */
 
+// init variables
+$black: #000;
+$offsetblack: #2c2d33;
+$blue: #0077c5;
+$yellow: #f8b812;
+$green: #54b59f;
+$white: #fff;
+
+
+// mixins
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+// general page styling
+.site-header, .site-footer {
+  padding: 0;
+  background-color: $offsetblack;
+  .col-full {
+    background-color: $black;
+    padding: 20px;
+  }
+}
+#content {
+  background-color: $offsetblack;
+  .col-full {
+    background-color: $white;
+    margin-bottom: 0;
+    padding: 0 20px;
+  }
+}
+
+.site-footer {
+
+}
+
+// home page styling
+.page-template-template-homepage {
+  #content {
+    .col-full {
+      padding: 0;
+    }
+  }
+  #main {
+    padding-top: 0;
+    p {
+      margin: 0;
+    }
+    .content-area-widget {
+      .home-nav {
+        background-color: $black;
+        color: $white;
+        @include clearfix;
+        div {
+          float: left;
+          width: 33.3333%;
+          background-repeat: no-repeat;
+          background-position: center;
+          height: 250px;
+          padding:20px;
+          img {
+            width: 100px;
+          }
+          p {
+            margin-left: 50px;
+          }
+          a {
+            color: $white;
+          }
+        }
+        .buy {
+          background-color: $blue;
+        }
+        .rent {
+          background-color: $yellow;
+        }
+        .learn {
+          background-color: $green;
+        }
+      }
+    }
+  }
+
+}
