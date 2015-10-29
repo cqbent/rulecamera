@@ -29,6 +29,100 @@ function add_features_fields() {
 }
 add_action( 'woocommerce_after_single_product_summary', 'add_features_fields', 10 );
 
+// add custom manufacturer product category
+/*
+function product_manufacturer_categories() {
+    $labels = array(
+
+    );
+    register_taxonomy(
+        'manufacturers',
+        'products',
+        array(
+            'label' => __( 'Manufacturers' ),
+            'rewrite' => array( 'slug' => 'manufacturers' ),
+            'hierarchical' => true,
+        )
+    )
+}
+*/
+
+// add custom menu items
+function rule_nav_menu_items($items) {
+    $homelink = '<li class="home"><a href="' . home_url( '/' ) . '">' . __('Home') . '</a></li>';
+    // add the home link to the end of the menu
+    $items = $items . $homelink;
+    return $items;
+}
+
+add_filter( 'wp_nav_menu_items', 'rule_nav_menu_items' );
+
+function rule_primary_navigation() {
+    ?>
+    <nav id="site-navigation" class="main-navigation" role="navigation" aria-label="<?php esc_html_e( 'Primary Navigation', 'storefront' ); ?>">
+        <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false"><?php echo esc_attr( apply_filters( 'storefront_menu_toggle_text', __( 'Navigation', 'storefront' ) ) ); ?></button>
+        <?php
+        wp_nav_menu(
+            array(
+                'theme_location'	=> 'primary',
+                'container_class'	=> 'primary-navigation',
+                'walker'            => new Walker_Rule_Submenu,
+            )
+        );
+
+        wp_nav_menu(
+            array(
+                'theme_location'	=> 'handheld',
+                'container_class'	=> 'handheld-navigation',
+                'walker'            => new Walker_Rule_Submenu,
+            )
+        );
+        ?>
+    </nav><!-- #site-navigation -->
+    <?php
+}
+add_action('rule_header_top', 'storefront_product_search', 10);
+add_action('rule_header_bottom', 'rule_primary_navigation', 10);
+
+class Walker_Rule_Submenu extends Walker_Nav_Menu {
+    function end_el(&$output, $item, $depth=0, $args=array()) {
+        if( 'Rentals' == $item->title ){
+            $output .= '<ul>'.display_product_categories(8).'</ul>';
+        }
+        else if( 'Sales' == $item->title ){
+            $output .= '<ul>'.display_product_categories(12).'</ul>';
+        }
+        $output .= "</li>\n";
+    }
+}
+//$items = wp_get_nav_menu_items('Main Menu');
+//print_r($items);
+
+function display_product_categories($id) {
+    $args = array(
+        'type' => 'product',
+        'taxonomy' => 'product_cat',
+        'parent' => $id,
+    );
+    $product_cat = get_categories($args);
+    $output = '';
+    for ($i=0; $i<count($product_cat); $i++) {
+        $output .= '<li><a href="/rentals/'.$product_cat[$i]->slug.'">'.$product_cat[$i]->cat_name.'</a></li>';
+    }
+    return $output;
+    //print($output);
+}
+//add_shortcode( 'product_cat', 'display_product_categories' );
+
+// disable cart and checkout stuff
+remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );
+remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
+remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
+remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );
+
+
+
+
 // register content widget area
 function rule_widgets_init() {
 

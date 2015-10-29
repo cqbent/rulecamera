@@ -19,6 +19,9 @@ Tags:         	black, white, light, two-columns, left-sidebar, right-sidebar, re
   .site-header .col-full, .site-footer .col-full {
     background-color: #000;
     padding: 20px; }
+    .site-header .col-full.yellow, .site-footer .col-full.yellow {
+      background-color: #f8b812;
+      padding: 0 20px; }
 
 #content {
   background-color: #2c2d33; }

@@ -35,19 +35,20 @@
 			 * @hooked storefront_primary_navigation - 50
 			 * @hooked storefront_header_cart - 60
 			 */
+			remove_action('storefront_header', 'storefront_primary_navigation',50);
 			remove_action('storefront_header', 'storefront_site_branding',20);
-			//remove_action('storefront_header', 'storefront_header_cart',60);
+			remove_action('storefront_header', 'storefront_header_cart',60);
+			add_action('storefront_header', 'rule_primary_navigation', 50)
 			?>
 			<div class="site-branding">
 				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php echo '<img src="' . get_stylesheet_directory_uri() . '/images/rule_logo.png" />'; ?></a></h1>
 			</div>
 			<?php
-			do_action( 'storefront_header' ); ?>
+			do_action( 'rule_header_top' ); ?>
 
-
-
-
-
+		</div>
+		<div class="col-full yellow">
+			<?php do_action( 'rule_header_bottom' ); ?>
 		</div>
 	</header><!-- #masthead -->
 
