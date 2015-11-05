@@ -10,7 +10,7 @@ add_action( 'wp_enqueue_scripts', 'rule_enqueue_styles' );
 function rule_enqueue_styles() {
     //wp_dequeue_style('open-sans-css');
     wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
-    wp_enqueue_style('open-sans-bold', 'https://fonts.googleapis.com/css?family=Open+Sans:700,700italic,800,800italic');
+    wp_enqueue_style('open-sans-fonts', 'https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic');
 }
 
 // remove storefront inline styles
