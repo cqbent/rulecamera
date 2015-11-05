@@ -21,7 +21,7 @@ $blue: #0077c5;
 $yellow: #f8b812;
 $green: #54b59f;
 $white: #fff;
-
+$gray: #778590;
 
 // mixins
 @mixin clearfix {
@@ -33,6 +33,13 @@ $white: #fff;
 }
 
 // general page styling
+body {
+  font-family: 'Open Sans', sans-serif;
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Open Sans', sans-serif;
+  }
+}
+
 .site-header, .site-footer {
   padding: 0;
   background-color: $offsetblack;
@@ -41,13 +48,129 @@ $white: #fff;
     padding: 20px;
     &.yellow {
       background-color: $yellow;
-      padding: 0 20px;
+      padding: 0px;
+    }
+    .main-navigation {
+      float: right;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+.site-header {
+  // logo
+  .site-branding {
+    margin-bottom: 0;
+    img {
+      width: 150px;
+    }
+  }
+  .site-search {
+    margin: 0;
+    .widget_product_search {
+      form {
+        margin: 0;
+        input[type=search] {
+          padding:10px;
+        }
+        &:before {
+          top: 0;
+          right: 0;
+          left: inherit;
+          height: 35px;
+          background-color: $blue;
+          color: $white;
+          padding: 8px 5px 5px 5px;
+          box-sizing: border-box;
+          font-size: 1.25em;
+        }
+      }
+    }
+
+  }
+  .tagline {
+    float: right;
+    clear: both;
+    color: $white;
+    margin-top: -20px;
+    a {
+      color: $yellow;
+
+    }
+  }
+}
+
+
+
+/* primary navigation menu */
+.primary-navigation {
+  float: right;
+  padding: 0;
+  margin: 0;
+  ul.nav-menu {
+    > li:first-child {
+      margin-left: 0;
+    }
+    li {
+      position: static;
       a {
-        
+        padding: .5em 1em;
+      }
+      ul.sub-menu {
+        width: calc(100% + 40px);
+        margin-left: -20px;
+        left: 0;
+        column-count: 4;
+        -webkit-column-count: 4;
+        -moz-column-count: 4;
+        position: absolute;
+        padding: .75em 0;
+        background-color: $yellow;
+        color: $black;
+        padding:20px;
+        &.sales {
+          background-color: $blue;
+        }
+        li {
+          background: none;
+          a {
+            padding: 0;
+            color: $white;
+          }
+          &:hover, &:focus {
+            ul.children {
+              left: auto;
+              top: auto;
+            }
+          }
+          ul.children {
+            display: block;
+            float: none;
+            position: relative;
+            top: auto;
+            background: none;
+            li {
+              float: none;
+              font-weight: normal;
+              font-size: 13px;
+              display: block;
+              a {
+                padding: 0;
+                color: $black;
+                font-weight: normal;
+              }
+              ul.children {
+                display: none;
+              }
+            }
+          }
+        }
       }
     }
   }
 }
+
 #content {
   background-color: $offsetblack;
   .col-full {
@@ -107,5 +230,83 @@ $white: #fff;
       }
     }
   }
+}
 
+// page styling
+.page {
+  .site-content {
+    .woocommerce-breadcrumb {
+      display: none;
+    }
+    .entry-header {
+      padding:10px 20px 0 20px;
+      background-color: $gray;
+      margin: 0 -20px 20px -20px;
+      h1.entry-title {
+        margin-left: 50px;
+        -webkit-transform: rotate(-10deg);
+        -moz-transform: rotate(-10deg);
+        -ms-transform: rotate(-10deg);
+        -o-transform: rotate(-10deg);
+        transform: rotate(-10deg);
+        display: inline-block;
+        font-weight: 700;
+        color: $white;
+        &:before, &:after {
+          font-size: 1.25em;
+          font-weight:400;
+        }
+        &:before {
+          content: "[";
+        }
+        &:after {
+          content: "]";
+        }
+      }
+    }
+
+  }
+  &:not(.group-blog) {
+    .content-area.col-full {
+      width: 100%;
+      margin: 0;
+      float: none;
+    }
+  }
+}
+
+// credits list, page list
+.credits-list, .page-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  li {
+    float: left;
+    margin: 10px;
+    text-align: center;
+    max-width: 223px;
+    img {
+    }
+    .title {
+      font-weight: 600;
+    }
+  }
+}
+.page-list {
+  li {
+    a {
+      color: $white;
+    }
+    .title {
+      background-color: $gray;
+      text-transform: uppercase;
+    }
+  }
+}
+
+// blog post list
+.blog-post-list {
+  article {
+    margin-bottom: 20px;
+  }
 }
