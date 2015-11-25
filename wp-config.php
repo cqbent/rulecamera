@@ -22,7 +22,7 @@ define('DB_NAME', 'rulecamera');
 define('DB_USER', 'root');
 
 /** MySQL database password */
-define('DB_PASSWORD', 'root');
+define('DB_PASSWORD', 'syproot');
 
 /** MySQL hostname */
 define('DB_HOST', 'localhost');

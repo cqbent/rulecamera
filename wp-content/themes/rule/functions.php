@@ -10,11 +10,14 @@ add_action( 'wp_enqueue_scripts', 'rule_enqueue_styles' );
 function rule_enqueue_styles() {
     //wp_dequeue_style('open-sans-css');
     wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
+    wp_enqueue_style( 'FontAwesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css' );
     wp_enqueue_style('open-sans-fonts', 'https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic');
+    wp_enqueue_script('script.js', get_stylesheet_directory_uri() . '/js/script.js', array('jquery'));
 }
 
 // remove storefront inline styles
-//add_filter( 'storefront_customizer_enabled', '__return_false' );
+add_filter( 'storefront_customizer_enabled', '__return_false' );
+
 
 
 /*
@@ -64,6 +67,26 @@ function product_manufacturer_categories() {
 
 }
 add_action( 'init', 'product_manufacturer_categories', 0 );
+
+// create people post type
+function create_post_type_people() {
+    register_post_type( 'people',
+        array(
+            'labels' => array(
+                'name' => __( 'People' ),
+                'singular_name' => __( 'People' )
+            ),
+            'public' => true,
+            'has_archive' => true,
+            'rewrite' => array('slug' => 'people', 'with_front' => false),
+            'hierarchical' => true,
+            'supports' => array('title','author','custom-fields','thumbnail','editor'),
+            'taxonomies' => array('category'),
+            'not-found' => __('Nothing was found. what to do?')
+        )
+    );
+}
+add_action( 'init', 'create_post_type_people' );
 
 // add custom menu items
 function rule_primary_navigation() {
@@ -157,6 +180,107 @@ function display_product_category_widget_list() {
             </ul>
         </div>';
 }
+
+// add child menu
+function child_menu_list() {
+    // first get the menu id of the
+    $post_id = get_the_ID();
+    $menu = wp_get_nav_menu_items(362,array(
+        'posts_per_page' => -1,
+        'meta_key' => '_menu_item_object_id',
+        'meta_value' => $post_id
+        //'meta_key' => '_menu_item_menu_item_parent',
+        //'meta_value' => 3454 // the currently displayed post
+    ));
+    var_dump($menu);
+}
+
+add_filter( 'wp_nav_menu_objects','custom_nav_menu_objects_sub_menu', 10, 2 );
+// filter_hook function to react on sub_menu flag
+function custom_nav_menu_objects_sub_menu( $sorted_menu_items, $args ) {
+    if ( isset( $args->sub_menu ) ) {
+        $root_id = 0;
+
+        // find the current menu item
+        foreach ( $sorted_menu_items as $menu_item ) {
+            if ( $menu_item->current ) {
+                // set the root id based on whether the current menu item has a parent or not
+                $root_id = ( $menu_item->menu_item_parent ) ? $menu_item->menu_item_parent : $menu_item->ID;
+                break;
+            }
+        }
+        // find the top level parent
+        if ( ! isset( $args->direct_parent ) ) {
+            $prev_root_id = $root_id;
+            while ( $prev_root_id != 0 ) {
+                foreach ( $sorted_menu_items as $menu_item ) {
+                    if ( $menu_item->ID == $prev_root_id ) {
+                        $prev_root_id = $menu_item->menu_item_parent;
+                        // don't set the root_id to 0 if we've reached the top of the menu
+                        if ( $prev_root_id != 0 ) $root_id = $menu_item->menu_item_parent;
+                        break;
+                    }
+                }
+            }
+        }
+        $menu_item_parents = array();
+        foreach ( $sorted_menu_items as $key => $item ) {
+            // init menu_item_parents
+            if ( $item->ID == $root_id ) $menu_item_parents[] = $item->ID;
+            if ( in_array( $item->menu_item_parent, $menu_item_parents ) ) {
+                // part of sub-tree: keep!
+                $menu_item_parents[] = $item->ID;
+            } else if ( ! ( isset( $args->show_parent ) && in_array( $item->ID, $menu_item_parents ) ) ) {
+                // not part of sub-tree: away with it!
+                unset( $sorted_menu_items[$key] );
+            }
+        }
+
+        return $sorted_menu_items;
+    } else {
+        return $sorted_menu_items;
+    }
+}
+
+
+function get_sidebar_menu() {
+    $sm = wp_nav_menu(
+        array(
+            'theme_location'	=> 'primary',
+            'container_class'	=> 'sidebar-navigation',
+            'menu_class'        => 'menu-sidebar-menu',
+            'echo'              => false,
+            'sub_menu'          => true,
+        )
+    );
+    if ($sm) {
+        $output = '
+        <div class="sidebar-left aside">
+            '.$sm.'
+        </div>
+        ';
+    }
+    return $output;
+}
+
+//add_action('sidebar_menu', 'get_sidebar_menu');
+add_shortcode('sidebar_menu', 'get_sidebar_menu');
+
+
+// get page parent
+function footer_menu() {
+    wp_nav_menu(
+        array(
+            'theme_location'	=> 'primary',
+            'container_class'	=> 'sidebar-navigation',
+            'menu_class'        => 'menu-footer-menu',
+            'depth'             => 1
+        )
+    );
+}
+add_shortcode('footer_menu','footer_menu');
+
+
 //add_action('woocommerce_after_single_product', 'display_product_category_ancestors');
 add_shortcode( 'product_category_widget_list', 'display_product_category_widget_list' );
 
@@ -270,6 +394,8 @@ function display_credits_list() {
 }
 add_shortcode( 'credits_list', 'display_credits_list' );
 
+add_image_size('square-image', 250, 250, array('left','top'));
+
 function display_child_pages() {
     $id = get_the_ID();
     $args = array(
@@ -282,10 +408,14 @@ function display_child_pages() {
     foreach ($pages_array as $post) {
         $thumb_id = get_post_thumbnail_id($post->ID);
         $thumb_url = wp_get_attachment_thumb_url( $thumb_id );
+        $img_url = wp_get_attachment_image_src( $thumb_id, 'medium' );
         $output .= '
-            <li>
-                <a href="'.get_the_permalink($post->ID).'">'.wp_get_attachment_image($thumb_id, array(250,300)).'
-                <div class="title">'.get_the_title($post->ID).'</div></a>
+            <li style="background-image:url('.$img_url[0].');">
+                <a href="'.get_the_permalink($post->ID).'">
+                    <div class="list-item">
+                        <div class="title">'.get_the_title($post->ID).'</div>
+                    </div>
+                </a>
             </li>';
     }
     $output .= '</ul>';
@@ -293,6 +423,8 @@ function display_child_pages() {
     return $output;
 }
 add_shortcode( 'page_list', 'display_child_pages' );
+
+
 
 
 
@@ -314,9 +446,12 @@ $wp_query = new WP_Query($args);
 get_template_part( 'loop');
 */
 
-function show_latest_posts() {
+function show_latest_posts($atts) {
+    $a = shortcode_atts( array(
+        'posts' => 10,
+    ), $atts );
     $args = array(
-        'numberposts'=>10,
+        'numberposts'=>$a['posts'],
         'order_by'=>'date',
         'order'=> 'DESC',
         'post_status'=>'publish',
@@ -340,6 +475,42 @@ function show_latest_posts() {
 }
 
 add_shortcode( 'latest_posts', 'show_latest_posts' );
+
+// display people list
+function display_people_list() {
+    $args = array(
+        'post_type' => 'people',
+        'posts_per_page' => 999,
+        'order' => 'ASC'
+    );
+    $pp_query = new WP_Query( $args );
+    $output = '';
+    if ( $pp_query->have_posts() ) {
+        $output .= '<ul class="staff-list">';
+        while ( $pp_query->have_posts() ) {
+            $pp_query->the_post();
+            $img_thumb = get_the_post_thumbnail(get_the_ID(), 'thumbnail');
+            $output .= '
+                <li>
+                    <div class="image">
+                        '.$img_thumb.'
+                    </div>
+                    <div class="info">
+                        <span class="name">'.get_the_title().'</span>, <span class="position">'.get_field('position').'</span>
+                        <span class="extension">x '.get_field('extension').'</span>
+                        <span class="email"><a href="'.get_field('email').'">'.get_field('email').'</a></span>
+
+                    </div>
+                </li>';
+        }
+        $output .= '</ul>';
+        wp_reset_postdata();
+    }
+    return $output;
+}
+
+add_shortcode('people_list', 'display_people_list');
+
 
 
 ?>

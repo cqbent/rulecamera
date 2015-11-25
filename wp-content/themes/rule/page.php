@@ -19,11 +19,14 @@ get_header(); ?>
 	?>
 	<header class="entry-header">
 		<?php
-		the_title( '<h1 class="entry-title" itemprop="name">', '</h1>' );
+		$page_title = empty( $post->post_parent ) ? get_the_title( $post->ID ) : get_the_title( $post->post_parent );
+		//the_title( '<h1 class="entry-title" itemprop="name">', '</h1>' );
+		echo '<h1 class="entry-title" itemprop="name">'.$page_title.'</h1>';
 		?>
 	</header><!-- .entry-header -->
 
 	<div id="primary" class="content-area col-full">
+		<h2 class="page-title"><?php the_title(); ?></h2>
 		<main id="main" class="site-main" role="main">
 
 			<?php while ( have_posts() ) : the_post(); ?>
@@ -52,5 +55,10 @@ get_header(); ?>
 		do_action( 'storefront_sidebar' );
 	}
 	//do_action( 'storefront_sidebar' );
+	echo do_shortcode('[sidebar_menu]');
+	// right sidebar ???
+
+
+
 ?>
 <?php get_footer(); ?>
