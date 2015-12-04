@@ -24,7 +24,7 @@ $desktop: new-breakpoint(min-width 769px 12);
 $black: #000;
 $offsetblack: #2c2d33;
 $blue: #0077c5;
-$yellow: #f8b812;
+$yellow: #d79800;  //#f8b812;
 $green: #54b59f;
 $white: #fff;
 $gray: #778590;
@@ -138,11 +138,14 @@ body {
         -moz-column-count: 4;
         position: absolute;
         padding: .75em 0;
-        background-color: $yellow;
+        background-color: $gray;
         color: $black;
         padding: 10px 20px;
         &.sales {
           background-color: $blue;
+        }
+        &.rentals {
+          background-color: $yellow;
         }
         li {
           background: none;
@@ -154,6 +157,9 @@ body {
             ul.children {
               left: auto;
               top: auto;
+            }
+            a {
+              outline: none;
             }
           }
           ul.children {
@@ -169,7 +175,6 @@ body {
               display: block;
               a {
                 padding: 0;
-                color: $black;
                 font-weight: normal;
               }
               ul.children {
@@ -189,6 +194,14 @@ body {
     background-color: $white;
     margin-bottom: 0;
     padding: 0 20px;
+    max-width: 100%;
+    .entry-header-title, .content-container {
+      @include media($desktop) {
+        max-width: 978px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
   }
 }
 
@@ -225,6 +238,39 @@ body {
   .social-links {
     font-size: 25px;
   }
+}
+
+// woocommerce pagination styling
+.pagination, .woocommerce-pagination {
+  .page-numbers {
+    li {
+      .page-numbers.current {
+        background-color: $blue;
+      }
+    }
+  }
+}
+
+// woocommerce tabs
+.woocommerce-tabs {
+  ul.tabs {
+    li {
+      &.active, &:hover {
+        a {
+          outline: 1px $blue solid;
+        }
+      }
+    }
+  }
+}
+
+// woocommerce sort order form
+.woocommerce-ordering {
+  z-index: 1;
+}
+
+.pagination .page-numbers li .page-numbers.current, .woocommerce-pagination .page-numbers li .page-numbers.current {
+
 }
 
 // home page styling
@@ -336,17 +382,28 @@ body {
   }
 }
 
-// page styling
-.page {
+// page, archive, prodduct styling
+.page, .archive, .single {
   .site-content {
-    .woocommerce-breadcrumb {
-      display: none;
+    position: relative;
+    .content-container {
+      margin-top: 40px;
     }
-    .entry-header {
+    .woocommerce-breadcrumb {
+      position: absolute;
+      top: 80px;
+      width: 100%;
+      max-width: 980px;
+      margin: 0 auto;
+      left: 0;
+      right: 0;
+      padding: 5px 0;
+    }
+    .entry-header, .archive-header {
       padding:10px 20px 0 20px;
       background-color: $gray;
       margin: 0 -20px 20px -20px;
-      h1.entry-title {
+      h1.entry-title, h1.section-title {
         margin-left: 50px;
         -webkit-transform: rotate(-10deg);
         -moz-transform: rotate(-10deg);
@@ -367,8 +424,14 @@ body {
           content: "]";
         }
       }
+      &.sales {
+        background-color: $blue;
+      }
+      &.rentals {
+        background-color: $yellow;
+      }
     }
-    h2.page-title {
+    h2.page-title, h2.archive-title {
       color: $gray;
       text-transform: uppercase;
       letter-spacing: 2px;
@@ -377,6 +440,7 @@ body {
   .sidebar-left {
     .menu-sidebar-menu {
       list-style: none;
+      margin-left: 0;
       li {
         font-size: 1.25em;
         a {

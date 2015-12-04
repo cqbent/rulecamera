@@ -32,7 +32,7 @@ body {
     background-color: #2c2d33;
     padding: 20px; }
     .site-header .col-full.yellow, .site-footer .col-full.yellow {
-      background-color: #f8b812;
+      background-color: #d79800;
       padding: 0px; }
     .site-header .col-full .main-navigation, .site-footer .col-full .main-navigation {
       float: right;
@@ -68,7 +68,7 @@ body {
   color: #fff;
   margin-top: -20px; }
   .site-header .tagline a {
-    color: #f8b812; }
+    color: #d79800; }
 
 /* primary navigation menu */
 .primary-navigation {
@@ -90,11 +90,13 @@ body {
       -moz-column-count: 4;
       position: absolute;
       padding: .75em 0;
-      background-color: #f8b812;
+      background-color: #778590;
       color: #000;
       padding: 10px 20px; }
       .primary-navigation ul.nav-menu li ul.sub-menu.sales {
         background-color: #0077c5; }
+      .primary-navigation ul.nav-menu li ul.sub-menu.rentals {
+        background-color: #d79800; }
       .primary-navigation ul.nav-menu li ul.sub-menu li {
         background: none; }
         .primary-navigation ul.nav-menu li ul.sub-menu li a {
@@ -103,6 +105,8 @@ body {
         .primary-navigation ul.nav-menu li ul.sub-menu li:hover ul.children, .primary-navigation ul.nav-menu li ul.sub-menu li:focus ul.children {
           left: auto;
           top: auto; }
+        .primary-navigation ul.nav-menu li ul.sub-menu li:hover a, .primary-navigation ul.nav-menu li ul.sub-menu li:focus a {
+          outline: none; }
         .primary-navigation ul.nav-menu li ul.sub-menu li ul.children {
           display: block;
           float: none;
@@ -116,7 +120,6 @@ body {
             display: block; }
             .primary-navigation ul.nav-menu li ul.sub-menu li ul.children li a {
               padding: 0;
-              color: #000;
               font-weight: normal; }
             .primary-navigation ul.nav-menu li ul.sub-menu li ul.children li ul.children {
               display: none; }
@@ -126,7 +129,13 @@ body {
   #content .col-full {
     background-color: #fff;
     margin-bottom: 0;
-    padding: 0 20px; }
+    padding: 0 20px;
+    max-width: 100%; }
+    @media screen and (min-width: 769px) {
+      #content .col-full .entry-header-title, #content .col-full .content-container {
+        max-width: 978px;
+        margin-left: auto;
+        margin-right: auto; } }
 
 .site-footer .footer-columns {
   display: table;
@@ -136,7 +145,7 @@ body {
   width: 100%;
   color: #fff; }
   .site-footer .footer-columns a {
-    color: #f8b812; }
+    color: #d79800; }
   .site-footer .footer-columns li.col {
     display: table-cell;
     padding: 0 10px 0 0;
@@ -152,6 +161,15 @@ body {
       font-weight: 600; }
 .site-footer .social-links {
   font-size: 25px; }
+
+.pagination .page-numbers li .page-numbers.current, .woocommerce-pagination .page-numbers li .page-numbers.current {
+  background-color: #0077c5; }
+
+.woocommerce-tabs ul.tabs li.active a, .woocommerce-tabs ul.tabs li:hover a {
+  outline: 1px #0077c5 solid; }
+
+.woocommerce-ordering {
+  z-index: 1; }
 
 .page-template-template-homepage #content .col-full {
   padding: 0;
@@ -192,9 +210,9 @@ body {
     .page-template-template-homepage #main .buy-rent-learn .col.buy .box {
       background-color: #0077c5; }
     .page-template-template-homepage #main .buy-rent-learn .col.rent h3, .page-template-template-homepage #main .buy-rent-learn .col.rent a {
-      color: #f8b812; }
+      color: #d79800; }
     .page-template-template-homepage #main .buy-rent-learn .col.rent .box {
-      background-color: #f8b812; }
+      background-color: #d79800; }
     .page-template-template-homepage #main .buy-rent-learn .col.learn h3, .page-template-template-homepage #main .buy-rent-learn .col.learn a {
       color: #54b59f; }
     .page-template-template-homepage #main .buy-rent-learn .col.learn .box {
@@ -222,61 +240,77 @@ body {
     .page-template-template-homepage #main .content-area-widget .home-nav .buy {
       background-color: #0077c5; }
     .page-template-template-homepage #main .content-area-widget .home-nav .rent {
-      background-color: #f8b812; }
+      background-color: #d79800; }
     .page-template-template-homepage #main .content-area-widget .home-nav .learn {
       background-color: #54b59f; }
 
-.page .site-content .woocommerce-breadcrumb {
-  display: none; }
-.page .site-content .entry-header {
-  padding: 10px 20px 0 20px;
-  background-color: #778590;
-  margin: 0 -20px 20px -20px; }
-  .page .site-content .entry-header h1.entry-title {
-    margin-left: 50px;
-    -webkit-transform: rotate(-10deg);
-    -moz-transform: rotate(-10deg);
-    -ms-transform: rotate(-10deg);
-    -o-transform: rotate(-10deg);
-    transform: rotate(-10deg);
-    display: inline-block;
-    font-weight: 700;
-    color: #fff; }
-    .page .site-content .entry-header h1.entry-title:before, .page .site-content .entry-header h1.entry-title:after {
-      font-size: 1.25em;
-      font-weight: 400; }
-    .page .site-content .entry-header h1.entry-title:before {
-      content: "["; }
-    .page .site-content .entry-header h1.entry-title:after {
-      content: "]"; }
-.page .site-content h2.page-title {
-  color: #778590;
-  text-transform: uppercase;
-  letter-spacing: 2px; }
-.page .sidebar-left .menu-sidebar-menu {
-  list-style: none; }
-  .page .sidebar-left .menu-sidebar-menu li {
+.page .site-content, .archive .site-content, .single .site-content {
+  position: relative; }
+  .page .site-content .content-container, .archive .site-content .content-container, .single .site-content .content-container {
+    margin-top: 40px; }
+  .page .site-content .woocommerce-breadcrumb, .archive .site-content .woocommerce-breadcrumb, .single .site-content .woocommerce-breadcrumb {
+    position: absolute;
+    top: 80px;
+    width: 100%;
+    max-width: 980px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    padding: 5px 0; }
+  .page .site-content .entry-header, .page .site-content .archive-header, .archive .site-content .entry-header, .archive .site-content .archive-header, .single .site-content .entry-header, .single .site-content .archive-header {
+    padding: 10px 20px 0 20px;
+    background-color: #778590;
+    margin: 0 -20px 20px -20px; }
+    .page .site-content .entry-header h1.entry-title, .page .site-content .entry-header h1.section-title, .page .site-content .archive-header h1.entry-title, .page .site-content .archive-header h1.section-title, .archive .site-content .entry-header h1.entry-title, .archive .site-content .entry-header h1.section-title, .archive .site-content .archive-header h1.entry-title, .archive .site-content .archive-header h1.section-title, .single .site-content .entry-header h1.entry-title, .single .site-content .entry-header h1.section-title, .single .site-content .archive-header h1.entry-title, .single .site-content .archive-header h1.section-title {
+      margin-left: 50px;
+      -webkit-transform: rotate(-10deg);
+      -moz-transform: rotate(-10deg);
+      -ms-transform: rotate(-10deg);
+      -o-transform: rotate(-10deg);
+      transform: rotate(-10deg);
+      display: inline-block;
+      font-weight: 700;
+      color: #fff; }
+      .page .site-content .entry-header h1.entry-title:before, .page .site-content .entry-header h1.entry-title:after, .page .site-content .entry-header h1.section-title:before, .page .site-content .entry-header h1.section-title:after, .page .site-content .archive-header h1.entry-title:before, .page .site-content .archive-header h1.entry-title:after, .page .site-content .archive-header h1.section-title:before, .page .site-content .archive-header h1.section-title:after, .archive .site-content .entry-header h1.entry-title:before, .archive .site-content .entry-header h1.entry-title:after, .archive .site-content .entry-header h1.section-title:before, .archive .site-content .entry-header h1.section-title:after, .archive .site-content .archive-header h1.entry-title:before, .archive .site-content .archive-header h1.entry-title:after, .archive .site-content .archive-header h1.section-title:before, .archive .site-content .archive-header h1.section-title:after, .single .site-content .entry-header h1.entry-title:before, .single .site-content .entry-header h1.entry-title:after, .single .site-content .entry-header h1.section-title:before, .single .site-content .entry-header h1.section-title:after, .single .site-content .archive-header h1.entry-title:before, .single .site-content .archive-header h1.entry-title:after, .single .site-content .archive-header h1.section-title:before, .single .site-content .archive-header h1.section-title:after {
+        font-size: 1.25em;
+        font-weight: 400; }
+      .page .site-content .entry-header h1.entry-title:before, .page .site-content .entry-header h1.section-title:before, .page .site-content .archive-header h1.entry-title:before, .page .site-content .archive-header h1.section-title:before, .archive .site-content .entry-header h1.entry-title:before, .archive .site-content .entry-header h1.section-title:before, .archive .site-content .archive-header h1.entry-title:before, .archive .site-content .archive-header h1.section-title:before, .single .site-content .entry-header h1.entry-title:before, .single .site-content .entry-header h1.section-title:before, .single .site-content .archive-header h1.entry-title:before, .single .site-content .archive-header h1.section-title:before {
+        content: "["; }
+      .page .site-content .entry-header h1.entry-title:after, .page .site-content .entry-header h1.section-title:after, .page .site-content .archive-header h1.entry-title:after, .page .site-content .archive-header h1.section-title:after, .archive .site-content .entry-header h1.entry-title:after, .archive .site-content .entry-header h1.section-title:after, .archive .site-content .archive-header h1.entry-title:after, .archive .site-content .archive-header h1.section-title:after, .single .site-content .entry-header h1.entry-title:after, .single .site-content .entry-header h1.section-title:after, .single .site-content .archive-header h1.entry-title:after, .single .site-content .archive-header h1.section-title:after {
+        content: "]"; }
+    .page .site-content .entry-header.sales, .page .site-content .archive-header.sales, .archive .site-content .entry-header.sales, .archive .site-content .archive-header.sales, .single .site-content .entry-header.sales, .single .site-content .archive-header.sales {
+      background-color: #0077c5; }
+    .page .site-content .entry-header.rentals, .page .site-content .archive-header.rentals, .archive .site-content .entry-header.rentals, .archive .site-content .archive-header.rentals, .single .site-content .entry-header.rentals, .single .site-content .archive-header.rentals {
+      background-color: #d79800; }
+  .page .site-content h2.page-title, .page .site-content h2.archive-title, .archive .site-content h2.page-title, .archive .site-content h2.archive-title, .single .site-content h2.page-title, .single .site-content h2.archive-title {
+    color: #778590;
+    text-transform: uppercase;
+    letter-spacing: 2px; }
+.page .sidebar-left .menu-sidebar-menu, .archive .sidebar-left .menu-sidebar-menu, .single .sidebar-left .menu-sidebar-menu {
+  list-style: none;
+  margin-left: 0; }
+  .page .sidebar-left .menu-sidebar-menu li, .archive .sidebar-left .menu-sidebar-menu li, .single .sidebar-left .menu-sidebar-menu li {
     font-size: 1.25em; }
-    .page .sidebar-left .menu-sidebar-menu li a {
+    .page .sidebar-left .menu-sidebar-menu li a, .archive .sidebar-left .menu-sidebar-menu li a, .single .sidebar-left .menu-sidebar-menu li a {
       font-weight: 500; }
-      .page .sidebar-left .menu-sidebar-menu li a:hover {
+      .page .sidebar-left .menu-sidebar-menu li a:hover, .archive .sidebar-left .menu-sidebar-menu li a:hover, .single .sidebar-left .menu-sidebar-menu li a:hover {
         color: #778590; }
-    .page .sidebar-left .menu-sidebar-menu li.current-menu-item a {
+    .page .sidebar-left .menu-sidebar-menu li.current-menu-item a, .archive .sidebar-left .menu-sidebar-menu li.current-menu-item a, .single .sidebar-left .menu-sidebar-menu li.current-menu-item a {
       color: #778590; }
 @media screen and (min-width: 769px) {
-  .page .col.main {
+  .page .col.main, .archive .col.main, .single .col.main {
     float: left;
     display: block;
     margin-right: 2.35765%;
     width: 65.88078%; }
-    .page .col.main:last-child {
+    .page .col.main:last-child, .archive .col.main:last-child, .single .col.main:last-child {
       margin-right: 0; }
-  .page .col.sidebar {
+  .page .col.sidebar, .archive .col.sidebar, .single .col.sidebar {
     float: left;
     display: block;
     margin-right: 2.35765%;
     width: 31.76157%; }
-    .page .col.sidebar:last-child {
+    .page .col.sidebar:last-child, .archive .col.sidebar:last-child, .single .col.sidebar:last-child {
       margin-right: 0; } }
 
 .page:not(.page-id-2247) .site-content .content-area {
