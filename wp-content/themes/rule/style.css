@@ -79,8 +79,13 @@ body {
     margin-left: 0; }
   .primary-navigation ul.nav-menu li {
     position: static; }
+    .primary-navigation ul.nav-menu li.menu-item-has-children a:after {
+      display: none; }
     .primary-navigation ul.nav-menu li a {
-      padding: .5em 1em; }
+      padding: .5em 1em;
+      color: #d79800; }
+    .primary-navigation ul.nav-menu li.current-menu-item a {
+      color: #fff; }
     .primary-navigation ul.nav-menu li ul.sub-menu {
       width: calc(100% + 40px);
       margin-left: -20px;
@@ -97,6 +102,8 @@ body {
         background-color: #0077c5; }
       .primary-navigation ul.nav-menu li ul.sub-menu.rentals {
         background-color: #d79800; }
+      .primary-navigation ul.nav-menu li ul.sub-menu.learn {
+        background-color: #54b59f; }
       .primary-navigation ul.nav-menu li ul.sub-menu li {
         background: none; }
         .primary-navigation ul.nav-menu li ul.sub-menu li a {
@@ -263,11 +270,11 @@ body {
     margin: 0 -20px 20px -20px; }
     .page .site-content .entry-header h1.entry-title, .page .site-content .entry-header h1.section-title, .page .site-content .archive-header h1.entry-title, .page .site-content .archive-header h1.section-title, .archive .site-content .entry-header h1.entry-title, .archive .site-content .entry-header h1.section-title, .archive .site-content .archive-header h1.entry-title, .archive .site-content .archive-header h1.section-title, .single .site-content .entry-header h1.entry-title, .single .site-content .entry-header h1.section-title, .single .site-content .archive-header h1.entry-title, .single .site-content .archive-header h1.section-title {
       margin-left: 50px;
-      -webkit-transform: rotate(-10deg);
-      -moz-transform: rotate(-10deg);
-      -ms-transform: rotate(-10deg);
-      -o-transform: rotate(-10deg);
-      transform: rotate(-10deg);
+      -webkit-transform: rotate(-5deg);
+      -moz-transform: rotate(-5deg);
+      -ms-transform: rotate(-5deg);
+      -o-transform: rotate(-5deg);
+      transform: rotate(-5deg);
       display: inline-block;
       font-weight: 700;
       color: #fff; }
@@ -282,6 +289,8 @@ body {
       background-color: #0077c5; }
     .page .site-content .entry-header.rentals, .page .site-content .archive-header.rentals, .archive .site-content .entry-header.rentals, .archive .site-content .archive-header.rentals, .single .site-content .entry-header.rentals, .single .site-content .archive-header.rentals {
       background-color: #d79800; }
+    .page .site-content .entry-header.learn, .page .site-content .archive-header.learn, .archive .site-content .entry-header.learn, .archive .site-content .archive-header.learn, .single .site-content .entry-header.learn, .single .site-content .archive-header.learn {
+      background-color: #54b59f; }
   .page .site-content h2.page-title, .page .site-content h2.archive-title, .archive .site-content h2.page-title, .archive .site-content h2.archive-title, .single .site-content h2.page-title, .single .site-content h2.archive-title {
     color: #778590;
     text-transform: uppercase;

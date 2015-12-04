@@ -126,8 +126,19 @@ body {
     }
     li {
       position: static;
+      &.menu-item-has-children {
+        a:after {
+          display: none;
+        }
+      }
       a {
         padding: .5em 1em;
+        color: $yellow;
+      }
+      &.current-menu-item {
+        a {
+          color: $white;
+        }
       }
       ul.sub-menu {
         width: calc(100% + 40px);
@@ -146,6 +157,9 @@ body {
         }
         &.rentals {
           background-color: $yellow;
+        }
+        &.learn {
+          background-color: $green;
         }
         li {
           background: none;
@@ -405,11 +419,11 @@ body {
       margin: 0 -20px 20px -20px;
       h1.entry-title, h1.section-title {
         margin-left: 50px;
-        -webkit-transform: rotate(-10deg);
-        -moz-transform: rotate(-10deg);
-        -ms-transform: rotate(-10deg);
-        -o-transform: rotate(-10deg);
-        transform: rotate(-10deg);
+        -webkit-transform: rotate(-5deg);
+        -moz-transform: rotate(-5deg);
+        -ms-transform: rotate(-5deg);
+        -o-transform: rotate(-5deg);
+        transform: rotate(-5deg);
         display: inline-block;
         font-weight: 700;
         color: $white;
@@ -429,6 +443,9 @@ body {
       }
       &.rentals {
         background-color: $yellow;
+      }
+      &.learn {
+        background-color: $green;
       }
     }
     h2.page-title, h2.archive-title {
