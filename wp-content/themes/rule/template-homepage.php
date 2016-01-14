@@ -49,7 +49,7 @@ get_header(); ?>
 			<div class="buy-rent-learn">
 				<div class="col buy">
 					<div class="box">
-						<h3><a href="/product-category/sales"><img class="alignnone wp-image-2241 size-full" src="http://rulecamera/wp-content/uploads/2015/10/home_buy_headline.png" alt="home_buy_headline" /></a></h3>
+						<h3><a href="/product-category/sales"><img class="alignnone wp-image-2241 size-full" src="/wp-content/uploads/2015/10/home_buy_headline.png" alt="home_buy_headline" /></a></h3>
 						All the stuff you need, easy to find and easy to buy.
 						<a href="/product-category/sales">OK, go &gt;&gt;</a>
 					</div>
@@ -61,7 +61,7 @@ get_header(); ?>
 				</div>
 				<div class="col rent">
 					<div class="box">
-						<h3><a href="/product-categories/rentals"><img class="alignnone size-full wp-image-2243" src="http://rulecamera/wp-content/uploads/2015/10/home_rent_headline.png" alt="rent" /></a></h3>
+						<h3><a href="/product-categories/rentals"><img class="alignnone size-full wp-image-2243" src="/wp-content/uploads/2015/10/home_rent_headline.png" alt="rent" /></a></h3>
 						All the stuff you need, easy to find and easy to buy.
 						<a href="/product-category/rentals">OK, go &gt;&gt;</a>
 					</div>
@@ -73,7 +73,7 @@ get_header(); ?>
 				</div>
 				<div class="col learn">
 					<div class="box">
-						<h3><img class="alignnone size-full wp-image-2242" src="http://rulecamera/wp-content/uploads/2015/10/home_learn_headline.png" alt="learn" /></h3>
+						<h3><img class="alignnone size-full wp-image-2242" src="/wp-content/uploads/2015/10/home_learn_headline.png" alt="learn" /></h3>
 						All the stuff you need, easy to find and easy to buy.
 						<a href="#">OK, go &gt;&gt;</a>
 					</div>

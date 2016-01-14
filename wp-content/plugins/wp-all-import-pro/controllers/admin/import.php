@@ -355,7 +355,7 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 				}
 				else $this->errors->add('form-validation', __('Unable to download feed resource.', 'wp_all_import_plugin')); 
 			}								
-			
+		
 			if ( ! $this->errors->get_error_codes() ) {
 				
 				// xml is valid				
@@ -425,7 +425,7 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 				PMXI_Plugin::$session->save_data(); 						
 				
 				$xml = $this->get_xml();
-				
+					
 				if ( empty($xml) )
 				{
 					$this->errors->add('form-validation', __('Please confirm you are importing a valid feed.<br/> Often, feed providers distribute feeds with invalid data, improperly wrapped HTML, line breaks where they should not be, faulty character encodings, syntax errors in the XML, and other issues.<br/><br/>WP All Import has checks in place to automatically fix some of the most common problems, but we can’t catch every single one.<br/><br/>It is also possible that there is a bug in WP All Import, and the problem is not with the feed.<br/><br/>If you need assistance, please contact support – <a href="mailto:support@wpallimport.com">support@wpallimport.com</a> – with your XML/CSV file. We will identify the problem and release a bug fix if necessary.', 'wp_all_import_plugin')); 					
@@ -462,8 +462,7 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 	 * Step #2: Choose elements
 	 */
 	public function element()
-	{
-					
+	{				
 		$xpath = new DOMXPath($this->data['dom']);		
 		$post = $this->input->post(array('xpath' => ''));
 		$this->data['post'] =& $post;
@@ -941,6 +940,10 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 			
 			PMXI_Plugin::$session->set('encoding', $post['import_encoding']);
 			PMXI_Plugin::$session->save_data();
+
+			$functions = $wp_uploads['basedir'] . DIRECTORY_SEPARATOR . WP_ALL_IMPORT_UPLOADS_BASE_DIRECTORY . DIRECTORY_SEPARATOR . 'functions.php';
+			if ( @file_exists($functions) )
+				require_once $functions;
 			
 			// validate
 			try {
@@ -1078,6 +1081,10 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 			
 			PMXI_Plugin::$session->set('encoding', $post['import_encoding']);
 			PMXI_Plugin::$session->save_data();
+
+			$functions = $wp_uploads['basedir'] . DIRECTORY_SEPARATOR . WP_ALL_IMPORT_UPLOADS_BASE_DIRECTORY . DIRECTORY_SEPARATOR . 'functions.php';
+			if ( @file_exists($functions) )
+				require_once $functions;
 						
 			// validate
 			try {
@@ -1192,6 +1199,11 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 			
 			PMXI_Plugin::$session->set('encoding', $post['import_encoding']);
 			PMXI_Plugin::$session->save_data();
+
+			$wp_uploads = wp_upload_dir();		
+			$functions  = $wp_uploads['basedir'] . DIRECTORY_SEPARATOR . WP_ALL_IMPORT_UPLOADS_BASE_DIRECTORY . DIRECTORY_SEPARATOR . 'functions.php';
+			if ( @file_exists($functions) )
+				require_once $functions;
 			
 			// validate
 			try {			
@@ -1269,6 +1281,8 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 				'single_product_regular_price' => '',
 				'single_product_sale_price' => '',
 				'disable_prepare_price' => 0,
+				'prepare_price_to_woo_format' => 0,
+				'convert_decimal_separator' => 1,
 				'single_product_regular_price_adjust' => '',			
 				'single_product_regular_price_adjust_type' => '%',	
 				'single_product_sale_price_adjust' => '',	
@@ -1340,6 +1354,11 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 			
 			PMXI_Plugin::$session->set('encoding', $post['import_encoding']);
 			PMXI_Plugin::$session->save_data();
+
+			$wp_uploads = wp_upload_dir();	
+			$functions = $wp_uploads['basedir'] . DIRECTORY_SEPARATOR . WP_ALL_IMPORT_UPLOADS_BASE_DIRECTORY . DIRECTORY_SEPARATOR . 'functions.php';
+			if ( @file_exists($functions) )
+				require_once $functions;
 			
 			// validate
 			try {			
@@ -1350,13 +1369,13 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 
 					if ("" != $post['single_product_regular_price']){
 						list($this->data['product_regular_price']) = XmlImportParser::factory($xml, $xpath, $post['single_product_regular_price'], $file)->parse(); unlink($file);			
-						$this->data['product_regular_price'] = pmwi_adjust_price(pmwi_prepare_price($this->data['product_regular_price'], $post['disable_prepare_price']), 'regular_price', $post);
+						$this->data['product_regular_price'] = pmwi_adjust_price(pmwi_prepare_price($this->data['product_regular_price'], $post['disable_prepare_price'], $post['prepare_price_to_woo_format'], $post['convert_decimal_separator']), 'regular_price', $post);
 						$data_to_preview = true;
 						
 					}
 					if ("" != $post['single_product_sale_price']){
 						list($this->data['product_sale_price']) = XmlImportParser::factory($xml, $xpath, $post['single_product_sale_price'], $file)->parse(); unlink($file);			
-						$this->data['product_sale_price'] = pmwi_adjust_price(pmwi_prepare_price($this->data['product_sale_price'], $post['disable_prepare_price']), 'sale_price', $post);
+						$this->data['product_sale_price'] = pmwi_adjust_price(pmwi_prepare_price($this->data['product_sale_price'], $post['disable_prepare_price'], $post['prepare_price_to_woo_format'], $post['convert_decimal_separator']), 'sale_price', $post);
 						$data_to_preview = true;
 						
 					}
@@ -1441,6 +1460,11 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 		} elseif ($this->input->post('is_submitted')) { // save template submission
 
 			check_admin_referer('template', '_wpnonce_template');
+
+			$wp_uploads = wp_upload_dir();		
+			$functions  = $wp_uploads['basedir'] . DIRECTORY_SEPARATOR . WP_ALL_IMPORT_UPLOADS_BASE_DIRECTORY . DIRECTORY_SEPARATOR . 'functions.php';
+			if ( @file_exists($functions) )
+				require_once $functions;
 			
 			if (!empty($post['title'])) {			
 				$this->_validate_template($post['title'], 'Post title');
@@ -1741,7 +1765,12 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 		
 		if ($this->input->post('is_submitted')) {
 
-			check_admin_referer('options', '_wpnonce_options');						
+			check_admin_referer('options', '_wpnonce_options');				
+
+			$wp_uploads = wp_upload_dir();		
+			$functions  = $wp_uploads['basedir'] . DIRECTORY_SEPARATOR . WP_ALL_IMPORT_UPLOADS_BASE_DIRECTORY . DIRECTORY_SEPARATOR . 'functions.php';
+			if ( @file_exists($functions) )
+				require_once $functions;		
 			
 			if ($post['is_import_specified']) {
 				if (empty($post['import_specified'])) {
@@ -1769,6 +1798,10 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 					$this->errors->add('form-validation', __('Custom field name must be specified.', 'wp_all_import_plugin'));
 				if ('' == $post['custom_duplicate_value'])
 					$this->errors->add('form-validation', __('Custom field value must be specified.', 'wp_all_import_plugin'));
+			}
+			if ( 'manual' == $post['duplicate_matching'] and 'pid' == $post['duplicate_indicator']){
+				if ('' == $post['pid_xpath'])
+					$this->errors->add('form-validation', __('Post ID must be specified.', 'wp_all_import_plugin'));				
 			}
 
 			// Categories/taxonomies logic
@@ -2060,7 +2093,7 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 								}
 								$history_file = new PMXI_File_Record();
 								$history_file->getBy('id', $file['id']);
-								if ( ! $history_file->isEmpty()) $history_file->delete();
+								if ( ! $history_file->isEmpty()) $history_file->delete( $history_file_path != $upload_result['filePath'] );
 							}
 						}
 						
@@ -2285,7 +2318,7 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 					}
 					$history_file = new PMXI_File_Record();
 					$history_file->getBy('id', $file['id']);
-					if ( ! $history_file->isEmpty()) $history_file->delete();
+					if ( ! $history_file->isEmpty()) $history_file->delete( $history_file_path != PMXI_Plugin::$session->filePath );
 				}
 			}
 
@@ -2409,6 +2442,10 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 		wp_cache_flush();
 
 		if ( PMXI_Plugin::is_ajax() or ! $ajax_processing ) {	
+			
+			$functions  = $wp_uploads['basedir'] . DIRECTORY_SEPARATOR . WP_ALL_IMPORT_UPLOADS_BASE_DIRECTORY . DIRECTORY_SEPARATOR . 'functions.php';
+			if ( @file_exists($functions) )
+				require_once $functions;
 
 			$iteration_start_time = time();			
 			
@@ -2580,7 +2617,40 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 				    else break;					    				    																		
 				}
 			}									
-		}			
+		}	
+
+		// delete missing records
+		if ( ( PMXI_Plugin::is_ajax() and empty(PMXI_Plugin::$session->local_paths) ) or ! $ajax_processing )
+		{
+			ob_start();
+
+			$is_all_records_deleted = $import->delete_missing_records($logger, $import->iteration - 1);
+
+			$log_data = ob_get_clean();
+
+			if ( $log_storage ){
+				$log = @fopen($log_file, 'a+');				
+				@fwrite($log, $log_data);
+				@fclose($log);						
+			}
+
+			$iteration_execution_time = time() - $iteration_start_time;										
+
+			if ( $ajax_processing and ! $is_all_records_deleted ) {
+				wp_send_json(array(
+					'imported' => $import->imported,
+					'created' => $import->created,
+					'updated' => $import->updated,		
+					'deleted' => $import->deleted,								
+					'percentage' => 99,
+					'warnings' => PMXI_Plugin::$session->warnings,
+					'errors' => PMXI_Plugin::$session->errors,
+					'log' => $log_data,
+					'done' => false,
+					'records_per_request' => $import->options['records_per_request'] 
+				));
+			}					
+		}		
 		
 		if ( ( PMXI_Plugin::is_ajax() and empty(PMXI_Plugin::$session->local_paths) ) or ! $ajax_processing or ! empty($import->canceled) ) {
 			

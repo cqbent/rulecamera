@@ -3,7 +3,7 @@
 Plugin Name: WP All Import Pro
 Plugin URI: http://www.wpallimport.com/
 Description: The most powerful solution for importing XML and CSV files to WordPress. Import to Posts, Pages, and Custom Post Types. Support for imports that run on a schedule, ability to update existing imports, and much more.
-Version: 4.2.0
+Version: 4.2.6
 Author: Soflyy
 */
 
@@ -31,7 +31,7 @@ if ( is_plugin_active('wp-all-import/plugin.php') ){
 }
 else {
 
-	define('PMXI_VERSION', '4.2.0');
+	define('PMXI_VERSION', '4.2.6');
 
 	define('PMXI_EDITION', 'paid');
 
@@ -250,9 +250,7 @@ else {
 		 * @param string $rootDir Plugin root dir
 		 * @param string $pluginFilePath Plugin main file
 		 */
-		protected function __construct() {
-
-			$this->load_plugin_textdomain();
+		protected function __construct() {			
 
 			// regirster autoloading method
 			if (function_exists('__autoload') and ! in_array('__autoload', spl_autoload_functions())) { // make sure old way of autoloading classes is not broken
@@ -316,7 +314,12 @@ else {
 			// register admin page pre-dispatcher
 			add_action('admin_init', array($this, '__adminInit'));
 			add_action('admin_init', array($this, '_fix_options'));
+			add_action('init', array($this, 'init'));
 
+		}
+
+		public function init(){
+			$this->load_plugin_textdomain();
 		}
 
 		function in_plugin_update_message($plugin_data, $r){
@@ -578,6 +581,10 @@ else {
 				if ( ! @file_exists($dir . DIRECTORY_SEPARATOR . 'index.php') ) @touch( $dir . DIRECTORY_SEPARATOR . 'index.php' );
 
 			}
+
+			$functions = $uploads['basedir'] . DIRECTORY_SEPARATOR . WP_ALL_IMPORT_UPLOADS_BASE_DIRECTORY . DIRECTORY_SEPARATOR . 'functions.php';
+
+			if ( ! @file_exists($functions) ) @touch( $functions );
 
 			self::$session = new PMXI_Handler();
 
@@ -1047,6 +1054,7 @@ else {
 				'is_update_excerpt' => 1,
 				'is_update_categories' => 1,
 				'is_update_author' => 1,
+				'is_update_comment_status' => 1,
 				'update_categories_logic' => 'full_update',
 				'taxonomies_list' => array(),
 				'taxonomies_only_list' => array(),
@@ -1106,6 +1114,7 @@ else {
 				'is_keep_linebreaks' => 0,
 				'is_leave_html' => 0,
 				'fix_characters' => 0,
+				'pid_xpath' => '',
 
 				'featured_image' => '',
 				'download_featured_image' => '',

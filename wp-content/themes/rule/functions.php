@@ -157,12 +157,13 @@ function display_product_category_menu_list($id) {
 }
 
 // display product category and ancestors
-function display_product_category_widget_list() {
+function display_product_category_widget_list($atts) {
     //$cats = get_the_term_list($id, 'product_cat');
     //print 'this is the text: '.get_the_ID();
     //print $cats;
+    $pcatts = shortcode_atts(array('taxonomy' => 'product_cat'), $atts);
     $id = get_the_ID();
-    $taxonomy = 'product_cat';
+    $taxonomy = $pcatts['taxonomy'];
     // get the term IDs assigned to post.
     $post_terms = wp_get_object_terms( $id, $taxonomy, array( 'fields' => 'ids' ) );
     // separator between links
@@ -195,12 +196,12 @@ function child_menu_list() {
     var_dump($menu);
 }
 
+// custom menu configuration for sidebar menu: strip out all menu items that are not part of the current menu tree so it displays
+// in similar fashion as menu block module
 add_filter( 'wp_nav_menu_objects','custom_nav_menu_objects_sub_menu', 10, 2 );
-// filter_hook function to react on sub_menu flag
 function custom_nav_menu_objects_sub_menu( $sorted_menu_items, $args ) {
     if ( isset( $args->sub_menu ) ) {
         $root_id = 0;
-
         // find the current menu item
         foreach ( $sorted_menu_items as $menu_item ) {
             if ( $menu_item->current ) {
@@ -287,9 +288,33 @@ add_shortcode( 'product_category_widget_list', 'display_product_category_widget_
 
 // disable cart and checkout stuff
 remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );
-//remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
-remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );
+
+// remove related products
+remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20);
+
+// alter price language
+add_filter( 'woocommerce_price_html', 'filter_woocommerce_price_html', 10, 2 );
+function filter_woocommerce_price_html($price, $instance) {
+    return 'Buy for '.$price;
+}
+
+// add rental price
+add_action('woocommerce_single_product_summary', 'rule_rental_price', 16);
+add_action('woocommerce_after_shop_loop_item_title', 'rule_rental_price', 20);
+function rule_rental_price() {
+    if (get_field('rental_price')) {
+        echo '<span class="price">Rent for $'.get_field('rental_price').'</span>';
+    }
+}
+
+// remove popularity from sort options
+// Options: menu_order, popularity, rating, date, price, price-desc
+function rule_woocommerce_catalog_orderby( $orderby ) {
+    unset($orderby["popularity"]);
+    return $orderby;
+}
+add_filter( "woocommerce_catalog_orderby", "rule_woocommerce_catalog_orderby", 20 );
 
 // disable woocommerce tabs
 //remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
@@ -520,6 +545,39 @@ function get_term_top_most_parent( $term_id, $taxonomy ) {
     }
     return $parent;
 }
+
+// get page menu root
+function get_menu_parent_id($menu_name){
+    if(!isset($menu_name)){
+        return "No menu name provided in arguments";
+    }
+    $menu_slug = $menu_name;
+    $locations = get_nav_menu_locations();
+    $menu_id   = $locations[$menu_slug];
+    $post_id        = get_the_ID();
+    $menu_items     = wp_get_nav_menu_items($menu_id);
+    $parent_item_id = wp_filter_object_list($menu_items,array('object_id'=>$post_id),'and','menu_item_parent');
+    $parent_item_id = array_shift( $parent_item_id );
+    function checkForParent($parent_item_id,$menu_items){
+        $parent_post_id = wp_filter_object_list( $menu_items, array( 'ID' => $parent_item_id ), 'and', 'object_id' );
+        $parent_item_id = wp_filter_object_list($menu_items,array('ID'=>$parent_item_id),'and','menu_item_parent');
+        $parent_item_id = array_shift( $parent_item_id );
+        if($parent_item_id=="0"){
+            $parent_post_id = array_shift($parent_post_id);
+            return $parent_post_id;
+        }else{
+            return checkForParent($parent_item_id,$menu_items);
+        }
+    }
+    if(!empty($parent_item_id)){
+        return checkForParent($parent_item_id,$menu_items);
+    }else{
+        return $post_id;
+    }
+}
+
+// if post then get root post term and set cat slug and title
+// if category then : if root then set cat slug/title and no subtitle display; if not root then get root and set cat and title
 
 
 ?>

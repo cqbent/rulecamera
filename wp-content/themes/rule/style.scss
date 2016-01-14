@@ -54,7 +54,7 @@ body {
   background-color: $offsetblack;
   .col-full {
     background-color: $offsetblack;
-    padding: 20px;
+    padding: 20px 0;
     &.yellow {
       background-color: $yellow;
       padding: 0px;
@@ -68,13 +68,45 @@ body {
   }
 }
 .site-header {
-  // logo
-  .site-branding {
-    margin-bottom: 0;
-    img {
-      width: 150px;
+  .social-links {
+    font-size: 25px;
+    a {
+      color: $yellow;
     }
   }
+  .contact {
+    a {
+      color: $yellow;
+      font-weight: normal;
+    }
+  }
+
+  @include media($desktop) {
+    .site-branding {
+      position: absolute;
+    }
+    .site-header-content {
+      float: right;
+    }
+    .contact {
+      float: left;
+      margin-right: 50px;
+      .call {
+        &:after {
+          content: " | ";
+        }
+      }
+    }
+    .social-links {
+      float: right;
+      clear: both;
+      margin-top: 10px;
+    }
+    .site-search {
+      width: 200px !important;
+    }
+  }
+
   a {
     color: $white;
   }
@@ -101,16 +133,7 @@ body {
     }
 
   }
-  .tagline {
-    float: right;
-    clear: both;
-    color: $white;
-    margin-top: -20px;
-    a {
-      color: $yellow;
 
-    }
-  }
 }
 
 
@@ -123,6 +146,11 @@ body {
   ul.nav-menu {
     > li:first-child {
       margin-left: 0;
+    }
+    > li:last-child {
+      a {
+        padding-right: 0;
+      }
     }
     li {
       position: static;
@@ -198,6 +226,7 @@ body {
           }
         }
       }
+
     }
   }
 }
@@ -249,8 +278,13 @@ body {
       }
     }
   }
-  .social-links {
-    font-size: 25px;
+
+  .tagline {
+
+    a {
+      color: $yellow;
+
+    }
   }
 }
 
@@ -396,12 +430,25 @@ body {
   }
 }
 
+// blog post styling
+.single-post {
+  .site-content {
+    position: relative;
+    .woocommerce-breadcrumb {
+      max-width: 980px;
+      margin: 0 auto 20px auto;
+      padding: 5px 0;
+    }
+  }
+}
+
 // page, archive, prodduct styling
-.page, .archive, .single {
+.page, .archive, .single-product  {
   .site-content {
     position: relative;
     .content-container {
       margin-top: 40px;
+      padding: 20px;
     }
     .woocommerce-breadcrumb {
       position: absolute;

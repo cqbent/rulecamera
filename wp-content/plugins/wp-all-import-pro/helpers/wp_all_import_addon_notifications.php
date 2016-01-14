@@ -68,7 +68,7 @@ if ( ! function_exists('wp_all_import_addon_notifications') ){
 					'title' => 'Listify',
 					'url'   => 'https://wordpress.org/plugins/listify-xml-csv-listings-import/'
 				);
-			}
+			}			
 			// RealHomes Add-On
 			if ( in_array('RealHomes Theme', $current_themes) 
 				and is_wp_error(validate_plugin('realhomes-xml-csv-property-listings-import/realhomes-add-on.php')))
@@ -86,16 +86,16 @@ if ( ! function_exists('wp_all_import_addon_notifications') ){
 					'title' => 'Jobify',
 					'url'   => 'https://wordpress.org/plugins/jobify-xml-csv-listings-import/'
 				);
-			}
+			}			
 			// Yoast SEO Add-On
 			if ( is_plugin_active('wordpress-seo/wp-seo.php')
 				and is_wp_error(validate_plugin('yoast-seo-settings-xml-csv-import/yoast-addon.php')))
-			{
+			{				
 				$recommended_addons[] = array(
 					'title' => 'Yoast SEO',
 					'url'   => 'https://wordpress.org/plugins/yoast-seo-settings-xml-csv-import/'
 				);
-			}
+			}			
 			// ACF Add-On
 			if ( is_plugin_active('advanced-custom-fields-pro/acf.php')
 				and is_wp_error(validate_plugin('wpai-acf-add-on/wpai-acf-add-on.php')))

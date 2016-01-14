@@ -3,7 +3,7 @@ if ( ! function_exists('wp_all_import_template_notifications') )
 {
 	function wp_all_import_template_notifications( $post, $type = 'warning')
 	{
-		$notifications = array();
+		$notifications = array();		
 		// import template was generated via WP All Export
 		if ( ! empty($post['required_add_ons']) )
 		{
@@ -22,7 +22,7 @@ if ( ! function_exists('wp_all_import_template_notifications') )
 			{
 				$notifications[] = __('The import template you are using requires the User Import Add-On. If you continue without it your data may import incorrectly.<br/><br/><a href="http://www.wpallimport.com/add-ons/user-import/?utm_source=wordpress.org&utm_medium=wpai-import-template&utm_campaign=free+wp+all+export+plugin" target="_blank">Purchase the User Import Add-On</a>.', 'wp_all_import_plugin');						
 			}
-			elseif ( $post['custom_type'] == 'product' && ! class_exists('PMWI_Plugin') )
+			elseif ( $post['custom_type'] == 'product' && ! class_exists('PMWI_Plugin') && class_exists( 'Woocommerce' ))
 			{
 				$notifications[] = __('The import template you are using requires the WooCommerce Import Add-On. If you continue without it your data may import incorrectly.<br/><br/><a href="http://www.wpallimport.com/woocommerce-product-import/" target="_blank">Purchase the WooCommerce Import Add-On</a>.', 'wp_all_import_plugin');				
 			}			
@@ -37,7 +37,7 @@ if ( ! function_exists('wp_all_import_template_notifications') )
 						and ! is_plugin_active('wp-residence-add-on-for-wp-all-import/wp-residence-add-on.php') )
 			{
 				$notifications[] = __('The import template you are using requires the WP Residence Add-On. If you continue without it your data may import incorrectly.<br/><br/><a href="https://wordpress.org/plugins/wp-residence-add-on-for-wp-all-import/" target="_blank">Download the WP Residence Add-On</a>.', 'wp_all_import_plugin');
-			}
+			}			
 			// RealHomes Add-On
 			elseif ( ! empty($post['realhomes_addon']) 
 					and isset($post['realhomes_addon']['REAL_HOMES_property_price']) 

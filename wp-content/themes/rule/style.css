@@ -30,7 +30,7 @@ body {
   background-color: #2c2d33; }
   .site-header .col-full, .site-footer .col-full {
     background-color: #2c2d33;
-    padding: 20px; }
+    padding: 20px 0; }
     .site-header .col-full.yellow, .site-footer .col-full.yellow {
       background-color: #d79800;
       padding: 0px; }
@@ -40,10 +40,29 @@ body {
       margin: 0;
       padding: 0; }
 
-.site-header .site-branding {
-  margin-bottom: 0; }
-  .site-header .site-branding img {
-    width: 150px; }
+.site-header .social-links {
+  font-size: 25px; }
+  .site-header .social-links a {
+    color: #d79800; }
+.site-header .contact a {
+  color: #d79800;
+  font-weight: normal; }
+@media screen and (min-width: 769px) {
+  .site-header .site-branding {
+    position: absolute; }
+  .site-header .site-header-content {
+    float: right; }
+  .site-header .contact {
+    float: left;
+    margin-right: 50px; }
+    .site-header .contact .call:after {
+      content: " | "; }
+  .site-header .social-links {
+    float: right;
+    clear: both;
+    margin-top: 10px; }
+  .site-header .site-search {
+    width: 200px !important; } }
 .site-header a {
   color: #fff; }
 .site-header .site-search {
@@ -62,13 +81,6 @@ body {
       padding: 8px 5px 5px 5px;
       box-sizing: border-box;
       font-size: 1.25em; }
-.site-header .tagline {
-  float: right;
-  clear: both;
-  color: #fff;
-  margin-top: -20px; }
-  .site-header .tagline a {
-    color: #d79800; }
 
 /* primary navigation menu */
 .primary-navigation {
@@ -77,6 +89,8 @@ body {
   margin: 0; }
   .primary-navigation ul.nav-menu > li:first-child {
     margin-left: 0; }
+  .primary-navigation ul.nav-menu > li:last-child a {
+    padding-right: 0; }
   .primary-navigation ul.nav-menu li {
     position: static; }
     .primary-navigation ul.nav-menu li.menu-item-has-children a:after {
@@ -166,8 +180,8 @@ body {
     text-transform: uppercase; }
     .site-footer .menu-footer-menu li a {
       font-weight: 600; }
-.site-footer .social-links {
-  font-size: 25px; }
+.site-footer .tagline a {
+  color: #d79800; }
 
 .pagination .page-numbers li .page-numbers.current, .woocommerce-pagination .page-numbers li .page-numbers.current {
   background-color: #0077c5; }
@@ -251,11 +265,19 @@ body {
     .page-template-template-homepage #main .content-area-widget .home-nav .learn {
       background-color: #54b59f; }
 
-.page .site-content, .archive .site-content, .single .site-content {
+.single-post .site-content {
   position: relative; }
-  .page .site-content .content-container, .archive .site-content .content-container, .single .site-content .content-container {
-    margin-top: 40px; }
-  .page .site-content .woocommerce-breadcrumb, .archive .site-content .woocommerce-breadcrumb, .single .site-content .woocommerce-breadcrumb {
+  .single-post .site-content .woocommerce-breadcrumb {
+    max-width: 980px;
+    margin: 0 auto 20px auto;
+    padding: 5px 0; }
+
+.page .site-content, .archive .site-content, .single-product .site-content {
+  position: relative; }
+  .page .site-content .content-container, .archive .site-content .content-container, .single-product .site-content .content-container {
+    margin-top: 40px;
+    padding: 20px; }
+  .page .site-content .woocommerce-breadcrumb, .archive .site-content .woocommerce-breadcrumb, .single-product .site-content .woocommerce-breadcrumb {
     position: absolute;
     top: 80px;
     width: 100%;
@@ -264,11 +286,11 @@ body {
     left: 0;
     right: 0;
     padding: 5px 0; }
-  .page .site-content .entry-header, .page .site-content .archive-header, .archive .site-content .entry-header, .archive .site-content .archive-header, .single .site-content .entry-header, .single .site-content .archive-header {
+  .page .site-content .entry-header, .page .site-content .archive-header, .archive .site-content .entry-header, .archive .site-content .archive-header, .single-product .site-content .entry-header, .single-product .site-content .archive-header {
     padding: 10px 20px 0 20px;
     background-color: #778590;
     margin: 0 -20px 20px -20px; }
-    .page .site-content .entry-header h1.entry-title, .page .site-content .entry-header h1.section-title, .page .site-content .archive-header h1.entry-title, .page .site-content .archive-header h1.section-title, .archive .site-content .entry-header h1.entry-title, .archive .site-content .entry-header h1.section-title, .archive .site-content .archive-header h1.entry-title, .archive .site-content .archive-header h1.section-title, .single .site-content .entry-header h1.entry-title, .single .site-content .entry-header h1.section-title, .single .site-content .archive-header h1.entry-title, .single .site-content .archive-header h1.section-title {
+    .page .site-content .entry-header h1.entry-title, .page .site-content .entry-header h1.section-title, .page .site-content .archive-header h1.entry-title, .page .site-content .archive-header h1.section-title, .archive .site-content .entry-header h1.entry-title, .archive .site-content .entry-header h1.section-title, .archive .site-content .archive-header h1.entry-title, .archive .site-content .archive-header h1.section-title, .single-product .site-content .entry-header h1.entry-title, .single-product .site-content .entry-header h1.section-title, .single-product .site-content .archive-header h1.entry-title, .single-product .site-content .archive-header h1.section-title {
       margin-left: 50px;
       -webkit-transform: rotate(-5deg);
       -moz-transform: rotate(-5deg);
@@ -278,48 +300,48 @@ body {
       display: inline-block;
       font-weight: 700;
       color: #fff; }
-      .page .site-content .entry-header h1.entry-title:before, .page .site-content .entry-header h1.entry-title:after, .page .site-content .entry-header h1.section-title:before, .page .site-content .entry-header h1.section-title:after, .page .site-content .archive-header h1.entry-title:before, .page .site-content .archive-header h1.entry-title:after, .page .site-content .archive-header h1.section-title:before, .page .site-content .archive-header h1.section-title:after, .archive .site-content .entry-header h1.entry-title:before, .archive .site-content .entry-header h1.entry-title:after, .archive .site-content .entry-header h1.section-title:before, .archive .site-content .entry-header h1.section-title:after, .archive .site-content .archive-header h1.entry-title:before, .archive .site-content .archive-header h1.entry-title:after, .archive .site-content .archive-header h1.section-title:before, .archive .site-content .archive-header h1.section-title:after, .single .site-content .entry-header h1.entry-title:before, .single .site-content .entry-header h1.entry-title:after, .single .site-content .entry-header h1.section-title:before, .single .site-content .entry-header h1.section-title:after, .single .site-content .archive-header h1.entry-title:before, .single .site-content .archive-header h1.entry-title:after, .single .site-content .archive-header h1.section-title:before, .single .site-content .archive-header h1.section-title:after {
+      .page .site-content .entry-header h1.entry-title:before, .page .site-content .entry-header h1.entry-title:after, .page .site-content .entry-header h1.section-title:before, .page .site-content .entry-header h1.section-title:after, .page .site-content .archive-header h1.entry-title:before, .page .site-content .archive-header h1.entry-title:after, .page .site-content .archive-header h1.section-title:before, .page .site-content .archive-header h1.section-title:after, .archive .site-content .entry-header h1.entry-title:before, .archive .site-content .entry-header h1.entry-title:after, .archive .site-content .entry-header h1.section-title:before, .archive .site-content .entry-header h1.section-title:after, .archive .site-content .archive-header h1.entry-title:before, .archive .site-content .archive-header h1.entry-title:after, .archive .site-content .archive-header h1.section-title:before, .archive .site-content .archive-header h1.section-title:after, .single-product .site-content .entry-header h1.entry-title:before, .single-product .site-content .entry-header h1.entry-title:after, .single-product .site-content .entry-header h1.section-title:before, .single-product .site-content .entry-header h1.section-title:after, .single-product .site-content .archive-header h1.entry-title:before, .single-product .site-content .archive-header h1.entry-title:after, .single-product .site-content .archive-header h1.section-title:before, .single-product .site-content .archive-header h1.section-title:after {
         font-size: 1.25em;
         font-weight: 400; }
-      .page .site-content .entry-header h1.entry-title:before, .page .site-content .entry-header h1.section-title:before, .page .site-content .archive-header h1.entry-title:before, .page .site-content .archive-header h1.section-title:before, .archive .site-content .entry-header h1.entry-title:before, .archive .site-content .entry-header h1.section-title:before, .archive .site-content .archive-header h1.entry-title:before, .archive .site-content .archive-header h1.section-title:before, .single .site-content .entry-header h1.entry-title:before, .single .site-content .entry-header h1.section-title:before, .single .site-content .archive-header h1.entry-title:before, .single .site-content .archive-header h1.section-title:before {
+      .page .site-content .entry-header h1.entry-title:before, .page .site-content .entry-header h1.section-title:before, .page .site-content .archive-header h1.entry-title:before, .page .site-content .archive-header h1.section-title:before, .archive .site-content .entry-header h1.entry-title:before, .archive .site-content .entry-header h1.section-title:before, .archive .site-content .archive-header h1.entry-title:before, .archive .site-content .archive-header h1.section-title:before, .single-product .site-content .entry-header h1.entry-title:before, .single-product .site-content .entry-header h1.section-title:before, .single-product .site-content .archive-header h1.entry-title:before, .single-product .site-content .archive-header h1.section-title:before {
         content: "["; }
-      .page .site-content .entry-header h1.entry-title:after, .page .site-content .entry-header h1.section-title:after, .page .site-content .archive-header h1.entry-title:after, .page .site-content .archive-header h1.section-title:after, .archive .site-content .entry-header h1.entry-title:after, .archive .site-content .entry-header h1.section-title:after, .archive .site-content .archive-header h1.entry-title:after, .archive .site-content .archive-header h1.section-title:after, .single .site-content .entry-header h1.entry-title:after, .single .site-content .entry-header h1.section-title:after, .single .site-content .archive-header h1.entry-title:after, .single .site-content .archive-header h1.section-title:after {
+      .page .site-content .entry-header h1.entry-title:after, .page .site-content .entry-header h1.section-title:after, .page .site-content .archive-header h1.entry-title:after, .page .site-content .archive-header h1.section-title:after, .archive .site-content .entry-header h1.entry-title:after, .archive .site-content .entry-header h1.section-title:after, .archive .site-content .archive-header h1.entry-title:after, .archive .site-content .archive-header h1.section-title:after, .single-product .site-content .entry-header h1.entry-title:after, .single-product .site-content .entry-header h1.section-title:after, .single-product .site-content .archive-header h1.entry-title:after, .single-product .site-content .archive-header h1.section-title:after {
         content: "]"; }
-    .page .site-content .entry-header.sales, .page .site-content .archive-header.sales, .archive .site-content .entry-header.sales, .archive .site-content .archive-header.sales, .single .site-content .entry-header.sales, .single .site-content .archive-header.sales {
+    .page .site-content .entry-header.sales, .page .site-content .archive-header.sales, .archive .site-content .entry-header.sales, .archive .site-content .archive-header.sales, .single-product .site-content .entry-header.sales, .single-product .site-content .archive-header.sales {
       background-color: #0077c5; }
-    .page .site-content .entry-header.rentals, .page .site-content .archive-header.rentals, .archive .site-content .entry-header.rentals, .archive .site-content .archive-header.rentals, .single .site-content .entry-header.rentals, .single .site-content .archive-header.rentals {
+    .page .site-content .entry-header.rentals, .page .site-content .archive-header.rentals, .archive .site-content .entry-header.rentals, .archive .site-content .archive-header.rentals, .single-product .site-content .entry-header.rentals, .single-product .site-content .archive-header.rentals {
       background-color: #d79800; }
-    .page .site-content .entry-header.learn, .page .site-content .archive-header.learn, .archive .site-content .entry-header.learn, .archive .site-content .archive-header.learn, .single .site-content .entry-header.learn, .single .site-content .archive-header.learn {
+    .page .site-content .entry-header.learn, .page .site-content .archive-header.learn, .archive .site-content .entry-header.learn, .archive .site-content .archive-header.learn, .single-product .site-content .entry-header.learn, .single-product .site-content .archive-header.learn {
       background-color: #54b59f; }
-  .page .site-content h2.page-title, .page .site-content h2.archive-title, .archive .site-content h2.page-title, .archive .site-content h2.archive-title, .single .site-content h2.page-title, .single .site-content h2.archive-title {
+  .page .site-content h2.page-title, .page .site-content h2.archive-title, .archive .site-content h2.page-title, .archive .site-content h2.archive-title, .single-product .site-content h2.page-title, .single-product .site-content h2.archive-title {
     color: #778590;
     text-transform: uppercase;
     letter-spacing: 2px; }
-.page .sidebar-left .menu-sidebar-menu, .archive .sidebar-left .menu-sidebar-menu, .single .sidebar-left .menu-sidebar-menu {
+.page .sidebar-left .menu-sidebar-menu, .archive .sidebar-left .menu-sidebar-menu, .single-product .sidebar-left .menu-sidebar-menu {
   list-style: none;
   margin-left: 0; }
-  .page .sidebar-left .menu-sidebar-menu li, .archive .sidebar-left .menu-sidebar-menu li, .single .sidebar-left .menu-sidebar-menu li {
+  .page .sidebar-left .menu-sidebar-menu li, .archive .sidebar-left .menu-sidebar-menu li, .single-product .sidebar-left .menu-sidebar-menu li {
     font-size: 1.25em; }
-    .page .sidebar-left .menu-sidebar-menu li a, .archive .sidebar-left .menu-sidebar-menu li a, .single .sidebar-left .menu-sidebar-menu li a {
+    .page .sidebar-left .menu-sidebar-menu li a, .archive .sidebar-left .menu-sidebar-menu li a, .single-product .sidebar-left .menu-sidebar-menu li a {
       font-weight: 500; }
-      .page .sidebar-left .menu-sidebar-menu li a:hover, .archive .sidebar-left .menu-sidebar-menu li a:hover, .single .sidebar-left .menu-sidebar-menu li a:hover {
+      .page .sidebar-left .menu-sidebar-menu li a:hover, .archive .sidebar-left .menu-sidebar-menu li a:hover, .single-product .sidebar-left .menu-sidebar-menu li a:hover {
         color: #778590; }
-    .page .sidebar-left .menu-sidebar-menu li.current-menu-item a, .archive .sidebar-left .menu-sidebar-menu li.current-menu-item a, .single .sidebar-left .menu-sidebar-menu li.current-menu-item a {
+    .page .sidebar-left .menu-sidebar-menu li.current-menu-item a, .archive .sidebar-left .menu-sidebar-menu li.current-menu-item a, .single-product .sidebar-left .menu-sidebar-menu li.current-menu-item a {
       color: #778590; }
 @media screen and (min-width: 769px) {
-  .page .col.main, .archive .col.main, .single .col.main {
+  .page .col.main, .archive .col.main, .single-product .col.main {
     float: left;
     display: block;
     margin-right: 2.35765%;
     width: 65.88078%; }
-    .page .col.main:last-child, .archive .col.main:last-child, .single .col.main:last-child {
+    .page .col.main:last-child, .archive .col.main:last-child, .single-product .col.main:last-child {
       margin-right: 0; }
-  .page .col.sidebar, .archive .col.sidebar, .single .col.sidebar {
+  .page .col.sidebar, .archive .col.sidebar, .single-product .col.sidebar {
     float: left;
     display: block;
     margin-right: 2.35765%;
     width: 31.76157%; }
-    .page .col.sidebar:last-child, .archive .col.sidebar:last-child, .single .col.sidebar:last-child {
+    .page .col.sidebar:last-child, .archive .col.sidebar:last-child, .single-product .col.sidebar:last-child {
       margin-right: 0; } }
 
 .page:not(.page-id-2247) .site-content .content-area {

@@ -16,13 +16,20 @@
 		var is_variable = ($('#product-type').val() == 'variable');
 		var is_grouped = ($('#product-type').val() == 'grouped');
 		var is_simple = ($('#product-type').val() == 'simple');
-		var is_external = ($('#product-type').val() == 'external');
+		var is_external = ($('#product-type').val() == 'external');		
 		var is_downloadable = !($('input[name=is_product_downloadable]:checked').val() == 'no');
 		var is_variable_downloadable = !($('input[name=is_variable_product_downloadable]:checked').val() == 'no');		
 		var is_virtual = ($('#_virtual').is(':checked'));			
 		var is_multiple_product_type = ($('input[name=is_multiple_product_type]:checked').val() == 'yes');		
 
 		if (!is_multiple_product_type) $('.product_data_tabs li, .options_group').show();
+
+		if ( ! is_variable && ! is_grouped && ! is_external && is_multiple_product_type )
+		{
+			is_simple = true;
+		}
+
+		console.log(is_simple);
 
 		$('.product_data_tabs li, .options_group').each(function(){
 
@@ -157,21 +164,6 @@
 		$('#variable_sale_price_shedule').show();
 	});
 
-	// $('#_variable_virtual').click(function(){
-	// 	if ($(this).is(':checked')){
-	// 		$('#variable_virtual').show();
-	// 		$('#variable_dimensions').hide();
-	// 	}
-	// 	else{
-	// 		$('#variable_virtual').hide();
-	// 		$('#variable_dimensions').show();
-	// 	}
-	// });
-
-	// $('#_variable_downloadable').click(function(){
-	// 	if ($(this).is(':checked')) $('.variable_downloadable').show(); else $('.variable_downloadable').hide();
-	// });	
-
 	var variation_xpath = $('#variations_xpath').val();
 
 	$('#variations_xpath').blur(function(){
@@ -238,7 +230,7 @@
 	});
     
 
-	$('.variation_attributes, #woocommerce_attributes').find('label').live({
+	$('.variation_attributes').find('label').live({
         mouseenter:
            function()
             {           	
@@ -248,6 +240,8 @@
 					
 					$(this).parents('span:first').find('input').attr('id', $(this).parents('span:first').find('input').attr('name').replace('[]','') + '_' + counter );
 					$(this).attr('for', $(this).parents('span:first').find('input').attr('id'));
+					var $create_terms = $(this).parents('.wpallimport-radio-field:first').find('.is_create_taxonomy');
+					if ( ! $create_terms.hasClass('switcher-target-is_taxonomy_' + counter)) $create_terms.addClass('switcher-target-is_taxonomy_' + counter);
 				}
             },
         mouseleave:
@@ -255,6 +249,46 @@
            {
 
            }
+    });
+
+    $('.add-new-custom').click(function(){
+
+    	var counter = $(this).parents('table:first').find('tr.form-field:visible').length - 1;
+
+    	$('#woocommerce_attributes').find('.default_attribute_settings').find('label').each(function(){
+    		if ( "" == $(this).attr('for') )
+           	{
+           		var $parent = $(this).parents('tr.form-field:first');
+           		if ( ! $parent.hasClass('template'))
+           		{           							
+					$(this).parents('span:first').find('input').attr('id', $(this).parents('span:first').find('input').attr('name').replace('[]','') + '_' + counter );
+					$(this).attr('for', $(this).parents('span:first').find('input').attr('id'));
+					var $create_terms = $(this).parents('.wpallimport-radio-field:first').find('.is_create_taxonomy');
+					if ( ! $create_terms.hasClass('switcher-target-is_taxonomy_' + counter)) $create_terms.addClass('switcher-target-is_taxonomy_' + counter);
+           		}				
+			}
+    	});
+
+    	$('#woocommerce_attributes').find('.advanced_settings_template').each(function(){
+    		var $tpl = $(this).parents('tr.form-field:first');
+       		if ( ! $tpl.hasClass('template'))
+       		{  
+	    		$(this).find('label').each(function(){    		   			    			
+		   			$(this).attr('for', $(this).attr('for').replace('00', counter));							
+		    	});
+		    	$(this).find('input').each(function(){    		   			    			
+		   			if (typeof $(this).attr('id') != "undefined") $(this).attr('id', $(this).attr('id').replace('00', counter));							
+		   			$(this).attr('name', $(this).attr('name').replace('00', counter));
+		    	});
+		    	$(this).find('div.set_with_xpath').each(function(){
+		    		var $parent = $(this).parents('.wpallimport-radio-field:first');
+		    		$(this).addClass('switcher-target-' + $parent.find('input.switcher').attr('id'));
+		    		$parent.find('input.switcher').change();
+		    	});
+		    	$(this).removeClass('advanced_settings_template');
+		    }
+    	});    	    	
+
     });
 
 	$('#variations_tag').draggable({ containment: "#wpwrap", zIndex: 100 }).hide();	
@@ -316,6 +350,33 @@
 		else
 			$(this).find('span').html('-');
 		$('.pmwi_adjust_prices').slideToggle();
+	});
+
+	$('.advanced_attributes').live('click', function(){
+		var $parent = $(this).parent('div.wpallimport-radio-field:first');
+
+		if ($(this).find('span').html() == "+")
+		{
+			$parent.find('.default_attribute_settings').hide();
+			$parent.find('.advanced_attribute_settings').fadeIn();
+			$parent.find('input[name^=is_advanced]').val('1');
+			$(this).find('span').html("-");			
+		}
+		else
+		{
+			$parent.find('.advanced_attribute_settings').hide();
+			$parent.find('.default_attribute_settings').fadeIn();
+			$parent.find('input[name^=is_advanced]').val('0');
+			$(this).find('span').html("+");
+		}
+	});
+
+	$('input[name^=is_advanced]').each(function(){
+		if ($(this).val() == '1')
+		{
+			var $parent = $(this).parent('div.wpallimport-radio-field:first');
+			$parent.find('.advanced_attributes').click();
+		}
 	});
 
 });})(jQuery);

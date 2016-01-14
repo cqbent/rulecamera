@@ -15,34 +15,34 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header( 'shop' );
 
-// get cat info; if has parent then get
-$pcatinfo = get_queried_object();
-if ($pcatinfo->parent) {
-	$pcatparent = get_term_top_most_parent( $pcatinfo->term_id, 'product_cat' );
-	$pcattitle = $pcatparent->name;
-	$pcatslug = $pcatparent->slug;
+// get cat info; if has parent then get root parent as title
+$terminfo = get_queried_object();
+if ($terminfo->taxonomy == 'manufacturers') {
+	$termroot = (object) array('name' => 'Manufacturers', 'slug' => 'manufacturers');
 }
 else {
-	$pcattitle = $pcatinfo->name;
-	$pcatslug = $pcatinfo->slug;
+	$termroot = get_term_top_most_parent( $terminfo->term_id, $terminfo->taxonomy );
 }
-
-
+//var_dump($terminfo);
 ?>
 
-	<header class="archive-header <?php print $pcatslug; ?>">
+	<header class="archive-header <?php print $termroot->slug; ?>">
 
 		<div class="entry-header-title">
-			<h1 class="section-title"><?php print $pcattitle; ?></h1>
+			<h1 class="section-title"><?php print $termroot->name; ?></h1>
 		</div>
 
 	</header>
 
 	<div class="content-container">
 
-		<?php if ( apply_filters( 'woocommerce_show_page_title', true ) ) : ?>
+		<?php if ( apply_filters( 'woocommerce_show_page_title', true ) && $terminfo->parent ) : ?>
 
 			<h2 class="archive-title"><?php woocommerce_page_title(); ?></h2>
+
+		<?php elseif ($terminfo->taxonomy == 'manufacturers') : ?>
+
+			<h2 class="archive-title"><?php print $terminfo->name; ?></h2>
 
 		<?php endif; ?>
 

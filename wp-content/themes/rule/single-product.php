@@ -15,16 +15,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $terms = wp_get_post_terms( get_the_ID(), 'product_cat', array( 'orderby' => 'parent', 'order' => 'DESC' ) );
 $termroot = $terms[count($terms)-1];
-$pcattitle = $termroot->name;
-$pcatslug = $termroot->slug;
-//print_r($terms);
 
 get_header( 'shop' ); ?>
 
-	<header class="entry-header <?php print $pcatslug; ?>">
+	<header class="entry-header <?php print $termroot->slug; ?>">
 
 		<div class="entry-header-title">
-			<h1 class="section-title"><?php print $pcattitle; ?></h1>
+			<h1 class="section-title"><?php print $termroot->name; ?></h1>
 		</div>
 
 	</header>

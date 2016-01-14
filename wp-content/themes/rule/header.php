@@ -43,12 +43,27 @@
 			<div class="site-branding">
 				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php echo '<img src="' . get_stylesheet_directory_uri() . '/images/rule_logo.png" />'; ?></a></h1>
 			</div>
-			<?php
-			do_action( 'rule_header_top' ); ?>
-			<div class="tagline">
-				Discounts, events, cool new products! <a href="#">Join our mailing list >></a>
+			<div class="site-header-content">
+				<div class="contact">
+					<span class="call">
+						Call: 800.785.3266
+					</span>
+					<a href="#">Contact Us</a>
+				</div>
+				<?php
+				do_action( 'rule_header_top' ); ?>
+				<div class="social-links">
+					<a class="twittersm" href="http://twitter.com/#!/rulebostoncam" target="_blank"><i class="fa fa-twitter-square"></i></a>
+					<a class="facebooksm" href="http://www.facebook.com/pages/Rule-Boston-Camera/46957103796" target="_blank"><i class="fa fa-facebook-square"></i></a>
+					<a class="linkedinsm" href="http://www.linkedin.com/groups?gid=1781545" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+					<a class="vimeosm" href="http://vimeo.com/channels/rulelearninglabseries" target="_blank"><i class="fa fa-vimeo-square"></i></a>
+					<a class="instagram" href="http://instagram.com/rulebostoncamera" target="_blank"><i class="fa fa-instagram"></i></a>
+					<a class="pinterest" href="http://www.pinterest.com/rulebostoncam/" target="_blank"><i class="fa fa-pinterest-square"></i></a>
+					<a class="tumblr" href="http://rulebostoncamera.tumblr.com/" target="_blank"><i class="fa fa-tumblr-square"></i></a>
+					<a class="googleplus" href="https://plus.google.com/103862733335946680123/posts" target="_blank"><i class="fa fa-google-plus-square"></i></a>
+				</div>
 			</div>
-			<?php do_action( 'rule_header_bottom' ); ?>
+            <?php do_action( 'rule_header_bottom' ); ?>
 		</div>
 		<div class="col-full yellow">
 

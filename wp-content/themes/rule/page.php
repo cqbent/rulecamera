@@ -16,30 +16,31 @@ get_header(); ?>
 	//add_action('rule_page', 'storefront_page_header');
 	//do_action('rule_page');
 	//print do_shortcode('[woof sid="rule_product_filter" autohide=0 price_filter=0]');
-	if ($post->post_parent) {
-		$parents = get_post_ancestors($post->ID);
-		$parent = get_post($parents[count($parents)-1]);
-		$page_title = $parent->post_title;
-		$page_slug = $parent->post_name;
-	}
-	else {
-		$page_title = $post->post_title;
-		$page_slug = $post->post_name;
-	}
+	//$parents = get_post_ancestors($post->ID);
+	//$parent = get_post($parents[count($parents)-1]);
+
+	$mpid = get_menu_parent_id('primary');
+	$parent = get_post($mpid);
+
 	//$page_title = empty( $post->post_parent ) ? get_the_title( $post->ID ) : get_the_title( $post->post_parent );
 
 	//the_title( '<h1 class="entry-title" itemprop="name">', '</h1>' );
 	//echo '<h1 class="entry-title" itemprop="name">'.$page_title.'</h1>';
+	//var_dump(get_menu_parent_ID('primary'));
 	?>
-	<header class="entry-header <?php print $page_slug; ?>">
+	<header class="entry-header <?php print $parent->post_name; ?>">
 
 		<div class="entry-header-title">
-			<h1 class="entry-title" itemprop="name"><?php echo $page_title; ?></h1>
+			<h1 class="entry-title" itemprop="name"><?php echo $parent->post_title; ?></h1>
 		</div>
 	</header><!-- .entry-header -->
 	<div class="content-container">
+
 		<div id="primary" class="content-area col-full">
-			<h2 class="page-title"><?php the_title(); ?></h2>
+			<?php if ($post->post_parent) : ?>
+				<h2 class="page-title"><?php the_title(); ?></h2>
+			<?php endif; ?>
+
 			<main id="main" class="site-main" role="main">
 
 				<?php while ( have_posts() ) : the_post(); ?>
@@ -63,6 +64,7 @@ get_header(); ?>
 		</div><!-- #primary -->
 
 		<?php
+
 		$id = get_the_ID();
 		if ($id == 2247) {
 			do_action( 'storefront_sidebar' );
