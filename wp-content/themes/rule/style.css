@@ -229,13 +229,13 @@ body {
       .page-template-template-homepage #main .buy-rent-learn .col .feature h3 {
         text-transform: uppercase; }
     .page-template-template-homepage #main .buy-rent-learn .col.buy h3, .page-template-template-homepage #main .buy-rent-learn .col.buy a {
-      color: #0077c5; }
-    .page-template-template-homepage #main .buy-rent-learn .col.buy .box {
-      background-color: #0077c5; }
-    .page-template-template-homepage #main .buy-rent-learn .col.rent h3, .page-template-template-homepage #main .buy-rent-learn .col.rent a {
       color: #d79800; }
-    .page-template-template-homepage #main .buy-rent-learn .col.rent .box {
+    .page-template-template-homepage #main .buy-rent-learn .col.buy .box {
       background-color: #d79800; }
+    .page-template-template-homepage #main .buy-rent-learn .col.rent h3, .page-template-template-homepage #main .buy-rent-learn .col.rent a {
+      color: #0077c5; }
+    .page-template-template-homepage #main .buy-rent-learn .col.rent .box {
+      background-color: #0077c5; }
     .page-template-template-homepage #main .buy-rent-learn .col.learn h3, .page-template-template-homepage #main .buy-rent-learn .col.learn a {
       color: #54b59f; }
     .page-template-template-homepage #main .buy-rent-learn .col.learn .box {

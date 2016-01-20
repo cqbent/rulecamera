@@ -373,18 +373,18 @@ body {
         }
         &.buy {
           h3, a {
-            color: $blue;
-          }
-          .box {
-            background-color: $blue;
-          }
-        }
-        &.rent {
-          h3, a {
             color: $yellow;
           }
           .box {
             background-color: $yellow;
+          }
+        }
+        &.rent {
+          h3, a {
+            color: $blue;
+          }
+          .box {
+            background-color: $blue;
           }
         }
         &.learn {
