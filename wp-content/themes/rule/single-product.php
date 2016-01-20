@@ -12,9 +12,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-
-$terms = wp_get_post_terms( get_the_ID(), 'product_cat', array( 'orderby' => 'parent', 'order' => 'DESC' ) );
-$termroot = $terms[count($terms)-1];
+$termroot = get_term_top_most_parent(get_the_ID());
 
 get_header( 'shop' ); ?>
 
@@ -44,6 +42,12 @@ get_header( 'shop' ); ?>
 			<?php wc_get_template_part( 'content', 'single-product' ); ?>
 
 		<?php endwhile; // end of the loop. ?>
+
+	<?php
+	if ($termroot->slug == 'rentals') {
+		print '<div class="note">More than one day rentals&mdash;call for pricing.</div>';
+	}
+	?>
 
 	<?php
 		/**

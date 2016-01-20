@@ -281,6 +281,28 @@ function footer_menu() {
 }
 add_shortcode('footer_menu','footer_menu');
 
+// add excerpt for product loop
+/*
+function display_product_excerpt() {
+    ?>
+    <div itemprop="description">
+        <?php echo get_the_excerpt(); ?>
+    </div>
+    <?php
+}
+add_action( 'woocommerce_after_shop_loop_item_title', 'display_product_excerpt', 50 );
+*/
+
+function display_featured_products() {
+    /*
+    woocommerce_template_loop_product_thumbnail
+    woocommerce_template_loop_product_title
+    woocommerce_template_loop_price
+    */
+}
+
+
+
 
 //add_action('woocommerce_after_single_product', 'display_product_category_ancestors');
 add_shortcode( 'product_category_widget_list', 'display_product_category_widget_list' );
@@ -304,7 +326,7 @@ add_action('woocommerce_single_product_summary', 'rule_rental_price', 16);
 add_action('woocommerce_after_shop_loop_item_title', 'rule_rental_price', 20);
 function rule_rental_price() {
     if (get_field('rental_price')) {
-        echo '<span class="price">Rent for $'.get_field('rental_price').'</span>';
+        echo '<span class="price">Rent for $'.get_field('rental_price').' per day</span>';
     }
 }
 
@@ -502,11 +524,12 @@ function show_latest_posts($atts) {
 add_shortcode( 'latest_posts', 'show_latest_posts' );
 
 // display people list
-function display_people_list() {
+function display_people_list($id = null) {
     $args = array(
         'post_type' => 'people',
         'posts_per_page' => 999,
-        'order' => 'ASC'
+        'order' => 'ASC',
+        'p' => $id
     );
     $pp_query = new WP_Query( $args );
     $output = '';
@@ -538,13 +561,22 @@ add_shortcode('people_list', 'display_people_list');
 
 
 // get root parent category
-function get_term_top_most_parent( $term_id, $taxonomy ) {
-    $parent  = get_term_by( 'id', $term_id, $taxonomy );
-    while ( $parent->parent != 0 ){
-        $parent  = get_term_by( 'id', $parent->parent, $taxonomy );
+$termroot = '';
+function get_term_top_most_parent( $id, $taxonomy = NULL ) {
+    if ($taxonomy) {
+        $parent  = get_term_by( 'id', $id, $taxonomy );
+        while ( $parent->parent != 0 ){
+            $parent  = get_term_by( 'id', $parent->parent, $taxonomy );
+        }
+    }
+    else {
+        $terms = wp_get_post_terms( $id, 'product_cat', array( 'orderby' => 'parent', 'order' => 'DESC' ) );
+        $parent = $terms[count($terms)-1];
     }
     return $parent;
 }
+
+
 
 // get page menu root
 function get_menu_parent_id($menu_name){
@@ -575,6 +607,7 @@ function get_menu_parent_id($menu_name){
         return $post_id;
     }
 }
+
 
 // if post then get root post term and set cat slug and title
 // if category then : if root then set cat slug/title and no subtitle display; if not root then get root and set cat and title

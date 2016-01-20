@@ -8,4 +8,9 @@ jQuery(document).ready(function($) {
         $('body').addClass('sidebar-left');
     }
 
+    if ($('header').hasClass('rentals')) {
+        $('.how-to-link').attr('href','/how-to-rent-from-us');
+        $('.how-to-link').text('How to Rent from Us');
+    }
+
 });

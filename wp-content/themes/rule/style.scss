@@ -54,7 +54,7 @@ body {
   background-color: $offsetblack;
   .col-full {
     background-color: $offsetblack;
-    padding: 20px 0;
+    padding: 20px 0 0 0;
     &.yellow {
       background-color: $yellow;
       padding: 0px;
@@ -143,6 +143,11 @@ body {
   float: right;
   padding: 0;
   margin: 0;
+  #menu-main-menu {
+    > li.menu-item {
+      padding-bottom: 10px;
+    }
+  }
   ul.nav-menu {
     > li:first-child {
       margin-left: 0;
@@ -179,12 +184,12 @@ body {
         padding: .75em 0;
         background-color: $gray;
         color: $black;
-        padding: 10px 20px;
+        padding: 15px 20px;
         &.sales {
-          background-color: $blue;
+          background-color: $yellow;
         }
         &.rentals {
-          background-color: $yellow;
+          background-color: $blue;
         }
         &.learn {
           background-color: $green;
@@ -486,10 +491,10 @@ body {
         }
       }
       &.sales {
-        background-color: $blue;
+        background-color: $yellow;
       }
       &.rentals {
-        background-color: $yellow;
+        background-color: $blue;
       }
       &.learn {
         background-color: $green;
@@ -521,6 +526,18 @@ body {
       }
     }
   }
+  #secondary {
+    .how-to-link {
+      font-weight: bold;
+      color: $blue;
+      font-size: 1.25em;
+    }
+  }
+  .note {
+    font-style: italic;
+    font-size: 1.25em;
+  }
+
   // for pages with right sidebar content
   .col {
     @include media($desktop) {
@@ -531,9 +548,126 @@ body {
         @include span-columns(4);
       }
     }
-
   }
 }
+
+// custom style options for rentals and sales landing pages
+.term-rentals, .term-sales {
+  #primary {
+    .term-description {
+      font-size: 1.5em;
+      color: $black;
+    }
+    h2 {
+      font-size: 1em;
+      text-transform: uppercase;
+      border-top: 2px $gray solid;
+      letter-spacing: 2px;
+    }
+  }
+  .feature {
+    .columns-3 {
+      .products {
+
+        li.product {
+          text-align: left;
+          h3 {
+            color: $blue;
+            margin: 0;
+          }
+          .price {
+            margin: 0;
+          }
+          .description {
+            color: $black;
+            font-weight: normal;
+          }
+          .readmore {
+            &:after {
+              content: " >>";
+            }
+          }
+        }
+        @include media($desktop) {
+          li:first-child {
+            width: 100%;
+            img {
+              float: left;
+              margin-right: 20px;
+            }
+            h3 {
+              display: inline-block;
+            }
+          }
+          li.first {
+            clear: none !important;
+          }
+
+          li:last-child {
+            margin-left: 5.85%;
+            margin-right: 0;
+          }
+        }
+      }
+    }
+  }
+  .product-categories {
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      li {
+        margin: 0;
+        padding: 0;
+        ul {
+          li {
+            a {
+              font-weight: normal;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @include media($desktop) {
+    #primary {
+      width: 100%;
+      float: none;
+      margin-right: 0;
+      padding-right: 15%;
+      box-sizing: border-box;
+      position: relative;
+    }
+    .product-categories {
+      > ul {
+        column-count: 4;
+        -webkit-column-count: 4;
+        -moz-column-count: 4;
+      }
+    }
+    .staff-list {
+      position: absolute;
+      right: 0;
+      li {
+        .image {
+          float: none;
+        }
+        .info span {
+          display: block;
+        }
+      }
+
+    }
+  }
+}
+.product_cat-rentals {
+  .sku_wrapper {
+    display: none !important;
+  }
+
+}
+
 .page:not(.page-id-2247)  {
   .site-content {
     .content-area {

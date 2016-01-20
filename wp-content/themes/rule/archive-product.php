@@ -13,17 +13,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-get_header( 'shop' );
-
 // get cat info; if has parent then get root parent as title
 $terminfo = get_queried_object();
+$termroot = get_term_top_most_parent( $terminfo->term_id, $terminfo->taxonomy );
+/*
 if ($terminfo->taxonomy == 'manufacturers') {
 	$termroot = (object) array('name' => 'Manufacturers', 'slug' => 'manufacturers');
 }
 else {
 	$termroot = get_term_top_most_parent( $terminfo->term_id, $terminfo->taxonomy );
 }
+*/
+//print rent_buy_link();
 //var_dump($terminfo);
+
+get_header( 'shop' );
+
+
 ?>
 
 	<header class="archive-header <?php print $termroot->slug; ?>">
@@ -107,6 +113,7 @@ else {
 
 		<?php endif; ?>
 
+
 	<?php
 		/**
 		 * woocommerce_after_main_content hook
@@ -123,6 +130,7 @@ else {
 		 * @hooked woocommerce_get_sidebar - 10
 		 */
 		do_action( 'woocommerce_sidebar' );
+
 	?>
 
 	</div>

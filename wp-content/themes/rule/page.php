@@ -66,7 +66,7 @@ get_header(); ?>
 		<?php
 
 		$id = get_the_ID();
-		if ($id == 2247) {
+		if ($id == 2247) { // if this is the blog page then add right sidebar
 			do_action( 'storefront_sidebar' );
 		}
 		//do_action( 'storefront_sidebar' );
