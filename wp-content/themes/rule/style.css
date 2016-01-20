@@ -220,7 +220,8 @@ body {
       .page-template-template-homepage #main .buy-rent-learn .col .box p {
         margin-left: 50px; }
       .page-template-template-homepage #main .buy-rent-learn .col .box a {
-        color: #fff; }
+        color: #fff;
+        display: block; }
     .page-template-template-homepage #main .buy-rent-learn .col .feature {
       padding: 20px;
       text-align: left; }
@@ -228,15 +229,15 @@ body {
         text-align: left; }
       .page-template-template-homepage #main .buy-rent-learn .col .feature h3 {
         text-transform: uppercase; }
-    .page-template-template-homepage #main .buy-rent-learn .col.buy h3, .page-template-template-homepage #main .buy-rent-learn .col.buy a {
+    .page-template-template-homepage #main .buy-rent-learn .col.buy .feature h3, .page-template-template-homepage #main .buy-rent-learn .col.buy .feature a {
       color: #d79800; }
     .page-template-template-homepage #main .buy-rent-learn .col.buy .box {
       background-color: #d79800; }
-    .page-template-template-homepage #main .buy-rent-learn .col.rent h3, .page-template-template-homepage #main .buy-rent-learn .col.rent a {
+    .page-template-template-homepage #main .buy-rent-learn .col.rent .feature h3, .page-template-template-homepage #main .buy-rent-learn .col.rent .feature a {
       color: #0077c5; }
     .page-template-template-homepage #main .buy-rent-learn .col.rent .box {
       background-color: #0077c5; }
-    .page-template-template-homepage #main .buy-rent-learn .col.learn h3, .page-template-template-homepage #main .buy-rent-learn .col.learn a {
+    .page-template-template-homepage #main .buy-rent-learn .col.learn .feature h3, .page-template-template-homepage #main .buy-rent-learn .col.learn .feature a {
       color: #54b59f; }
     .page-template-template-homepage #main .buy-rent-learn .col.learn .box {
       background-color: #54b59f; }

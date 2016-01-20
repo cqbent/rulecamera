@@ -359,6 +359,7 @@ body {
           }
           a {
             color: $white;
+            display: block;
           }
         }
         .feature {
@@ -372,24 +373,32 @@ body {
           }
         }
         &.buy {
-          h3, a {
-            color: $yellow;
+          .feature {
+            h3, a {
+              color: $yellow;
+            }
           }
+
           .box {
             background-color: $yellow;
           }
         }
         &.rent {
-          h3, a {
-            color: $blue;
+          .feature {
+            h3, a {
+              color: $blue;
+            }
           }
           .box {
             background-color: $blue;
+
           }
         }
         &.learn {
-          h3, a {
-            color: $green;
+          .feature {
+            h3, a {
+              color: $green;
+            }
           }
           .box {
             background-color: $green;
