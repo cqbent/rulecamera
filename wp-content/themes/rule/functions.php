@@ -353,7 +353,7 @@ function rule_product_tabs( $tabs ) {
     // Adds the new tab
     $tabs['feature_tab'] = array(
         'title' 	=> __( 'Features', 'woocommerce' ),
-        'priority' 	=> 50,
+        'priority' 	=> 40,
         'callback' 	=> 'rule_feature_tab_content'
     );
     $tabs['specs_tab'] = array(
@@ -607,7 +607,16 @@ function get_menu_parent_id($menu_name){
         return $post_id;
     }
 }
+// change placeholder product photo
+add_action( 'init', 'custom_fix_thumbnail' );
 
+function custom_fix_thumbnail() {
+    add_filter('woocommerce_placeholder_img_src', 'custom_woocommerce_placeholder_img_src');
+    function custom_woocommerce_placeholder_img_src( $src ) {
+        $src = get_stylesheet_directory_uri() . '/images/placeholder.jpg';
+        return $src;
+    }
+}
 
 // if post then get root post term and set cat slug and title
 // if category then : if root then set cat slug/title and no subtitle display; if not root then get root and set cat and title
