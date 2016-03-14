@@ -125,9 +125,20 @@ class Walker_Rule_Submenu extends Walker_Nav_Menu {
         else if( 'Sales' == $item->title ){
             $output .= '<ul class="sub-menu sales">'.display_product_category_menu_list(12).'</ul>';
         }
+        //$item->classes[] = $item->attr_title;
+        //var_dump($item);
         $output .= "</li>\n";
+
     }
 }
+
+function add_nav_class( $classes, $item ) {
+    if ($item->attr_title) {
+        $classes[] = $item->attr_title;
+    }
+    return $classes;
+}
+add_filter( 'nav_menu_css_class', 'add_nav_class', 10, 2 );
 
 function display_product_category_menu_list($id) {
     $args = array(
@@ -193,7 +204,7 @@ function child_menu_list() {
         //'meta_key' => '_menu_item_menu_item_parent',
         //'meta_value' => 3454 // the currently displayed post
     ));
-    var_dump($menu);
+    //var_dump($menu);
 }
 
 // custom menu configuration for sidebar menu: strip out all menu items that are not part of the current menu tree so it displays
@@ -238,20 +249,28 @@ function custom_nav_menu_objects_sub_menu( $sorted_menu_items, $args ) {
         }
 
         return $sorted_menu_items;
-    } else {
+    }
+
+    else {
         return $sorted_menu_items;
     }
 }
 
 
-function get_sidebar_menu() {
+function get_sidebar_menu($atts) {
+    extract(shortcode_atts(array(
+        'level' => 2,
+        'child_of' => '',
+    ), $atts));
+
     $sm = wp_nav_menu(
         array(
             'theme_location'	=> 'primary',
+            'level'             => $level,
+            'child_of'          => $child_of,
             'container_class'	=> 'sidebar-navigation',
             'menu_class'        => 'menu-sidebar-menu',
             'echo'              => false,
-            'sub_menu'          => true,
         )
     );
     if ($sm) {
@@ -576,7 +595,36 @@ function get_term_top_most_parent( $id, $taxonomy = NULL ) {
     return $parent;
 }
 
+function get_menu_parent($objId) {
+    $locations = get_nav_menu_locations();
+    $menu_id   = $locations['primary'];
+    $menu_items = wp_get_nav_menu_items($menu_id);  // get the main menu items
+    /* filter by menu object id and get its menu parent  */
+    $parent_item_id = wp_filter_object_list($menu_items,array('object_id'=>$objId),'and','menu_item_parent');
+    $parent_item_id = array_shift( $parent_item_id );
+    if (!empty($parent_item_id)) {
+        return get_post(check_for_parent($parent_item_id,$menu_items));
+    }
+    else {
+        return get_post($objId);
+    }
+}
 
+function check_for_parent ($parent_item_id,$menu_items) {
+    /* get post id of item */
+    $parent_post_id = wp_filter_object_list( $menu_items, array( 'ID' => $parent_item_id ), 'and', 'object_id' );
+    /* get menu parent id of item if exists */
+    $parent_item_id = wp_filter_object_list($menu_items,array('ID'=>$parent_item_id),'and','menu_item_parent');
+    $parent_item_id = array_shift( $parent_item_id );
+    /* if no menu parent id then return post id as value; otherwise call this function again with parent id */
+    if($parent_item_id=="0"){
+        $parent_post_id = array_shift($parent_post_id);
+        return $parent_post_id;
+    }
+    else {
+        return checkForParent($parent_item_id,$menu_items);
+    }
+}
 
 // get page menu root
 function get_menu_parent_id($menu_name){
@@ -607,6 +655,9 @@ function get_menu_parent_id($menu_name){
         return $post_id;
     }
 }
+
+
+
 // change placeholder product photo
 add_action( 'init', 'custom_fix_thumbnail' );
 
@@ -620,6 +671,81 @@ function custom_fix_thumbnail() {
 
 // if post then get root post term and set cat slug and title
 // if category then : if root then set cat slug/title and no subtitle display; if not root then get root and set cat and title
+
+
+// wp the events alter functions
+
+function alter_events_title( $depth = true ) {
+    $events_label_plural = tribe_get_event_label_plural();
+
+    global $wp_query;
+
+    $tribe_ecp = Tribe__Events__Main::instance();
+
+    $title = sprintf( esc_html__( 'Upcoming %s', 'the-events-calendar' ), $events_label_plural );
+
+    // If there's a date selected in the tribe bar, show the date range of the currently showing events
+    if ( isset( $_REQUEST['tribe-bar-date'] ) && $wp_query->have_posts() ) {
+        $first_returned_date = tribe_get_start_date( $wp_query->posts[0], false, Tribe__Date_Utils::DBDATEFORMAT );
+        $first_event_date    = tribe_get_start_date( $wp_query->posts[0], false );
+        $last_event_date     = tribe_get_end_date( $wp_query->posts[ count( $wp_query->posts ) - 1 ], false );
+
+        // If we are on page 1 then we may wish to use the *selected* start date in place of the
+        // first returned event date
+        if ( 1 == $wp_query->get( 'paged' ) && $_REQUEST['tribe-bar-date'] < $first_returned_date ) {
+            $first_event_date = tribe_format_date( $_REQUEST['tribe-bar-date'], false );
+        }
+
+        $title = sprintf( __( '%1$s for %2$s - %3$s', 'the-events-calendar' ), $events_label_plural, $first_event_date, $last_event_date );
+    } elseif ( tribe_is_past() ) {
+        $title = sprintf( esc_html__( 'Past %s', 'the-events-calendar' ), $events_label_plural );
+    }
+
+    if ( tribe_is_month() ) {
+        $title = sprintf(
+            esc_html__( '%1$s for %2$s', 'the-events-calendar' ),
+            $events_label_plural,
+            date_i18n( tribe_get_date_option( 'monthAndYearFormat', 'F Y' ), strtotime( tribe_get_month_view_date() ) )
+        );
+    }
+
+    // day view title
+    if ( tribe_is_day() ) {
+        $title = sprintf(
+            esc_html__( '%1$s for %2$s', 'the-events-calendar' ),
+            $events_label_plural,
+            date_i18n( tribe_get_date_format( true ), strtotime( $wp_query->get( 'start_date' ) ) )
+        );
+    }
+
+    if ( is_tax( $tribe_ecp->get_event_taxonomy() ) && $depth ) {
+        $cat = get_queried_object();
+        $title = $cat->name . ' ' .$title;
+    }
+
+    return $title;
+}
+add_filter( 'tribe_get_events_title', 'alter_events_title', 11, 2 );
+
+
+function get_event_category_description() {
+    global $wp_query;
+    $obj = get_queried_object();
+    $eventinstance = Tribe__Events__Main::instance();
+    if (isset($obj->term_id)) {
+        print $obj->description;
+    }
+}
+add_action('tribe_events_after_the_title','get_event_category_description');
+
+function get_event_category() {
+    global $post;
+    $cat = '<ul class="event-category">'.tribe_get_event_taxonomy($post->ID).'</ul>';
+    print $cat;
+}
+add_action('tribe_events_before_the_event_title','get_event_category');
+
+// learn landing page
 
 
 ?>

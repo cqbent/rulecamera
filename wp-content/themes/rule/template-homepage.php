@@ -43,15 +43,15 @@ get_header(); ?>
 
 			<?php endwhile; // end of the loop. ?>
 
-			<div class="home-banner" style="background-image:url(/wp-content/uploads/2015/10/home_banner.jpg);">
+			<div class="home-banner">
 
 			</div>
 			<div class="buy-rent-learn">
 				<div class="col buy">
 					<div class="box">
 						<h3><a href="/product-category/sales"><img class="alignnone wp-image-2241 size-full" src="/wp-content/uploads/2015/10/home_buy_headline.png" alt="home_buy_headline" /></a></h3>
-						All the stuff you need, easy to find and easy to buy.
-						<a href="/product-category/sales">OK, go &gt;&gt;</a>
+						<p>We are very choosy about what we sell, and we're happy to consult on the best gear for your needs.</p>
+						<a href="/product-category/sales" class="button">Learn More</a>
 					</div>
 					<div class="feature">
 						<?php
@@ -62,8 +62,8 @@ get_header(); ?>
 				<div class="col rent">
 					<div class="box">
 						<h3><a href="/product-category/rentals"><img class="alignnone size-full wp-image-2243" src="/wp-content/uploads/2015/10/home_rent_headline.png" alt="rent" /></a></h3>
-						All the stuff you need, easy to find and easy to buy.
-						<a href="/product-category/rentals">OK, go &gt;&gt;</a>
+						<p>We'll work with you to make sure you get what you neeed, froma  few pieces of gear to entire systems.</p>
+						<a href="/product-category/rentals" class="button">Learn More</a>
 					</div>
 					<div class="feature">
 						<?php
@@ -74,8 +74,8 @@ get_header(); ?>
 				<div class="col learn">
 					<div class="box">
 						<h3><img class="alignnone size-full wp-image-2242" src="/wp-content/uploads/2015/10/home_learn_headline.png" alt="learn" /></h3>
-						All the stuff you need, easy to find and easy to buy.
-						<a href="#">OK, go &gt;&gt;</a>
+						<p>Check out our Learning Labs, Pub Nights, Sponsor Events, videos and lots of other useful resources.</p>
+						<a href="/learn" class="button">Learn More</a>
 					</div>
 					<div class="feature">
 						<?php

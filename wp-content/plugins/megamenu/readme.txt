@@ -2,8 +2,8 @@
 Contributors: megamenu
 Tags: menu, megamenu, mega menu, navigation, widget, dropdown menu, drag and drop, mobile, responsive, retina, theme editor, widget, shortcode, sidebar, icons, dashicons
 Requires at least: 3.8
-Tested up to: 4.3
-Stable tag: 1.9
+Tested up to: 4.4
+Stable tag: 2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,7 +15,7 @@ WordPress Mega Menu Plugin. Create widgetized mega menus using the built in visu
 
 https://www.youtube.com/watch?v=44dJwP1AXT8
 
-Documentation & Demo: http://www.maxmegamenu.com
+Documentation & Demo: https://www.maxmegamenu.com
 
 ###Features:
 
@@ -52,7 +52,7 @@ Documentation & Demo: http://www.maxmegamenu.com
 > * Automatic updates
 > * Priority Support
 >
-> Find out more: http://www.maxmegamenu.com/upgrade/
+> Find out more: https://www.maxmegamenu.com/upgrade/
 
 Translations:
 
@@ -64,13 +64,13 @@ Translations:
 
 Getting started:
 
-http://www.maxmegamenu.com/documentation/getting-started/installation/
+https://www.maxmegamenu.com/documentation/getting-started/installation/
 
 Not working with your theme?
 Mobile menu not working?
 Multiple mobile menu toggle icons?
 
-http://www.maxmegamenu.com/documentation/faqs/removing-residual-styling/
+https://www.maxmegamenu.com/documentation/faqs/removing-residual-styling/
 
 == Installation ==
 
@@ -78,11 +78,11 @@ http://www.maxmegamenu.com/documentation/faqs/removing-residual-styling/
 1. Search for "Max Mega Menu"
 1. Click "Install"
 
-http://www.maxmegamenu.com/documentation/getting-started/installation/
+https://www.maxmegamenu.com/documentation/getting-started/installation/
 
 == Screenshots ==
 
-See http://www.maxmegamenu.com for more screenshots
+See https://www.maxmegamenu.com for more screenshots
 
 1. New menu changes
 2. Drag and Drop widget editor for each menu item
@@ -91,6 +91,35 @@ See http://www.maxmegamenu.com for more screenshots
 5. Back end: Use the theme editor to change the appearance of your menus
 
 == Changelog ==
+
+= 2.0.1 [07/01/2016] =
+
+* Fix: Typos in the Theme Editor
+* Fix: CSS Compilation Failed error for Helping Hands (and possibly other themes)
+* Fix: Regenerate CSS after clearing cache to fix a conflict with caching plugins - ensure style.css always exists
+* Fix: Enqueue menu CSS before the theme CSS, as it was pre 2.0
+* Change: Theme Editor accordion open by default (to avoid JS conflicts which make it impossible to open the closed panels)
+* Change: Use visibility: hidden to hide mobile sub menu instead of display: none (to allow Google Maps to render properly)
+* Change: Admin Styling toned down
+* Change: Hide mobile sub menu option moved to "Sub Menu Options" section
+* New Feature: Sub Menu Inner Width setting added
+* Improvement: Update Dashicons
+
+= 2.0 [28/12/2015] =
+
+* New feature: Allow second level menu items and widgets to be placed on the same row/mixed together within mega menus
+* New feature: Mobile Styling options added to theme editor
+* Improvement: Styling updated throughout
+* Improvement: Theme Editor accordionised
+* Improvement: Move JS to footer, unbind previously binded events from menu (for improved theme compatibility)
+* Improvement: Basic validation added to Theme Editor
+* New feature: Hide on mobile, Hide on desktop and Hide submenu on mobile options added
+* Improvement: Display column count on widgets within the mega menu builder
+* Fix: Getting started message displayed every time plugin is deactivated/activated
+* Improvement: Clear cache nag now clears the cache instead of taking user to the Tools page
+* Fix: Polylang fixes
+* Improvement: Getting started link takes user to menus page and highlights mega menu options
+* Improvement: Dropdown theme selector now displays which menu locations the theme is applied to
 
 = 1.9.1 [20/10/2015] =
 

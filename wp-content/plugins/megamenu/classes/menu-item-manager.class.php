@@ -109,6 +109,27 @@ class Mega_Menu_Menu_Item_Manager {
 
                 }
 
+                // Hide on mobile checkbox is unchecked
+                if ( ! isset ( $submitted_settings['hide_on_mobile'] ) ) {
+
+                    $submitted_settings['hide_on_mobile'] = 'false';
+
+                }
+
+                // Hide on mobile checkbox is unchecked
+                if ( ! isset ( $submitted_settings['hide_sub_menu_on_mobile'] ) ) {
+
+                    $submitted_settings['hide_sub_menu_on_mobile'] = 'false';
+
+                }
+
+                // Hide on desktop checkbox is unchecked
+                if ( ! isset ( $submitted_settings['hide_on_desktop'] ) ) {
+
+                    $submitted_settings['hide_on_desktop'] = 'false';
+
+                }
+
             }
 
             $submitted_settings = apply_filters( "megamenu_menu_item_submitted_settings", $submitted_settings, $menu_item_id );
@@ -129,7 +150,7 @@ class Mega_Menu_Menu_Item_Manager {
 
         if ( isset( $_POST['clear_cache'] ) ) {
 
-            do_action("megamenu_generate_css");
+            do_action("megamenu_delete_cache");
 
         }
 
@@ -172,7 +193,7 @@ class Mega_Menu_Menu_Item_Manager {
 
         if ( $menu_item_depth > 0 ) {
             $tabs['mega_menu'] = array(
-                'title' => __('Mega Menu', 'megamenu'),
+                'title' => __('Sub Menu', 'megamenu'),
                 'content' => '<em>' . __( "Mega Menus can only be created on top level menu items.", "megamenu" ) . '</em>'
             );
 
@@ -184,11 +205,11 @@ class Mega_Menu_Menu_Item_Manager {
 		$all_widgets = $widget_manager->get_available_widgets();
 
         $return = "<label for='mm_enable_mega_menu'>" . __("Sub menu display mode", "megamenu") . "</label>";
-
         $return .= "<select id='mm_enable_mega_menu' name='settings[type]'>";
         $return .= "    <option value='flyout'>" . __("Flyout Menu", "megamenu") . "</option>";
         $return .= "    <option id='megamenu' value='megamenu' " . selected( $menu_item_meta['type'], 'megamenu', false ) . ">" . __("Mega Menu", "megamenu") . "</option>";
         $return .= "</select>";
+
 
         $return .= "<select id='mm_number_of_columns' name='settings[panel_columns]'>";
         $return .= "    <option value='1' " . selected( $menu_item_meta['panel_columns'], 1, false ) . ">1 " . __("column", "megamenu") . "</option>";
@@ -214,53 +235,25 @@ class Mega_Menu_Menu_Item_Manager {
 
         $return .= "<div id='widgets' class='{$class}' data-columns='{$this->menu_item_meta['panel_columns']}'>";
 
-        $second_level_items = $this->get_second_level_menu_items();
+        $items = $widget_manager->get_widgets_and_menu_items_for_menu_id( $menu_item_id, $this->menu_id );
 
-        $panel_widgets = $widget_manager->get_widgets_for_menu_id( $menu_item_id );
+        if ( count ( $items ) ) {
 
-        if ( count ( $second_level_items ) ) {
-
-            $return .= "<h5>" . __("Sub menu items", "megamenu") . "</h5>";
-
-            foreach ( $second_level_items as $item ) {
-
-                $return .= '<div class="widget sub_menu" data-columns="' . esc_attr( $item['mega_columns'] ) . '" data-menu-item-id="' . esc_attr( $item['id'] ) . '">';
+            foreach ( $items as $item ) {
+                $return .= '<div class="widget" title="' . esc_attr( $item['title'] ) . '" id="' . esc_attr( $item['id'] ) . '" data-columns="' . esc_attr( $item['columns'] ) . '" data-type="' . esc_attr( $item['type'] ) . '" data-id="' . esc_attr( $item['id'] ) . '">';
                 $return .= '    <div class="widget-top">';
                 $return .= '        <div class="widget-title-action">';
-                $return .= '            <a class="widget-option widget-contract"></a>';
-                $return .= '            <a class="widget-option widget-expand"></a>';
+                $return .= '            <a class="widget-option widget-contract" title="' . esc_attr( __("Contract", "megamenu") ) . '"></a>';
+                $return .= '            <span class="widget-cols"><span class="widget-num-cols">' . $item['columns'] . '</span><span class="widget-of">/</span><span class="widget-total-cols">' . $menu_item_meta['panel_columns'] . '</span></span>';
+                $return .= '            <a class="widget-option widget-expand" title="' . esc_attr( __("Expand", "megamenu") ) . '"></a>';
+                $return .= '            <a class="widget-option widget-action" title="' . esc_attr( __("Edit", "megamenu") ) . '"></a>';
                 $return .= '        </div>';
                 $return .= '        <div class="widget-title">';
                 $return .= '            <h4>' .  esc_html( $item['title'] ) . '</h4>';
                 $return .= '        </div>';
                 $return .= '    </div>';
-                $return .= '</div>';
-
-            }
-
-        }
-
-        $return .= "<h5>" . __("Widgets", "megamenu") . "</h5>";
-
-        if ( count( $panel_widgets ) ) {
-
-
-            foreach ( $panel_widgets as $widget ) {
-
-                $return .= '<div class="widget" data-columns="' . esc_attr( $widget['mega_columns'] ) . '" id="' . esc_attr( $widget['widget_id'] ) . '" data-widget-id="' . esc_attr( $widget['widget_id'] ) . '">';
-                $return .= '    <div class="widget-top">';
-                $return .= '        <div class="widget-title-action">';
-                $return .= '            <a class="widget-option widget-contract"></a>';
-                $return .= '            <a class="widget-option widget-expand"></a>';
-                $return .= '            <a class="widget-option widget-action"></a>';
-                $return .= '        </div>';
-                $return .= '        <div class="widget-title">';
-                $return .= '            <h4>' . esc_html( $widget['title'] ) . '</h4>';
-                $return .= '        </div>';
-                $return .= '    </div>';
                 $return .= '    <div class="widget-inner"></div>';
                 $return .= '</div>';
-
             }
 
         } else {
@@ -325,6 +318,22 @@ class Mega_Menu_Menu_Item_Manager {
         $return .= '        </tr>';
         $return .= '        <tr>';
         $return .= '            <td class="mega-name">';
+        $return .=                  __("Hide Item on Mobile", "megamenu");
+        $return .= '            </td>';
+        $return .= '            <td class="mega-value">';
+        $return .= '                <input type="checkbox" name="settings[hide_on_mobile]" value="true" ' . checked( $menu_item_meta['hide_on_mobile'], 'true', false ) . ' />';
+        $return .= '            </td>';
+        $return .= '        </tr>';
+        $return .= '        <tr>';
+        $return .= '            <td class="mega-name">';
+        $return .=                  __("Hide Item on Desktop", "megamenu");
+        $return .= '            </td>';
+        $return .= '            <td class="mega-value">';
+        $return .= '                <input type="checkbox" name="settings[hide_on_desktop]" value="true" ' . checked( $menu_item_meta['hide_on_desktop'], 'true', false ) . ' />';
+        $return .= '            </td>';
+        $return .= '        </tr>';
+        $return .= '        <tr>';
+        $return .= '            <td class="mega-name">';
         $return .=                  __("Menu Item Align", "megamenu");
         $return .= '            </td>';
         $return .= '            <td class="mega-value">';
@@ -356,11 +365,11 @@ class Mega_Menu_Menu_Item_Manager {
 
         if ( $menu_item_depth == 0 ) {
             $return .= '            <select name="settings[align]">';
-            $return .= '                <option value="bottom-left" ' . selected( $menu_item_meta['align'], 'bottom-left', false ) . '>' . __("Left", "megamenu") . '</option>';
-            $return .= '                <option value="bottom-right" ' . selected( $menu_item_meta['align'], 'bottom-right', false ) . '>' . __("Right", "megamenu") . '</option>';
+            $return .= '                <option value="bottom-left" ' . selected( $menu_item_meta['align'], 'bottom-left', false ) . '>' . __("Left edge of Parent", "megamenu") . '</option>';
+            $return .= '                <option value="bottom-right" ' . selected( $menu_item_meta['align'], 'bottom-right', false ) . '>' . __("Right edge of Parent", "megamenu") . '</option>';
             $return .= '            </select>';
             $return .= '            <div class="mega-description">';
-            $return .=                  __("Right aligned sub menus will align to the right of the parent menu item and expand to the left", "megamenu");
+            $return .=                 __("Right aligned flyout menus will expand to the left", "megamenu");
             $return .= '            </div>';
         } else {
             $return .= '<em>' . __("Option only available for top level menu items", "megamenu") . '</em>';
@@ -368,12 +377,20 @@ class Mega_Menu_Menu_Item_Manager {
 
         $return .= '            </td>';
         $return .= '        </tr>';
+        $return .= '        <tr>';
+        $return .= '            <td class="mega-name">';
+        $return .=                  __("Hide Sub Menu on Mobile", "megamenu");
+        $return .= '            </td>';
+        $return .= '            <td class="mega-value">';
+        $return .= '                <input type="checkbox" name="settings[hide_sub_menu_on_mobile]" value="true" ' . checked( $menu_item_meta['hide_sub_menu_on_mobile'], 'true', false ) . ' />';
+        $return .= '            </td>';
+        $return .= '        </tr>';
         $return .= '    </table>';
         $return .=     get_submit_button();
         $return .= '</form>';
 
         $tabs['general_settings'] = array(
-            'title' => __('General Settings', 'megamenu'),
+            'title' => __('Settings', 'megamenu'),
             'content' => $return
         );
 
@@ -399,23 +416,24 @@ class Mega_Menu_Menu_Item_Manager {
             'fontawesome' => array(
                 'title' => __("Font Awesome", "megamenu"),
                 'active' => false,
-                'content' => str_replace( "{link}", "<a href='http://www.maxmegamenu.com/upgrade/?utm_source=free&amp;utm_medium=link&amp;utm_campaign=pro'>" . __("Max Mega Menu Pro", "megamenu") . "</a>", __("Get access to over 400 Font Awesome Icons with {link}", "megamenu") )
+                'content' => str_replace( "{link}", "<a href='https://www.maxmegamenu.com/upgrade/?utm_source=free&amp;utm_medium=link&amp;utm_campaign=pro'>" . __("Max Mega Menu Pro", "megamenu") . "</a>", __("Get access to over 400 Font Awesome Icons with {link}", "megamenu") )
             ),
             'genericons' => array(
                 'title' => __("Genericons", "megamenu"),
                 'active' => false,
-                'content' => str_replace( "{link}", "<a href='http://www.maxmegamenu.com/upgrade/?utm_source=free&amp;utm_medium=link&amp;utm_campaign=pro'>" . __("Max Mega Menu Pro", "megamenu") . "</a>", __("Choose from over 100 genericons with {link}", "megamenu") )
+                'content' => str_replace( "{link}", "<a href='https://www.maxmegamenu.com/upgrade/?utm_source=free&amp;utm_medium=link&amp;utm_campaign=pro'>" . __("Max Mega Menu Pro", "megamenu") . "</a>", __("Choose from over 100 genericons with {link}", "megamenu") )
             ),
             'custom' => array(
                 'title' => __("Custom Icon", "megamenu"),
                 'active' => false,
-                'content' => str_replace( "{link}", "<a href='http://www.maxmegamenu.com/upgrade/?utm_source=free&amp;utm_medium=link&amp;utm_campaign=pro'>" . __("Max Mega Menu Pro", "megamenu") . "</a>", __("Select icons from your media library with {link}", "megamenu") )
+                'content' => str_replace( "{link}", "<a href='https://www.maxmegamenu.com/upgrade/?utm_source=free&amp;utm_medium=link&amp;utm_campaign=pro'>" . __("Max Mega Menu Pro", "megamenu") . "</a>", __("Select icons from your media library with {link}", "megamenu") )
             ),
         );
 
         $icon_tabs = apply_filters( "megamenu_icon_tabs", $icon_tabs, $menu_item_id, $menu_id, $menu_item_depth, $menu_item_meta );
 
-        $return = "<ul class='mm_tabs horizontal'>";
+        $return = '    <h4 class="first">' . __("Menu Item Icon", "megamenu") . '</h4>';
+        $return .= "<ul class='mm_tabs horizontal'>";
 
         foreach ( $icon_tabs as $id => $icon_tab ) {
 
@@ -445,7 +463,7 @@ class Mega_Menu_Menu_Item_Manager {
         }
 
         $tabs['menu_icon'] = array(
-            'title' => __('Menu Icon', 'megamenu'),
+            'title' => __('Icon', 'megamenu'),
             'content' => $return
         );
 
@@ -481,50 +499,6 @@ class Mega_Menu_Menu_Item_Manager {
 
 
     /**
-     * Returns an array of immediate child menu items for the current item
-     *
-     * @since 1.5
-     * @return array
-     */
-    private function get_second_level_menu_items() {
-
-        $items = array();
-
-        // check we're using a valid menu ID
-        if ( ! is_nav_menu( $this->menu_id ) ) {
-            return $items;
-        }
-
-        $menu = wp_get_nav_menu_items( $this->menu_id );
-
-        if ( count( $menu ) ) {
-
-            foreach ( $menu as $item ) {
-
-                // find the child menu items
-                if ( $item->menu_item_parent == $this->menu_item_id ) {
-
-                    $saved_settings = array_filter( (array) get_post_meta( $item->ID, '_megamenu', true ) );
-
-                    $settings = array_merge( Mega_Menu_Nav_Menus::get_menu_item_defaults(), $saved_settings );
-
-                    $items[] = array(
-                        'id' => $item->ID,
-                        'title' => $item->title,
-                        'mega_columns' => $settings['mega_menu_columns']
-                    );
-
-                }
-
-            }
-
-        }
-
-        return $items;
-    }
-
-
-    /**
      * List of all available DashIcon classes.
      *
      * @since 1.0
@@ -550,6 +524,9 @@ class Mega_Menu_Menu_Item_Manager {
             'dash-f102' => 'dashicons-admin-home',
             'dash-f111' => 'dashicons-admin-generic',
             'dash-f148' => 'dashicons-admin-collapse',
+            'dash-f536' => 'dashicons-filter',
+            'dash-f540' => 'dashicons-admin-customizer',
+            'dash-f541' => 'dashicons-admin-multisite',
             'dash-f119' => 'dashicons-welcome-write-blog',
             'dash-f133' => 'dashicons-welcome-add-page',
             'dash-f115' => 'dashicons-welcome-view-site',
@@ -581,11 +558,22 @@ class Mega_Menu_Menu_Item_Manager {
             'dash-f490' => 'dashicons-media-video',
             'dash-f492' => 'dashicons-playlist-audio',
             'dash-f493' => 'dashicons-playlist-video',
+            'dash-f522' => 'dashicons-controls-play',
+            'dash-f523' => 'dashicons-controls-pause',
+            'dash-f519' => 'dashicons-controls-forward',
+            'dash-f517' => 'dashicons-controls-skipforward',
+            'dash-f518' => 'dashicons-controls-back',
+            'dash-f516' => 'dashicons-controls-skipback',
+            'dash-f515' => 'dashicons-controls-repeat',
+            'dash-f521' => 'dashicons-controls-volumeon',
+            'dash-f520' => 'dashicons-controls-volumeoff',
             'dash-f165' => 'dashicons-image-crop',
+            'dash-f531' => 'dashicons-image-rotate',
             'dash-f166' => 'dashicons-image-rotate-left',
             'dash-f167' => 'dashicons-image-rotate-right',
             'dash-f168' => 'dashicons-image-flip-vertical',
             'dash-f169' => 'dashicons-image-flip-horizontal',
+            'dash-f533' => 'dashicons-image-filter',
             'dash-f171' => 'dashicons-undo',
             'dash-f172' => 'dashicons-redo',
             'dash-f200' => 'dashicons-editor-bold',
@@ -615,19 +603,24 @@ class Mega_Menu_Menu_Item_Manager {
             'dash-f224' => 'dashicons-editor-strikethrough',
             'dash-f225' => 'dashicons-editor-unlink',
             'dash-f320' => 'dashicons-editor-rtl',
-            'dash-f464' => 'dashicons-editor-break',
+            'dash-f474' => 'dashicons-editor-break',
             'dash-f475' => 'dashicons-editor-code',
             'dash-f476' => 'dashicons-editor-paragraph',
+            'dash-f535' => 'dashicons-editor-table',
             'dash-f135' => 'dashicons-align-left',
             'dash-f136' => 'dashicons-align-right',
             'dash-f134' => 'dashicons-align-center',
             'dash-f138' => 'dashicons-align-none',
             'dash-f160' => 'dashicons-lock',
+            'dash-f528' => 'dashicons-unlock',
             'dash-f145' => 'dashicons-calendar',
+            'dash-f508' => 'dashicons-calendar-alt',
             'dash-f177' => 'dashicons-visibility',
+            'dash-f530' => 'dashicons-hidden',
             'dash-f173' => 'dashicons-post-status',
             'dash-f464' => 'dashicons-edit',
             'dash-f182' => 'dashicons-trash',
+            'dash-f537' => 'dashicons-sticky',
             'dash-f504' => 'dashicons-external',
             'dash-f142' => 'dashicons-arrow-up',
             'dash-f140' => 'dashicons-arrow-down',
@@ -646,6 +639,7 @@ class Mega_Menu_Menu_Item_Manager {
             'dash-f503' => 'dashicons-randomize',
             'dash-f163' => 'dashicons-list-view',
             'dash-f164' => 'dashicons-exerpt-view',
+            'dash-f509' => 'dashicons-grid-view',
             'dash-f237' => 'dashicons-share',
             'dash-f240' => 'dashicons-share-alt',
             'dash-f242' => 'dashicons-share-alt2',
@@ -681,9 +675,9 @@ class Mega_Menu_Menu_Item_Manager {
             'dash-f326' => 'dashicons-translation',
             'dash-f323' => 'dashicons-tag',
             'dash-f318' => 'dashicons-category',
-            'dash-f478' => 'dashicons-archive',
+            'dash-f480' => 'dashicons-archive',
             'dash-f479' => 'dashicons-tagcloud',
-            'dash-f480' => 'dashicons-text',
+            'dash-f478' => 'dashicons-text',
             'dash-f147' => 'dashicons-yes',
             'dash-f158' => 'dashicons-no',
             'dash-f335' => 'dashicons-no-alt',
@@ -696,6 +690,7 @@ class Mega_Menu_Menu_Item_Manager {
             'dash-f459' => 'dashicons-star-half',
             'dash-f154' => 'dashicons-star-empty',
             'dash-f227' => 'dashicons-flag',
+            'dash-f534' => 'dashicons-warning',
             'dash-f230' => 'dashicons-location',
             'dash-f231' => 'dashicons-location-alt',
             'dash-f178' => 'dashicons-vault',
@@ -729,7 +724,19 @@ class Mega_Menu_Menu_Item_Manager {
             'dash-f472' => 'dashicons-desktop',
             'dash-f471' => 'dashicons-tablet',
             'dash-f470' => 'dashicons-smartphone',
-            'dash-f328' => 'dashicons-smiley'
+            'dash-f525' => 'dashicons-phone',
+            'dash-f510' => 'dashicons-index-card',
+            'dash-f511' => 'dashicons-carrot',
+            'dash-f512' => 'dashicons-building',
+            'dash-f513' => 'dashicons-store',
+            'dash-f514' => 'dashicons-album',
+            'dash-f527' => 'dashicons-palmtree',
+            'dash-f524' => 'dashicons-tickets-alt',
+            'dash-f526' => 'dashicons-money',
+            'dash-f328' => 'dashicons-smiley',
+            'dash-f529' => 'dashicons-thumbs-up',
+            'dash-f542' => 'dashicons-thumbs-down',
+            'dash-f538' => 'dashicons-layout'
         );
 
         $icons = apply_filters( "megamenu_dashicons", $icons );

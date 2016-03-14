@@ -18,14 +18,15 @@ Tags:         	black, white, light, two-columns, left-sidebar, right-sidebar, re
 @import "neat/neat";
 // set break
 $mobile: new-breakpoint(max-width 768px 1);
-$desktop: new-breakpoint(min-width 769px 12);
+$tablet: new-breakpoint(min-width 769px 12);
+$desktop: new-breakpoint(min-width 979px 12);
 
 // init variables
 $black: #000;
 $offsetblack: #2c2d33;
 $blue: #0077c5;
 $yellow: #d79800;  //#f8b812;
-$green: #54b59f;
+$green: #74a35c;
 $white: #fff;
 $gray: #778590;
 
@@ -46,6 +47,10 @@ body {
   }
   a {
     color: $blue;
+    &:focus, &:active {
+      border: none;
+      outline: none;
+    }
   }
 }
 
@@ -81,7 +86,7 @@ body {
     }
   }
 
-  @include media($desktop) {
+  @include media($tablet) {
     .site-branding {
       position: absolute;
     }
@@ -173,18 +178,33 @@ body {
           color: $white;
         }
       }
+      &:hover, &focus {
+        ul.sub-menu {
+          display: block;
+          left: auto;
+        }
+      }
+      &.learn {
+        ul.sub-menu {
+          background-color: $green;
+        }
+      }
       ul.sub-menu {
-        width: calc(100% + 40px);
-        margin-left: -20px;
-        left: 0;
-        column-count: 4;
-        -webkit-column-count: 4;
-        -moz-column-count: 4;
         position: absolute;
         padding: .75em 0;
         background-color: $gray;
         color: $black;
         padding: 15px 20px;
+        float: none;
+        &.sales, &.rentals {
+          float: left;
+          width: calc(100% + 40px);
+          margin-left: -20px;
+          left: 0;
+          column-count: 4;
+          -webkit-column-count: 4;
+          -moz-column-count: 4;
+        }
         &.sales {
           background-color: $yellow;
         }
@@ -241,8 +261,9 @@ body {
   .col-full {
     background-color: $white;
     margin-bottom: 0;
-    padding: 0 20px;
+    padding: 0;
     max-width: 100%;
+    margin: 0 auto;
     .entry-header-title, .content-container {
       @include media($desktop) {
         max-width: 978px;
@@ -342,6 +363,7 @@ body {
     .home-banner {
       height: 400px;
       background-size: cover;
+      background-image:url(images/home_banner.jpg);
     }
     .buy-rent-learn {
       .col {
@@ -351,15 +373,18 @@ body {
           background-color: $black;
           height: 250px;
           padding:20px;
+          text-align: center;
           img {
             width: 100px;
+            margin: 0 auto;
           }
           p {
-            margin-left: 50px;
+            margin: 0 40px 20px 40px;
           }
-          a {
+          a.button {
             color: $white;
-            display: block;
+            background-color: $black;
+            font-weight: bold;
           }
         }
         .feature {
@@ -457,12 +482,16 @@ body {
 }
 
 // page, archive, prodduct styling
-.page, .archive, .single-product  {
+.page, .archive, .single-product, .events-single  {
   .site-content {
     position: relative;
+
     .content-container {
       margin-top: 40px;
-      padding: 20px;
+      padding: 0 20px;
+      @include media($desktop) {
+        padding: 0px;
+      }
     }
     .woocommerce-breadcrumb {
       position: absolute;
@@ -472,12 +501,17 @@ body {
       margin: 0 auto;
       left: 0;
       right: 0;
-      padding: 5px 0;
+      padding: 5px 20px;
+      @include media($desktop) {
+        padding: 0px;
+      }
     }
     .entry-header, .archive-header {
       padding:10px 20px 0 20px;
+      width: 100%;
       background-color: $gray;
-      margin: 0 -20px 20px -20px;
+      margin: 0 0 20px 0;
+      display: block;
       h1.entry-title, h1.section-title {
         margin-left: 50px;
         -webkit-transform: rotate(-5deg);
@@ -549,7 +583,7 @@ body {
 
   // for pages with right sidebar content
   .col {
-    @include media($desktop) {
+    @include media($tablet) {
       &.main {
         @include span-columns(8);
       }
@@ -597,7 +631,7 @@ body {
             }
           }
         }
-        @include media($desktop) {
+        @include media($tablet) {
           li:first-child {
             width: 100%;
             img {
@@ -639,7 +673,7 @@ body {
     }
   }
 
-  @include media($desktop) {
+  @include media($tablet) {
     #primary {
       width: 100%;
       float: none;
@@ -686,14 +720,18 @@ body {
     }
   }
 }
-.page.sidebar-left {
+.page.sidebar-left, .archive.sidebar-left, .events-single.sidebar-left {
   .site-content {
-    @include direction-context(right-to-left) {
-      .content-area {
-        @include span-columns(10);
-      }
-      .sidebar-left {
-        @include span-columns(2);
+    @include media($desktop) {
+      @include direction-context(right-to-left) {
+        .content-area {
+          @include span-columns(10);
+          margin-right: 0;
+        }
+        .sidebar-left {
+          @include span-columns(2);
+          float: left;
+        }
       }
     }
   }
@@ -736,7 +774,7 @@ body {
   margin: 0;
   padding: 0;
   list-style: none;
-  li {
+  > li {
     float: left;
     text-align: center;
     margin-bottom: 20px;
@@ -754,6 +792,34 @@ body {
       font-weight: 600;
     }
   }
+}
+.learn-list {
+  @include media($desktop) {
+    margin: 0;
+    h3, h4, ul, p {
+      margin: 0;
+    }
+    li {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    > li {
+      margin-bottom: 20px;
+      text-align: left;
+      @include span-columns(4);
+      &:nth-child(3n) {
+        margin-right: 0;
+      }
+      &:nth-child(3n+4) {
+        clear: left;
+      }
+      li {
+        margin-top: 5px;
+      }
+    }
+  }
+
 }
 .page-list {
   li {
@@ -784,6 +850,7 @@ body {
     }
   }
 }
+
 
 // blog post list
 .blog-post-list {
