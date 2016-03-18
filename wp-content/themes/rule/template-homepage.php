@@ -78,9 +78,11 @@ get_header(); ?>
 						<a href="/learn" class="button">Learn More</a>
 					</div>
 					<div class="feature">
+						<h4>Upcoming Events</h4>
 						<?php
-						echo do_shortcode('[latest_posts posts=1]');
+						echo do_shortcode('[ecs-list-events limit="2"]');
 						?>
+						<a href="/events">View all Events</a>
 					</div>
 				</div>
 			</div>

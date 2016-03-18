@@ -261,6 +261,7 @@ function get_sidebar_menu($atts) {
     extract(shortcode_atts(array(
         'level' => 2,
         'child_of' => '',
+        'parent_id' => '',
     ), $atts));
 
     $sm = wp_nav_menu(
@@ -274,9 +275,12 @@ function get_sidebar_menu($atts) {
         )
     );
     if ($sm) {
+        if ($parent_id) {
+            $parent_link = '<a class="parent-link" href="'.get_permalink($parent_id).'">'.$child_of.'</a>';
+        }
         $output = '
         <div class="sidebar-left aside">
-            '.$sm.'
+            '.$parent_link.$sm.'
         </div>
         ';
     }
@@ -746,6 +750,20 @@ function get_event_category() {
 add_action('tribe_events_before_the_event_title','get_event_category');
 
 // learn landing page
+function display_page_image() {
+    global $post;
+    //$post_thumbnail_id = get_post_thumbnail_id($post->ID);
+    $page_image = get_field('page_image',$post->ID);
+    if ($page_image) {
+        //$post_thumbnail_url = wp_get_attachment_url( $post_thumbnail_id );
+            $page_image_url = $page_image['url'];
+        print '
+            <div class="page-image" style="background-image: url('.$page_image_url.');"></div>
+        ';
+    }
+}
+add_action('page_image','display_page_image');
+
 
 
 ?>

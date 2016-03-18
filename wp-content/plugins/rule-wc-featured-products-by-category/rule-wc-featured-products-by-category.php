@@ -12,7 +12,6 @@ Contributors: WP Online Support
 add_shortcode( 'rule_featured_product_categories', 'rule_featured_products' );
 function rule_featured_products($atts){
 
-
 	global $woocommerce_loop;
  
 	extract(shortcode_atts(array(
@@ -50,8 +49,9 @@ function rule_featured_products($atts){
 			'ignore_sticky_posts'	=> 1,
 			'posts_per_page' => $per_cat,
 			'excerpt' => $excerpt,
+			'order' => 'ASC',
+			'orderby' => 'menu_order',
 			'tax_query' => array(
-				
 				array(
 					'taxonomy' => $tax,
 					'field' => 'id',

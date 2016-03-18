@@ -78,8 +78,8 @@
 
 	<div id="content" class="site-content" tabindex="-1">
 		<div class="col-full">
-
 		<?php
+		do_action('page_image');
 		/**
 		 * @hooked woocommerce_breadcrumb - 10
 		 */

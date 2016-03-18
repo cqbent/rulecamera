@@ -15,12 +15,13 @@
 get_header(); ?>
 	<?php
 	remove_action('storefront_page', 'storefront_page_header');
-	$parent_class = 'learn'; $parent_title = 'Learn';
+	$parent_class = 'learn'; $parent_title = 'Learn'; $parent_id = 1;
 	$terminfo = get_queried_object();
 	$parent = get_menu_parent($terminfo->term_id);
 	if ($parent->ID) {
 		$parent_class = $parent->post_name;
 		$parent_title = $parent->post_title;
+		$parent_id = $parent->ID;
 	}
 	?>
 	<header class="entry-header <?php print $parent_class; ?>">
@@ -60,13 +61,8 @@ get_header(); ?>
 
 		<?php
 
-		$id = get_the_ID();
-		if ($id == 2247) { // if this is the blog page then add right sidebar
-			do_action( 'storefront_sidebar' );
-		}
 		//do_action( 'storefront_sidebar' );
-		echo do_shortcode('[sidebar_menu level=2 child_of="Learn"]');
-
+		echo do_shortcode('[sidebar_menu child_of="'.$parent_title.'" parent_id="'.$parent_id.'"]');
 		?>
 
 
