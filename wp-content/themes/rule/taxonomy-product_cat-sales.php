@@ -19,7 +19,7 @@ get_header( 'shop' );
 
 ?>
 
-	<header class="archive-header rentals">
+	<header class="archive-header sales">
 
 		<div class="entry-header-title">
 			<h1 class="section-title">Sales</h1>
@@ -44,12 +44,11 @@ get_header( 'shop' );
 		<ul class="staff-list">
 			<li>
 				<div class="image">
-					<img width="150" height="150" src="/wp-content/uploads/2015/11/ChristinaOrtiz_Web-150x150.jpg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Christina Ortiz" srcset="http://rulecamera/wp-content/uploads/2015/11/ChristinaOrtiz_Web-150x150.jpg 150w, http://rulecamera/wp-content/uploads/2015/11/ChristinaOrtiz_Web-300x300.jpg 300w, http://rulecamera/wp-content/uploads/2015/11/ChristinaOrtiz_Web-1024x1024.jpg 1024w, http://rulecamera/wp-content/uploads/2015/11/ChristinaOrtiz_Web-180x180.jpg 180w, http://rulecamera/wp-content/uploads/2015/11/ChristinaOrtiz_Web-600x600.jpg 600w" sizes="(max-width: 150px) 100vw, 150px">
+					<img width="150" height="150" src="/wp-content/uploads/2016/03/TomTalbot_Web-150x150.jpg" alt="Sales questions" />
 				</div>
 				<div class="info">
-					<span>Got a question?</span>
 					<span class="tel" href="tel:800.785.3200">800.785.3200</span>
-					<span class="email"><a href="mailto:info@rule.com">info@rule.com</a></span>
+					<span class="email"><a href="mailto:sales@rule.com">sales@rule.com</a></span>
 				</div>
 			</li>
 		</ul>
