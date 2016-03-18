@@ -44,7 +44,7 @@ get_header( 'shop' );
 		<ul class="staff-list">
 			<li>
 				<div class="image">
-					<img width="150" height="150" src="http://rulecamera/wp-content/uploads/2015/11/ChristinaOrtiz_Web-150x150.jpg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Christina Ortiz" srcset="http://rulecamera/wp-content/uploads/2015/11/ChristinaOrtiz_Web-150x150.jpg 150w, http://rulecamera/wp-content/uploads/2015/11/ChristinaOrtiz_Web-300x300.jpg 300w, http://rulecamera/wp-content/uploads/2015/11/ChristinaOrtiz_Web-1024x1024.jpg 1024w, http://rulecamera/wp-content/uploads/2015/11/ChristinaOrtiz_Web-180x180.jpg 180w, http://rulecamera/wp-content/uploads/2015/11/ChristinaOrtiz_Web-600x600.jpg 600w" sizes="(max-width: 150px) 100vw, 150px">
+					<img width="150" height="150" src="/wp-content/uploads/2015/11/ChristinaOrtiz_Web-150x150.jpg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Christina Ortiz" srcset="http://rulecamera/wp-content/uploads/2015/11/ChristinaOrtiz_Web-150x150.jpg 150w, http://rulecamera/wp-content/uploads/2015/11/ChristinaOrtiz_Web-300x300.jpg 300w, http://rulecamera/wp-content/uploads/2015/11/ChristinaOrtiz_Web-1024x1024.jpg 1024w, http://rulecamera/wp-content/uploads/2015/11/ChristinaOrtiz_Web-180x180.jpg 180w, http://rulecamera/wp-content/uploads/2015/11/ChristinaOrtiz_Web-600x600.jpg 600w" sizes="(max-width: 150px) 100vw, 150px">
 				</div>
 				<div class="info">
 					<span>Got a question?</span>
