@@ -586,7 +586,7 @@ body {
   }
   .sidebar-left {
     .parent-link {
-      font-weight: normal;
+      font-weight: bold;
       font-size: 1.3em;
       text-transform: uppercase;
     }
@@ -596,7 +596,7 @@ body {
       li {
         font-size: 1.25em;
         line-height: normal;
-        margin-bottom: 5px;
+        margin-bottom: 10px;
         a {
           font-weight: 500;
           &:hover {
@@ -821,12 +821,13 @@ body {
       */
       .content-area {
         @include span-columns(10);
-        margin-right: 0;
         @include shift(2 of 12);
+
       }
       .sidebar-left {
         @include span-columns(2);
         @include shift(-12 of 12);
+
       }
     }
   }

@@ -374,7 +374,7 @@ body {
     border-top: 2px #778590 solid;
     letter-spacing: 2px; }
 .page .sidebar-left .parent-link, .archive .sidebar-left .parent-link, .single-product .sidebar-left .parent-link, .events-single .sidebar-left .parent-link {
-  font-weight: normal;
+  font-weight: bold;
   font-size: 1.3em;
   text-transform: uppercase; }
 .page .sidebar-left .menu-sidebar-menu, .archive .sidebar-left .menu-sidebar-menu, .single-product .sidebar-left .menu-sidebar-menu, .events-single .sidebar-left .menu-sidebar-menu {
@@ -383,7 +383,7 @@ body {
   .page .sidebar-left .menu-sidebar-menu li, .archive .sidebar-left .menu-sidebar-menu li, .single-product .sidebar-left .menu-sidebar-menu li, .events-single .sidebar-left .menu-sidebar-menu li {
     font-size: 1.25em;
     line-height: normal;
-    margin-bottom: 5px; }
+    margin-bottom: 10px; }
     .page .sidebar-left .menu-sidebar-menu li a, .archive .sidebar-left .menu-sidebar-menu li a, .single-product .sidebar-left .menu-sidebar-menu li a, .events-single .sidebar-left .menu-sidebar-menu li a {
       font-weight: 500; }
       .page .sidebar-left .menu-sidebar-menu li a:hover, .archive .sidebar-left .menu-sidebar-menu li a:hover, .single-product .sidebar-left .menu-sidebar-menu li a:hover, .events-single .sidebar-left .menu-sidebar-menu li a:hover {
@@ -526,7 +526,6 @@ body {
       display: block;
       margin-right: 2.35765%;
       width: 82.94039%;
-      margin-right: 0;
       margin-left: 17.05961%; }
       .page.sidebar-left .site-content .content-area:last-child, .page.sidebar-left #content .content-area:last-child, .archive.sidebar-left .site-content .content-area:last-child, .archive.sidebar-left #content .content-area:last-child, .events-single.sidebar-left .site-content .content-area:last-child, .events-single.sidebar-left #content .content-area:last-child {
         margin-right: 0; }
