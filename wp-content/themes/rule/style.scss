@@ -265,6 +265,7 @@ body {
     max-width: 100%;
     margin: 0 auto;
     .entry-header-title, .content-container {
+      position: relative;
       @include media($desktop) {
         max-width: 978px;
         margin-left: auto;
@@ -575,6 +576,13 @@ body {
       text-transform: uppercase;
       letter-spacing: 2px;
     }
+    h3.section-head {
+      font-size: 1em;
+      text-transform: uppercase;
+      border-top: 2px $gray solid;
+      letter-spacing: 2px;
+    }
+
   }
   .sidebar-left {
     .parent-link {
@@ -614,6 +622,9 @@ body {
     font-style: italic;
     font-size: 1.25em;
   }
+  .sidebar-right {
+    font-size: .875em;
+  }
 
   // for pages with right sidebar content
   .col {
@@ -642,6 +653,27 @@ body {
         background-color: $green;
         color: $white;
       }
+    }
+  }
+}
+
+// services section
+.content-container {
+  &.production-outfitters {
+    @include media($desktop) {
+      .po-list {
+        width: calc(100% * (83 / 65));
+        margin-left: calc(17% * (100 / 65) * -1);
+        .column-list {
+          column-count: 3;
+          -webkit-column-count: 3;
+          -moz-column-count: 3;
+        }
+      }
+      .columns-3 .products li.product:nth-child(3n+3) {
+        margin-right: 0;
+      }
+
     }
   }
 }
@@ -773,8 +805,9 @@ body {
   }
 }
 .page.sidebar-left, .archive.sidebar-left, .events-single.sidebar-left {
-  .site-content {
+  .site-content, #content {
     @include media($desktop) {
+      /*
       @include direction-context(right-to-left) {
         .content-area {
           @include span-columns(10);
@@ -785,9 +818,41 @@ body {
           float: left;
         }
       }
+      */
+      .content-area {
+        @include span-columns(10);
+        margin-right: 0;
+        @include shift(2 of 12);
+      }
+      .sidebar-left {
+        @include span-columns(2);
+        @include shift(-12 of 12);
+      }
     }
   }
 }
+.page.sidebar-both {
+  .site-content, #content {
+    @include media($desktop) {
+      .content-area {
+        @include span-columns(8);
+        @include shift(2 of 12);
+      }
+      .sidebar-left {
+        @include span-columns(2);
+        @include shift(-10 of 12);
+      }
+      .sidebar-right {
+        @include span-columns(2);
+        @include shift(10 of 12);
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+  }
+}
+
 
 // staff list
 .staff-list {

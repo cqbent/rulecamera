@@ -14,7 +14,7 @@ get_header();
 
 remove_action('storefront_page', 'storefront_page_header');
 $terminfo = get_queried_object();
-var_dump($terminfo);
+//var_dump($terminfo);
 ?>
 	<header class="entry-header <?php print $parent->post_name; ?>">
 

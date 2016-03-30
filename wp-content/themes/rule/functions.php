@@ -403,7 +403,7 @@ function rule_specs_tab_content() {
 function rule_widgets_init() {
     register_sidebar( array(
         'name'          => 'Rule Content Sidebar',
-        'id'            => 'content_area_widget',
+        'id'            => 'rule-content-sidebar',
         'before_widget' => '<div class="content-area-widget">',
         'after_widget'  => '</div>',
         'before_title'  => '<h2>',
@@ -547,7 +547,10 @@ function show_latest_posts($atts) {
 add_shortcode( 'latest_posts', 'show_latest_posts' );
 
 // display people list
-function display_people_list($id = null) {
+function display_people_list($atts) {
+    extract(shortcode_atts(array(
+        'id' => null,
+    ), $atts));
     $args = array(
         'post_type' => 'people',
         'posts_per_page' => 999,

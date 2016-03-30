@@ -7,6 +7,12 @@ jQuery(document).ready(function($) {
     if ($('.sidebar-left').length) {
         $('body').addClass('sidebar-left');
     }
+    if ($('.sidebar-right').length) {
+        $('body').addClass('sidebar-right');
+    }
+    if ($('.sidebar-left').length & $('.sidebar-right').length) {
+        $('body').addClass('sidebar-both');
+    }
 
     if ($('header').hasClass('rentals')) {
         $('.how-to-link').attr('href','/how-to-rent-from-us');

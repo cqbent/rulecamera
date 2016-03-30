@@ -20,11 +20,12 @@ function rule_featured_products($atts){
 		'per_cat' => '3',	
 		'columns' => '3',
 		'excerpt' => false,
+		'featured' => 'true',
 	), $atts));
  
 	
 	if(empty($cats)){
-		$terms = get_terms( 'product_cat', array('hide_empty' => true, 'fields' => 'ids'));
+		$terms = get_terms( $tax, array('hide_empty' => true, 'fields' => 'ids'));
 		$cats = implode(',', $terms);
 	}
 	
@@ -38,10 +39,10 @@ function rule_featured_products($atts){
 	ob_start();
  
 	foreach($cats as $cat){
- 
+
 		// get the product category
 		$term = get_term( $cat, $tax);
- 
+
 		// setup query
 		$args = array(
 			'post_type'	=> 'product',
@@ -58,21 +59,29 @@ function rule_featured_products($atts){
 					'terms' => $cat,
 				)
 			),
-			'meta_query' => array(
-				
-				array(
-					'key' => '_visibility',
-					'value' => array('catalog', 'visible'),
-					'compare' => 'IN'
-				),
-				// get only products marked as featured
-				array(
-					'key' => '_featured',
-					'value' => 'yes'
-				)
-			)
+
 		);
-		
+        $args2 = array(
+            'meta_query' => array(
+                array(
+                    'key' => '_visibility',
+                    'value' => array('catalog', 'visible'),
+                    'compare' => 'IN'
+                ),
+                // get only products marked as featured
+                array(
+                    'key' => '_featured',
+                    'value' => 'yes'
+                )
+            )
+        );
+
+        if ($featured != 'false') {
+            // get only products marked as featured
+            $args = array_merge($args, $args2);
+            //var_dump($args);
+        }
+
 		// set woocommerce columns
 		$woocommerce_loop['columns'] = $columns;
  

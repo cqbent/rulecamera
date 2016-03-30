@@ -40,7 +40,7 @@ get_header(); ?>
 			<h1 class="entry-title" itemprop="name"><?php echo $parent->post_title; ?></h1>
 		</div>
 	</header><!-- .entry-header -->
-	<div class="content-container">
+	<div class="content-container <?php print $post->post_name . ' '.$parent->post_name; ?>">
 
 		<div id="primary" class="content-area col-full">
 			<?php if ($post->post_parent) : ?>
@@ -78,6 +78,8 @@ get_header(); ?>
 		//do_action( 'storefront_sidebar' );
 		echo do_shortcode('[sidebar_menu child_of="'.$parent->post_title.'" parent_id="'.$parent->ID.'"]');
 		// right sidebar ???
+
+		get_sidebar('rule');
 		?>
 
 	</div>
