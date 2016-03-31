@@ -582,6 +582,22 @@ body {
       border-top: 2px $gray solid;
       letter-spacing: 2px;
     }
+    // grid list sytling
+    .grid-list {
+      @include outer-container();
+
+      list-style: none;
+      li {
+        @include span-columns(3);
+        @include omega(4n);
+        padding: 10px;
+        text-align: center;
+        vertical-align: middle;
+        img {
+          display: inline;
+        }
+      }
+    }
 
   }
   .sidebar-left {
@@ -634,6 +650,10 @@ body {
       }
       &.sidebar {
         @include span-columns(4);
+        &.narrow {
+          @include span-columns(3);
+          @include shift(1);
+        }
       }
     }
   }
@@ -662,8 +682,8 @@ body {
   &.production-outfitters {
     @include media($desktop) {
       .po-list {
-        width: calc(100% * (83 / 65));
-        margin-left: calc(17% * (100 / 65) * -1);
+        //width: calc(100% * (83 / 65));
+        //margin-left: calc(17% * (100 / 65) * -1);
         .column-list {
           column-count: 3;
           -webkit-column-count: 3;
