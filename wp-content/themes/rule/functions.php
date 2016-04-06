@@ -68,6 +68,33 @@ function product_manufacturer_categories() {
 }
 add_action( 'init', 'product_manufacturer_categories', 0 );
 
+// display manufacturer list
+function display_manufacturers() {
+    $output = '';
+    $args = array(
+        'title_li' => '',
+        'taxonomy' => 'manufacturers',
+        'style' => 'list',
+        'echo' => 0
+    );
+    $terms = get_terms('manufacturers');
+    foreach ($terms as $term) {
+        if (function_exists('z_taxonomy_image_url')) {
+            if (z_taxonomy_image_url($term->term_id)) {
+                //$term_img = z_taxonomy_image_url($term->term_id) ? '<img src="'.z_taxonomy_image_url($term->term_id).'"/>' : $term->name;
+                $output .= '<li class="cat-item cat-name-'.$term->slug.'"><img src="'.z_taxonomy_image_url($term->term_id).'" alt="'.$term->name.'" /></li>';
+            }
+        }
+        else {
+            $output .= '<li class="cat-item cat-name-'.$term->slug.'"><a href="'.get_term_link($term).'">'.$term->name.'</a></li>';
+        }
+
+
+    }
+    return '<ul class="table-grid">'.$output.'</ul>';
+}
+add_shortcode( 'manufacturer_list', 'display_manufacturers' );
+
 // create people post type
 function create_post_type_people() {
     register_post_type( 'people',
@@ -120,11 +147,12 @@ class Walker_Rule_Submenu extends Walker_Nav_Menu {
 
     function end_el(&$output, $item, $depth=0, $args=array()) {
         if( 'Rentals' == $item->title ){
-            $output .= '<ul class="sub-menu rentals">'.display_product_category_menu_list(8).'</ul>';
+            $output .= '<ul class="sub-menu cat-menu rentals">'.display_product_category_menu_list(8).'</ul>';
         }
         else if( 'Sales' == $item->title ){
-            $output .= '<ul class="sub-menu sales">'.display_product_category_menu_list(12).'</ul>';
+            $output .= '<ul class="sub-menu cat-menu sales">'.display_product_category_menu_list(12).'</ul>';
         }
+
         //$item->classes[] = $item->attr_title;
         //var_dump($item);
         $output .= "</li>\n";
@@ -610,12 +638,14 @@ function get_menu_parent($objId) {
     $parent_item_id = wp_filter_object_list($menu_items,array('object_id'=>$objId),'and','menu_item_parent');
     $parent_item_id = array_shift( $parent_item_id );
     if (!empty($parent_item_id)) {
-        return get_post(check_for_parent($parent_item_id,$menu_items));
+        $piid = check_for_parent($parent_item_id,$menu_items);
+        return get_post($piid);
     }
     else {
         return get_post($objId);
     }
 }
+
 
 function check_for_parent ($parent_item_id,$menu_items) {
     /* get post id of item */

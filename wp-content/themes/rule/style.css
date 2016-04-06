@@ -398,6 +398,17 @@ body {
         clear: left; }
       .page .site-content .grid-list li img, .archive .site-content .grid-list li img, .single-product .site-content .grid-list li img, .events-single .site-content .grid-list li img {
         display: inline; }
+  .page .site-content .table-grid, .archive .site-content .table-grid, .single-product .site-content .table-grid, .events-single .site-content .table-grid {
+    border-spacing: 20px;
+    border-collapse: separate;
+    margin: -20px; }
+    .page .site-content .table-grid li, .archive .site-content .table-grid li, .single-product .site-content .table-grid li, .events-single .site-content .table-grid li {
+      display: table-cell;
+      width: 25%;
+      vertical-align: middle; }
+      .page .site-content .table-grid li:nth-child(5n), .archive .site-content .table-grid li:nth-child(5n), .single-product .site-content .table-grid li:nth-child(5n), .events-single .site-content .table-grid li:nth-child(5n) {
+        float: left;
+        clear: both; }
 .page .sidebar-left .parent-link, .archive .sidebar-left .parent-link, .single-product .sidebar-left .parent-link, .events-single .sidebar-left .parent-link {
   font-weight: bold;
   font-size: 1.3em;

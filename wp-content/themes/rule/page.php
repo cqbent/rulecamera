@@ -16,6 +16,7 @@ get_header(); ?>
 	<?php
 	remove_action('storefront_page', 'storefront_page_header');
 	$parent = get_menu_parent(get_the_ID());
+	//var_dump($parent);
 	//add_action('rule_page', 'storefront_page_header');
 	//do_action('rule_page');
 	//print do_shortcode('[woof sid="rule_product_filter" autohide=0 price_filter=0]');

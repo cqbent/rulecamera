@@ -585,7 +585,6 @@ body {
     // grid list sytling
     .grid-list {
       @include outer-container();
-
       list-style: none;
       li {
         @include span-columns(3);
@@ -595,6 +594,21 @@ body {
         vertical-align: middle;
         img {
           display: inline;
+        }
+      }
+    }
+    .table-grid {
+      @include display-context(table) {
+        border-spacing: 20px;
+        border-collapse: separate;
+        margin: -20px;
+        li {
+          @include span-columns(3 of 12);
+          vertical-align: middle;
+          &:nth-child(5n) {
+            float: left;
+            clear: both;
+          }
         }
       }
     }

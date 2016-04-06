@@ -19,4 +19,10 @@ jQuery(document).ready(function($) {
         $('.how-to-link').text('How to Rent from Us');
     }
 
+    // place sales and rentals menu items inside their custom menu list
+    $('#menu-main-menu > li.menu-item-type-taxonomy').each(function() {
+        var menu_items = $(this).find('ul.sub-menu:not(.cat-menu)').html();
+        $(this).find('ul.cat-menu').append(menu_items);
+    })
+
 });

@@ -55,19 +55,19 @@ get_header(); ?>
 					</div>
 					<div class="feature">
 						<?php
-						echo do_shortcode('[featured_product_categories cats="12" per_cat="1" columns="1"]');
+						echo do_shortcode('[rule_featured_product_categories cats="12" per_cat="1" columns="1"]');
 						?>
 					</div>
 				</div>
 				<div class="col rent">
 					<div class="box">
 						<h3><a href="/product-category/rentals"><img class="alignnone size-full wp-image-2243" src="/wp-content/uploads/2015/10/home_rent_headline.png" alt="rent" /></a></h3>
-						<p>We'll work with you to make sure you get what you neeed, froma  few pieces of gear to entire systems.</p>
+						<p>We'll work with you to make sure you get what you neeed, from a  few pieces of gear to entire systems.</p>
 						<a href="/product-category/rentals" class="button">Learn More</a>
 					</div>
 					<div class="feature">
 						<?php
-						echo do_shortcode('[featured_product_categories cats="8" per_cat="1" columns="1"]');
+						echo do_shortcode('[rule_featured_product_categories cats="8" per_cat="1" columns="1"]');
 						?>
 					</div>
 				</div>
