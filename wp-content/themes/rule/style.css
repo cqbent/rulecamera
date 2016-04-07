@@ -218,7 +218,7 @@ body {
   .page-template-template-homepage #main .home-banner {
     height: 400px;
     background-size: cover;
-    background-image: url(images/home_banner.jpg); }
+    background-image: url(images/home_banner_1.jpg); }
   .page-template-template-homepage #main .buy-rent-learn .col {
     float: left;
     display: block;
@@ -542,6 +542,10 @@ body {
 
 .product_cat-rentals .sku_wrapper {
   display: none !important; }
+
+/* line card and pre-owned product catetory styling */
+.term-pre-owned-equipment p.woocommerce-info, .term-pre-owned-equipment .WOOF_Widget, .term-line-card p.woocommerce-info, .term-line-card .WOOF_Widget {
+  display: none; }
 
 .page:not(.page-id-2247) .site-content .content-area {
   width: 100%;

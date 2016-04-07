@@ -284,6 +284,14 @@ function custom_nav_menu_objects_sub_menu( $sorted_menu_items, $args ) {
     }
 }
 
+// add category_body field to product category pages
+function category_body_field() {
+    $pcobj = get_queried_object();
+    if (get_field('category_body', $pcobj)) {
+        echo '<div class="category-body">' . get_field('category_body', $pcobj) . '</div>';
+    }
+}
+add_action('woocommerce_archive_description', 'category_body_field', 15);
 
 function get_sidebar_menu($atts) {
     extract(shortcode_atts(array(

@@ -23,6 +23,13 @@ jQuery(document).ready(function($) {
     $('#menu-main-menu > li.menu-item-type-taxonomy').each(function() {
         var menu_items = $(this).find('ul.sub-menu:not(.cat-menu)').html();
         $(this).find('ul.cat-menu').append(menu_items);
-    })
+    });
+
+    // home banner random generator
+    $('.page-template-template-homepage #main .home-banner')
+        .css('background-image','url(/wp-content/themes/rule/images/home_banner_'+getRandomIntInclusive(1, 4)+'.jpg');
+    function getRandomIntInclusive(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
 
 });

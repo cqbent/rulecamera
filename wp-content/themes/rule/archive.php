@@ -32,8 +32,8 @@ $terminfo = get_queried_object();
 				<h1 class="page-title">
 					<?php the_archive_title(); ?>
 				</h1>
-
 				<?php the_archive_description(); ?>
+				<?php the_field('category_body'); ?>
 			</header><!-- .page-header -->
 
 			<?php get_template_part( 'loop' ); ?>

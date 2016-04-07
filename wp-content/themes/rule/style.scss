@@ -364,7 +364,7 @@ body {
     .home-banner {
       height: 400px;
       background-size: cover;
-      background-image:url(images/home_banner.jpg);
+      background-image:url(images/home_banner_1.jpg);
     }
     .buy-rent-learn {
       .col {
@@ -827,6 +827,11 @@ body {
     display: none !important;
   }
 
+}/* line card and pre-owned product catetory styling */
+.term-pre-owned-equipment, .term-line-card {
+  p.woocommerce-info, .WOOF_Widget {
+    display: none;
+  }
 }
 
 .page:not(.page-id-2247)  {
