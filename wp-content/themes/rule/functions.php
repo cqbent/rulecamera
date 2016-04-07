@@ -433,8 +433,7 @@ function rule_specs_tab_content() {
     echo get_field('specifications');
     $file = get_field('pdf_manual');
     if( $file ) {
-        $url = wp_get_attachment_url( $file );
-        ?><a href="<?php echo $url; ?>" >Download Manual</a><?php
+        ?><a href="<?php echo $file['url']; ?>" target="_blank" >Download Manual</a><?php
     }
 }
 
