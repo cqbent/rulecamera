@@ -119,7 +119,7 @@ add_action( 'init', 'create_post_type_people' );
 function rule_primary_navigation() {
     ?>
     <nav id="site-navigation" class="main-navigation" role="navigation" aria-label="<?php esc_html_e( 'Primary Navigation', 'storefront' ); ?>">
-        <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false"><?php echo esc_attr( apply_filters( 'storefront_menu_toggle_text', __( 'Navigation', 'storefront' ) ) ); ?></button>
+        <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false"><span>Menu</span></button>
         <?php
         wp_nav_menu(
             array(
