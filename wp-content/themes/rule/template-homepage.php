@@ -46,49 +46,11 @@ get_header(); ?>
 			<div class="home-banner">
 
 			</div>
-			<div class="buy-rent-learn">
-				<div class="col buy">
-					<div class="box">
-						<h3><a href="/product-category/sales"><img class="alignnone wp-image-2241 size-full" src="/wp-content/uploads/2015/10/home_buy_headline.png" alt="home_buy_headline" /></a></h3>
-						<p>We are very choosy about what we sell, and we're happy to consult on the best gear for your needs.</p>
-						<a href="/product-category/sales" class="button">Learn More</a>
-					</div>
-					<div class="feature">
-						<?php
-						echo do_shortcode('[rule_featured_product_categories cats="12" per_cat="1" columns="1"]');
-						?>
-					</div>
-				</div>
-				<div class="col rent">
-					<div class="box">
-						<h3><a href="/product-category/rentals"><img class="alignnone size-full wp-image-2243" src="/wp-content/uploads/2015/10/home_rent_headline.png" alt="rent" /></a></h3>
-						<p>We'll work with you to make sure you get what you neeed, from a  few pieces of gear to entire systems.</p>
-						<a href="/product-category/rentals" class="button">Learn More</a>
-					</div>
-					<div class="feature">
-						<?php
-						echo do_shortcode('[rule_featured_product_categories cats="8" per_cat="1" columns="1"]');
-						?>
-					</div>
-				</div>
-				<div class="col learn">
-					<div class="box">
-						<h3><img class="alignnone size-full wp-image-2242" src="/wp-content/uploads/2015/10/home_learn_headline.png" alt="learn" /></h3>
-						<p>Check out our Learning Labs, Pub Nights, Sponsor Events, videos and lots of other useful resources.</p>
-						<a href="/learn" class="button">Learn More</a>
-					</div>
-					<div class="feature">
-						<h4>Upcoming Events</h4>
-						<?php
-						echo do_shortcode('[ecs-list-events limit="2"]');
-						?>
-						<a href="/events">View all Events</a>
-					</div>
-				</div>
-			</div>
+			
 
 			<?php
 				//dynamic_sidebar('content_area_widget');
+				dynamic_sidebar( 'rule-content-sidebar' );
 
 			?>
 
