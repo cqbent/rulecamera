@@ -1,8 +1,3 @@
-jQuery(function () {
-    //woof_init_selects();
-});
-
-
 function woof_init_selects() {
     if (is_woof_use_chosen) {
         try {

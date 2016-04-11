@@ -22,6 +22,12 @@
             'fields' => 'all',
             'who' => ''
         );
+
+        if (isset($role) AND ! empty($role))
+        {
+            $args['role'] = $role;
+        }
+
         $authors = get_users($args);
         $request = $WOOF->get_request_data();
         $woof_author = '';
@@ -30,33 +36,32 @@
             $woof_author = $request['woof_author'];
         }
         //+++
-        if (!isset($placeholder))
+        $p = __('Select a product author', 'woocommerce-products-filter');
+
+        if (isset($placeholder) AND ! empty($placeholder))
         {
-            $p = __('Select a product author', 'woocommerce-products-filter');
-        }
-
-
-        if (isset($WOOF->settings['search_by_author_placeholder_txt']) AND ! isset($placeholder))
+            $p = $placeholder;
+        } else
         {
-            if (!empty($WOOF->settings['search_by_author_placeholder_txt']))
+            if (isset($WOOF->settings['by_author']['placeholder']))
             {
-                $p = $WOOF->settings['search_by_author_placeholder_txt'];
-                $p = WOOF_HELPER::wpml_translate(null, $p);
-                $p = __($p, 'woocommerce-products-filter');
-            }
-
-
-            if ($WOOF->settings['search_by_author_placeholder_txt'] == 'none')
-            {
-                $p = '';
+                if (!empty($WOOF->settings['by_author']['placeholder']))
+                {
+                    $p = $WOOF->settings['by_author']['placeholder'];
+                    $p = WOOF_HELPER::wpml_translate(null, $p);
+                    $p = __($p, 'woocommerce-products-filter');
+                }
             }
         }
+
+
+
         //***
         $unique_id = uniqid('woof_author_search_');
         ?>
 
         <select name="woof_author" class="woof_select woof_show_author_search <?php echo $unique_id ?>" data-uid="<?php echo $unique_id ?>">
-            <option value="0"><?php echo(isset($placeholder) ? $placeholder : $p) ?></option>
+            <option value="0"><?php echo $p ?></option>
             <?php if (!empty($authors)): ?>
                 <?php foreach ($authors as $user): ?>
                     <option <?php echo selected($woof_author, $user->data->ID); ?> value="<?php echo $user->data->ID ?>"><?php echo $user->data->display_name ?></option>

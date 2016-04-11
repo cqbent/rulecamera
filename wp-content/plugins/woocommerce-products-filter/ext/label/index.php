@@ -8,7 +8,7 @@ final class WOOF_EXT_LABEL extends WOOF_EXT
 
     public $type = 'html_type';
     public $html_type = 'label'; //your custom key here
-    public $html_type_dynamic_recount_behavior = 2;
+    public $html_type_dynamic_recount_behavior = 'multi';
 
     public function __construct()
     {
@@ -34,7 +34,10 @@ final class WOOF_EXT_LABEL extends WOOF_EXT
 
     public function init()
     {
-        
+        add_filter('woof_add_html_types', array($this, 'woof_add_html_types'));
+        self::$includes['js']['woof_label_html_items'] = $this->get_ext_link() . 'js/html_types/label.js';
+        self::$includes['css']['woof_label_html_items'] = $this->get_ext_link() . 'css/html_types/label.css';
+        self::$includes['js_init_functions'][$this->html_type] = 'woof_init_labels';
     }
 
 

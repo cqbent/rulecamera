@@ -39,7 +39,7 @@
         <table class="woof_text_table">
             <tr>
                 <td style="width: 100%;">
-                    <input type="search" class="woof_show_text_search <?php echo $unique_id ?>" data-uid="<?php echo $unique_id ?>" placeholder="<?php echo(isset($placeholder) ? $placeholder : $p) ?>" name="woof_text" value="<?php echo $woof_text ?>" />
+                    <input type="search" class="woof_show_text_search <?php echo $unique_id ?>" id="<?php echo $unique_id ?>" data-uid="<?php echo $unique_id ?>" placeholder="<?php echo(isset($placeholder) ? $placeholder : $p) ?>" name="woof_text" value="<?php echo $woof_text ?>" />
                 </td>
                 <td>
                     <a href="javascript:void(0);" data-uid="<?php echo $unique_id ?>" class="woof_text_search_go <?php echo $unique_id ?>"></a>

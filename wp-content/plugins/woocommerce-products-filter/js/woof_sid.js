@@ -25,6 +25,7 @@ jQuery(function () {
 
 function woof_init_masonry() {
     return;
+    /*
     var $container = jQuery('.woof_sid');
     $container.imagesLoaded(function () {
         $container.masonry({
@@ -32,6 +33,7 @@ function woof_init_masonry() {
             columnWidth: 300
         });
     });
+    */
 }
 
 

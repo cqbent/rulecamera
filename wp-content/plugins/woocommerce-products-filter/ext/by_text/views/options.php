@@ -10,13 +10,10 @@ if (!defined('ABSPATH'))
     if (isset($woof_settings[$key]['show']))
     {
         $show = $woof_settings[$key]['show'];
-    } else
-    {
-        $show = get_option('woof_show_text_search', 0);
     }
     ?>
 
-    <a href="#" class="help_tip" data-tip="<?php _e("drag and drope", 'woocommerce-products-filter'); ?>"><img src="<?php echo WOOF_LINK ?>img/move.png" alt="<?php _e("move", 'woocommerce-products-filter'); ?>" /></a>
+    <a href="#" class="help_tip woof_drag_and_drope" data-tip="<?php _e("drag and drope", 'woocommerce-products-filter'); ?>"><img src="<?php echo WOOF_LINK ?>img/move.png" alt="<?php _e("move", 'woocommerce-products-filter'); ?>" /></a>
 
     <strong style="display: inline-block; width: 176px;"><?php _e("Search by Text", 'woocommerce-products-filter'); ?>:</strong>
 
@@ -39,45 +36,30 @@ if (!defined('ABSPATH'))
 
     if (!isset($woof_settings[$key]['placeholder']))
     {
-        //just for compatibility from 2.1.2 to 2.1.3
-        if (isset($woof_settings['search_by_title_placeholder_txt']))
-        {
-            $woof_settings[$key]['placeholder'] = $woof_settings['search_by_title_placeholder_txt'];
-        } else
-        {
-            $woof_settings[$key]['placeholder'] = '';
-        }
+        $woof_settings[$key]['placeholder'] = '';
     }
 
     if (!isset($woof_settings[$key]['behavior']))
     {
-        //just for compatibility from 2.1.2 to 2.1.3
-        if (isset($woof_settings['search_by_title_behavior']))
-        {
-            $woof_settings[$key]['behavior'] = $woof_settings['search_by_title_behavior'];
-        } else
-        {
-            $woof_settings[$key]['behavior'] = 'title';
-        }
+        $woof_settings[$key]['behavior'] = 'title';
+    }
+
+    if (!isset($woof_settings[$key]['autocomplete']))
+    {
+        $woof_settings[$key]['autocomplete'] = 0;
     }
 
 
     if (!isset($woof_settings[$key]['image']))
     {
-        //just for compatibility from 2.1.2 to 2.1.3
-        if (isset($woof_settings['title_submit_image']))
-        {
-            $woof_settings[$key]['image'] = $woof_settings['title_submit_image'];
-        } else
-        {
-            $woof_settings[$key]['image'] = '';
-        }
+        $woof_settings[$key]['image'] = '';
     }
     ?>
 
     <input type="hidden" name="woof_settings[<?php echo $key ?>][title]" value="<?php echo $woof_settings[$key]['title'] ?>" />
     <input type="hidden" name="woof_settings[<?php echo $key ?>][placeholder]" value="<?php echo $woof_settings[$key]['placeholder'] ?>" />
     <input type="hidden" name="woof_settings[<?php echo $key ?>][behavior]" value="<?php echo $woof_settings[$key]['behavior'] ?>" />
+    <input type="hidden" name="woof_settings[<?php echo $key ?>][autocomplete]" value="<?php echo $woof_settings[$key]['autocomplete'] ?>" />
     <input type="hidden" name="woof_settings[<?php echo $key ?>][image]" value="<?php echo $woof_settings[$key]['image'] ?>" />
 
     <div id="woof-modal-content-by_text" style="display: none;">
@@ -115,7 +97,7 @@ if (!defined('ABSPATH'))
         <div class="woof-form-element-container">
 
             <div class="woof-name-description">
-                <strong><?php _e('behavior', 'woocommerce-products-filter') ?></strong>
+                <strong><?php _e('Behavior', 'woocommerce-products-filter') ?></strong>
                 <span><?php _e('behavior of the text searching', 'woocommerce-products-filter') ?></span>
             </div>
 
@@ -127,18 +109,44 @@ if (!defined('ABSPATH'))
                     'content' => __("Search by content", 'woocommerce-products-filter'),
                     'excerpt' => __("Search by excerpt", 'woocommerce-products-filter'),
                     'content_or_excerpt' => __("Search by content OR excerpt", 'woocommerce-products-filter'),
-                    'title_or_content_or_excerpt' => __("Search by title OR content OR excerpt. In Premium only!", 'woocommerce-products-filter'),
-                    'title_or_content' => __("Search by title OR content. In Premium only!", 'woocommerce-products-filter'),
-                    'title_and_content' => __("Search by title AND content. In Premium only!", 'woocommerce-products-filter')
+                    'title_or_content_or_excerpt' => __("Search by title OR content OR excerpt", 'woocommerce-products-filter'),
+                    'title_or_content' => __("Search by title OR content", 'woocommerce-products-filter'),
+                    'title_and_content' => __("Search by title AND content", 'woocommerce-products-filter')
                 );
-                
-                $disabled=array('title_or_content_or_excerpt','title_or_content','title_and_content');
                 ?>
 
                 <div class="select-wrap">
                     <select class="woof_popup_option" data-option="behavior">
                         <?php foreach ($behavior as $key => $value) : ?>
-                        <option <?php if(in_array($key, $disabled)): ?>disabled=""<?php endif; ?> value="<?php echo $key; ?>"><?php echo $value; ?></option>
+                            <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="woof-form-element-container">
+
+            <div class="woof-name-description">
+                <strong><?php _e('Autocomplete', 'woocommerce-products-filter') ?></strong>
+                <span><?php _e('Autocomplete relevant variants in by_text textinput', 'woocommerce-products-filter') ?></span>
+            </div>
+
+            <div class="woof-form-element">
+                <?php
+                $autocomplete = array(
+                    0 => __('No', 'woocommerce-products-filter'),
+                    1 => __('Yes', 'woocommerce-products-filter')
+                );
+                ?>
+
+                <div class="select-wrap">
+                    <select class="woof_popup_option" data-option="autocomplete">
+                        <?php foreach ($autocomplete as $key => $value) : ?>
+                            <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>

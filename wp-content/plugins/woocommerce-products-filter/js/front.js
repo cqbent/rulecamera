@@ -93,7 +93,7 @@ jQuery(function () {
         woof_redirect_init();
     }
 
-
+    woof_init_toggles();
 
 });
 
@@ -102,41 +102,41 @@ jQuery(function () {
 function woof_redirect_init() {
 
     try {
-        woof_redirect = jQuery('.woof').eq(0).data('redirect');//default value
-        if (woof_redirect.length > 0) {
-            woof_shop_page = woof_current_page_link = woof_redirect;
+        if (jQuery('.woof').length) {
+            woof_redirect = jQuery('.woof').eq(0).data('redirect');//default value
+            if (woof_redirect.length > 0) {
+                woof_shop_page = woof_current_page_link = woof_redirect;
+            }
+
+
+            //***
+            /*
+             var events = ['click', 'change', 'ifChecked', 'ifUnchecked'];
+             
+             for (var i = 0; i < events.length; i++) {
+             
+             jQuery('div.woof input, div.woof option, div.woof div, div.woof label').live(events[i], function (e) {
+             try {
+             if (jQuery(this).parents('.woof').data('redirect').length > 0) {
+             woof_redirect = jQuery(this).parents('.woof').data('redirect');
+             }
+             } catch (e) {
+             console.log('Error: attribute redirection doesn works!');
+             }
+             e.stopPropagation();
+             });
+             
+             }
+             */
+            //***
+
+
+            return woof_redirect;
         }
-
-
-        //***
-        /*
-         var events = ['click', 'change', 'ifChecked', 'ifUnchecked'];
-         
-         for (var i = 0; i < events.length; i++) {
-         
-         jQuery('div.woof input, div.woof option, div.woof div, div.woof label').live(events[i], function (e) {
-         try {
-         if (jQuery(this).parents('.woof').data('redirect').length > 0) {
-         woof_redirect = jQuery(this).parents('.woof').data('redirect');
-         }
-         } catch (e) {
-         console.log('Error: attribute redirection doesn works!');
-         }
-         e.stopPropagation();
-         });
-         
-         }
-         */
-        //***
-
-        if (woof_redirect.length > 0) {
-            woof_shop_page = woof_current_page_link = woof_redirect;
-        }
-
-        return woof_redirect;
     } catch (e) {
         console.log(e);
     }
+
 }
 
 function woof_init_orderby() {
@@ -231,31 +231,8 @@ function woof_init_search_form() {
         });
     }
     //+++
-    var containers = jQuery('.woof_container');
-    //+++
-    try {
-        jQuery.each(containers, function (index, value) {
-
-            var remove = false;
-
-            if (jQuery(value).find('ul.woof_list_radio').size() === 1) {
-                remove = true;
-            }
-
-            if (jQuery(value).find('ul.woof_list_checkbox').size() === 1) {
-                remove = true;
-            }
-
-            if (remove) {
-                if (jQuery(value).find('ul.woof_list li').size() === 0) {
-                    jQuery(value).remove();
-                }
-            }
-
-        });
-    } catch (e) {
-
-    }
+    //var containers = jQuery('.woof_container');
+    
     //+++
     jQuery('.woof_submit_search_form').click(function () {
         if (woof_ajax_redraw) {
@@ -356,7 +333,7 @@ function woof_remove_empty_elements() {
     });
     //+++
     // lets check for empty checkboxes, radio, color conatiners
-    jQuery.each(jQuery('ul.woof_list_checkbox, ul.woof_list_color, ul.woof_list_radio'), function (index, ch) {
+    jQuery.each(jQuery('ul.woof_list'), function (index, ch) {
         var size = jQuery(ch).find('li').size();
         if (size === 0) {
             jQuery(ch).parents('.woof_container').remove();
@@ -583,7 +560,8 @@ function woof_draw_products_top_panel() {
 
                         if (!is_in_custom) {
                             try {
-                                txt = jQuery('.woof_n_' + index + '_' + v).val();
+                                //txt = jQuery('.woof_n_' + index + '_' + v).val();
+                                txt = jQuery("input[data-anchor='woof_n_" + index + '_' + v + "']").val();
                             } catch (e) {
                                 console.log(e);
                             }
@@ -825,6 +803,7 @@ function woof_init_native_woo_price_filter() {
         woof_current_values.max_price = max_price;
         woof_ajax_page_num = 1;
         if (woof_autosubmit || jQuery(input).within('.woof').length == 0) {
+            //comment next code row to avoid endless ajax requests
             woof_submit_link(woof_get_submit_link());
         }
         return false;
@@ -955,7 +934,6 @@ function woof_reinit_native_woo_price_filter() {
             jQuery(document.body).trigger('price_slider_slide', [ui.values[0], ui.values[1]]);
         },
         change: function (event, ui) {
-
             jQuery(document.body).trigger('price_slider_change', [ui.values[0], ui.values[1]]);
         }
     });
@@ -963,5 +941,33 @@ function woof_reinit_native_woo_price_filter() {
 
     //***
     woof_init_native_woo_price_filter();
+}
+
+function woof_init_toggles() {
+    jQuery('.woof_front_toggle').life('click', function () {
+        if (jQuery(this).data('condition') == 'opened') {
+            jQuery(this).removeClass('woof_front_toggle_opened');
+            jQuery(this).addClass('woof_front_toggle_closed');
+            jQuery(this).data('condition', 'closed');
+            if (woof_toggle_type == 'text') {
+                jQuery(this).text(woof_toggle_closed_text);
+            } else {
+                jQuery(this).find('img').prop('src', woof_toggle_closed_image);
+            }
+        } else {
+            jQuery(this).addClass('woof_front_toggle_opened');
+            jQuery(this).removeClass('woof_front_toggle_closed');
+            jQuery(this).data('condition', 'opened');
+            if (woof_toggle_type == 'text') {
+                jQuery(this).text(woof_toggle_opened_text);
+            } else {
+                jQuery(this).find('img').prop('src', woof_toggle_opened_image);
+            }
+        }
+
+
+        jQuery(this).parents('.woof_container_inner').find('.woof_block_html_items').toggle(500);
+        return false;
+    });
 }
 

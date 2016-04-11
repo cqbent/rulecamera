@@ -287,8 +287,10 @@ function custom_nav_menu_objects_sub_menu( $sorted_menu_items, $args ) {
 // add category_body field to product category pages
 function category_body_field() {
     $pcobj = get_queried_object();
-    if (get_field('category_body', $pcobj)) {
-        echo '<div class="category-body">' . get_field('category_body', $pcobj) . '</div>';
+    if (isset($pjobj->term_id)) {
+        if (get_field('category_body', $pcobj)) {
+            echo '<div class="category-body">' . get_field('category_body', $pcobj) . '</div>';
+        }
     }
 }
 add_action('woocommerce_archive_description', 'category_body_field', 15);
@@ -801,14 +803,17 @@ add_action('tribe_events_before_the_event_title','get_event_category');
 function display_page_image() {
     global $post;
     //$post_thumbnail_id = get_post_thumbnail_id($post->ID);
-    $page_image = get_field('page_image',$post->ID);
-    if ($page_image) {
-        //$post_thumbnail_url = wp_get_attachment_url( $post_thumbnail_id );
+    if ($post->ID) {
+        $page_image = get_field('page_image',$post->ID);
+        if ($page_image) {
+            //$post_thumbnail_url = wp_get_attachment_url( $post_thumbnail_id );
             $page_image_url = $page_image['url'];
-        print '
+            print '
             <div class="page-image" style="background-image: url('.$page_image_url.');"></div>
         ';
+        }
     }
+
 }
 add_action('page_image','display_page_image');
 

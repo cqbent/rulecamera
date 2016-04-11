@@ -13,7 +13,7 @@ if (!defined('ABSPATH'))
     }
     ?>
 
-    <a href="#" class="help_tip" data-tip="<?php _e("drag and drope", 'woocommerce-products-filter'); ?>"><img src="<?php echo WOOF_LINK ?>img/move.png" alt="<?php _e("move", 'woocommerce-products-filter'); ?>" /></a>
+    <a href="#" class="help_tip woof_drag_and_drope" data-tip="<?php _e("drag and drope", 'woocommerce-products-filter'); ?>"><img src="<?php echo WOOF_LINK ?>img/move.png" alt="<?php _e("move", 'woocommerce-products-filter'); ?>" /></a>
 
     <strong style="display: inline-block; width: 176px;"><?php _e("In sales checkbox", 'woocommerce-products-filter'); ?>:</strong>
     <img class="help_tip" data-tip="<?php _e('Show In sales only checkbox inside woof search form', 'woocommerce-products-filter') ?>" src="<?php echo WP_PLUGIN_URL ?>/woocommerce/assets/images/help.png" height="16" width="16" />

@@ -8,7 +8,7 @@ final class WOOF_EXT_BY_INSALES extends WOOF_EXT
     public $type = 'by_html_type';
     public $html_type = 'by_insales'; //your custom key here
     public $index = 'insales';
-    public $html_type_dynamic_recount_behavior = null;
+    public $html_type_dynamic_recount_behavior = 'none';
 
     public function __construct()
     {
@@ -52,7 +52,7 @@ final class WOOF_EXT_BY_INSALES extends WOOF_EXT
             if (typeof woof_lang_custom == 'undefined') {
                 var woof_lang_custom = {};//!!important
             }
-            woof_lang_custom.<?php echo $this->index ?> = "<?php _e('In sales', 'woocommerce-products-filter') ?>";
+            woof_lang_custom.<?php echo $this->index ?> = "<?php _e('On sales', 'woocommerce-products-filter') ?>";
         </script>
         <?php
     }
@@ -61,7 +61,7 @@ final class WOOF_EXT_BY_INSALES extends WOOF_EXT
     public function woof_print_html_type_options()
     {
         global $WOOF;
-        echo $WOOF->render_html($this->get_ext_path() . 'views/options.php', array(
+        echo $WOOF->render_html($this->get_ext_path() . 'views'.DIRECTORY_SEPARATOR.'options.php', array(
             'key' => $this->html_type,
             "woof_settings" => get_option('woof_settings', array())
                 )

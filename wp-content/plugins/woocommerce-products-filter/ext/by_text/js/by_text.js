@@ -25,7 +25,68 @@ function woof_init_text() {
             jQuery('.woof_text_search_go.' + uid).hide();
         }
         //}
+
+        //http://easyautocomplete.com/examples
+        if (val.length >= 3 && woof_text_autocomplete) {
+            var input_id = jQuery(this).attr('id');
+            var options = {
+                url: function (phrase) {
+                    return woof_ajaxurl;
+                },
+                //theme: "square",
+                getValue: function (element) {
+                    return element.name;
+                },
+                ajaxSettings: {
+                    dataType: "json",
+                    method: "POST",
+                    data: {
+                        action: "woof_text_autocomplete",
+                        dataType: "json"
+                    }
+                },
+                preparePostData: function (data) {
+                    data.phrase = jQuery("#" + input_id).val();
+                    return data;
+                },
+                template: {
+                    type: "iconRight",
+                    fields: {
+                        iconSrc: "icon"
+                    }
+                },
+                list: {
+                    maxNumberOfElements: woof_text_autocomplete_items,
+                    onChooseEvent: function () {
+                        woof_text_do_submit = true;
+                        woof_text_direct_search('woof_text', jQuery("#" + input_id).val());
+                        return true;
+                    },
+                    showAnimation: {
+                        type: "fade", //normal|slide|fade
+                        time: 333,
+                        callback: function () {
+                        }
+                    },
+                    hideAnimation: {
+                        type: "slide", //normal|slide|fade
+                        time: 333,
+                        callback: function () {
+                        }
+                    }
+
+                },
+                requestDelay: 400
+            };
+            try {
+                jQuery("#" + input_id).easyAutocomplete(options);
+            } catch (e) {
+                console.log(e);
+            }
+            jQuery("#" + input_id).focus();
+        }
     });
+
     //+++
     jQuery('.woof_text_search_go').life('click', function () {
         var uid = jQuery(this).data('uid');

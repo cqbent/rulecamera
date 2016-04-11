@@ -1,7 +1,3 @@
-jQuery(function () {
-    //woof_init_mselects();
-});
-
 function woof_init_mselects() {
     try {
         // jQuery("select.woof_select").chosen('destroy').trigger("liszt:updated");

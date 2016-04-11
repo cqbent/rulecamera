@@ -8,7 +8,7 @@ final class WOOF_EXT_BY_AUTHOR extends WOOF_EXT
     public $type = 'by_html_type';
     public $html_type = 'by_author'; //your custom key here
     public $index = 'woof_author';
-    public $html_type_dynamic_recount_behavior = null;
+    public $html_type_dynamic_recount_behavior = 'none';
 
     public function __construct()
     {
@@ -69,29 +69,26 @@ final class WOOF_EXT_BY_AUTHOR extends WOOF_EXT
     public function woof_author_filter($args = array())
     {
         global $WOOF;
-        return $WOOF->render_html($this->get_ext_path() . 'views/shortcodes/woof_author_filter.php', $args);
+        return $WOOF->render_html($this->get_ext_path() . 'views' . DIRECTORY_SEPARATOR . 'shortcodes' . DIRECTORY_SEPARATOR . 'woof_author_filter.php', $args);
     }
-
-   
 
     //settings page hook
     public function woof_print_html_type_options()
     {
         global $WOOF;
-        echo $WOOF->render_html($this->get_ext_path() . 'views/options.php', array(
+        echo $WOOF->render_html($this->get_ext_path() . 'views' . DIRECTORY_SEPARATOR . 'options.php', array(
             'key' => $this->html_type,
             "woof_settings" => get_option('woof_settings', array())
                 )
         );
     }
-    
 
     public function assemble_query_params(&$meta_query)
     {
         add_filter('posts_where', array($this, 'woof_post_author_filter'), 9999); //for searching by author
         return $meta_query;
     }
-    
+
     public function woof_post_author_filter($where = '')
     {
 

@@ -8,14 +8,17 @@ abstract class WOOF_EXT
 
     public static $includes = array();
     public $type = NULL; //html_type, by_html_type, addon
-    public $html_type = NULL; //your custom key here
+    public $html_type = NULL; //your custom key here, for applications it is should be folder name!!
+    //index in the search query
     public $index = NULL; //for by_html_type only: 'woof_sku' for example. This is key in the link
     public $html_type_dynamic_recount_behavior = 2; //0,1,2
+    public $folder_name = NULL;
     //for TAX html_type only
     //price2 -> 0 (default)
     //radio, select -> 1
     //checkbox, mselect -> 2
-    
+
+
     public $taxonomy_type_additional_options = array(); //select, text
     public static $ext_count = 0; //count of activated extensions in system
 
@@ -58,13 +61,27 @@ abstract class WOOF_EXT
 
     public function get_html_type_view()
     {
-        return $this->get_ext_path() . 'views/woof.php';
+        return $this->get_ext_path() . 'views' . DIRECTORY_SEPARATOR . 'woof.php';
     }
 
     public function print_html_type()
     {
         global $WOOF;
         echo $WOOF->render_html($this->get_html_type_view());
+    }
+
+    public static function draw_options($options, $folder_name='')
+    {
+        global $WOOF;
+        foreach ($options as $key => $value)
+        {
+            echo $WOOF->render_html(WOOF_PATH . 'views' . DIRECTORY_SEPARATOR . 'ext_options.php', array(
+                'options' => $value,
+                'key' => $key,
+                'woof_settings' => $WOOF->settings
+                    )
+            );
+        }
     }
 
     abstract public function init();

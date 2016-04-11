@@ -6,7 +6,19 @@ if (!defined('ABSPATH'))
 global $WOOF;
 if ($WOOF->settings['by_author']['show'])
 {
-    echo do_shortcode('[woof_author_filter]');
+    $placeholder = '';
+    $role = '';
+    if (isset($WOOF->settings['by_author']['placeholder']))
+    {
+        $placeholder = $WOOF->settings['by_author']['placeholder'];
+    }
+
+    if (isset($WOOF->settings['by_author']['role']))
+    {
+        $role = $WOOF->settings['by_author']['role'];
+    }
+
+    echo do_shortcode('[woof_author_filter role="' . $role . '" placeholder="' . $placeholder . '"]');
 }
 
 

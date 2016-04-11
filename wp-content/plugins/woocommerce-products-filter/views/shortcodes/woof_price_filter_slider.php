@@ -4,9 +4,9 @@
 wp_enqueue_script('ion.range-slider', WOOF_LINK . 'js/ion.range-slider/js/ion-rangeSlider/ion.rangeSlider.min.js', array('jquery'));
 wp_enqueue_style('ion.range-slider', WOOF_LINK . 'js/ion.range-slider/css/ion.rangeSlider.css');
 $ion_slider_skin = 'skinNice';
-if (isset($this->settings['by_price']['ion_slider_skin']))
+if (isset($this->settings['ion_slider_skin']))
 {
-    $ion_slider_skin = $this->settings['by_price']['ion_slider_skin'];
+    $ion_slider_skin = $this->settings['ion_slider_skin'];
 }
 wp_enqueue_style('ion.range-slider-skin', WOOF_LINK . 'js/ion.range-slider/css/ion.rangeSlider.' . $ion_slider_skin . '.css');
 //***
@@ -34,7 +34,40 @@ if (isset($this->settings['by_price']['ion_slider_step']))
         $slider_step = 1;
     }
 }
+//***
+//esc_attr( str_replace( array( '%1$s', '%2$s' ), array( '%s', '%v' ), get_woocommerce_price_format() ) )
 $slider_prefix = '';
-$slider_postfix = get_woocommerce_currency_symbol();
+$slider_postfix = '';
+if (class_exists('WOOCS'))
+{
+    global $WOOCS;
+    $currencies = $WOOCS->get_currencies();
+    $currency_pos = 'left';
+    if (isset($currencies[$WOOCS->current_currency]))
+    {
+        $currency_pos = $currencies[$WOOCS->current_currency]['position'];
+    }
+} else
+{
+    $currency_pos = get_option('woocommerce_currency_pos');
+}
+switch ($currency_pos)
+{
+    case 'left':
+        $slider_prefix = get_woocommerce_currency_symbol();
+        break;
+    case 'left_space':
+        $slider_prefix = get_woocommerce_currency_symbol() . ' ';
+        break;
+    case 'right':
+        $slider_postfix = get_woocommerce_currency_symbol();
+        break;
+    case 'right_space':
+        $slider_postfix = ' ' . get_woocommerce_currency_symbol();
+        break;
+
+    default:
+        break;
+}
 ?>
 <input class="woof_range_slider" id="<?php echo $uniqid ?>" data-min="<?php echo $preset_min ?>" data-max="<?php echo $preset_max ?>" data-min-now="<?php echo $min_price ?>" data-max-now="<?php echo $max_price ?>" data-step="<?php echo $slider_step ?>" data-slider-prefix="<?php echo $slider_prefix ?>" data-slider-postfix="<?php echo $slider_postfix ?>" value="" />

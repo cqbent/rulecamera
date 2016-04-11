@@ -57,7 +57,7 @@
             }).init();
 
         });
-    }
+    };
 
 })(jQuery, window);
 
@@ -119,7 +119,7 @@
             if (el.hasClass('js_woof_options')) {
                 //for 'by-' items
                 var key = data['key'],
-                        name = data['name'],
+                        name = data['name'] + ' [' + data['key'] + ']',
                         type = false,
                         info = $("#woof-modal-content-" + key),
                         content = info.html();
@@ -127,7 +127,7 @@
                 //for taxonomies
                 var type = el.parent().find('.woof_select_tax_type').val();
                 var key = data['taxonomy'];
-                var name = data['taxonomyName'];
+                var name = data['taxonomyName'] + ' [' + key + ']';
                 var info = $("#woof-modal-content");
                 info.find('.woof_option_container').hide();
                 info.find('.woof_option_all').show();
@@ -262,6 +262,12 @@ var woof_sort_order = [];
         $('.woof-tabs').woofTabs();
 
         $.woof_mod.popup_prepare();
+        
+        try{
+            $('.woof-color-picker').wpColorPicker();
+        }catch(e){
+            console.log(e);
+        }
 
         $("#woof_options").sortable({
             update: function (event, ui) {
@@ -272,15 +278,36 @@ var woof_sort_order = [];
                 });
                 $('input[name="woof_settings[items_order]"]').val(woof_sort_order.toString());
             },
+            opacity: 0.8,
+            cursor: "crosshair",
+            handle: '.woof_drag_and_drope',
             placeholder: 'woof-options-highlight'
-        });        
+        });
+
+
+        //options saving
+        $('#mainform').submit(function () {
+            $('input[name=save]').hide();
+            woof_show_info_popup(woof_lang_saving);
+            var data = {
+                action: "woof_save_options",
+                formdata: $(this).serialize()
+            };
+            $.post(ajaxurl, data, function () {
+                window.location = woof_save_link;
+            });
+
+            return false;
+        });
+
 
         $('.woof_reset_order').click(function () {
-            if (prompt('To reset order write word "reset". Page will be reloaded!') == 'reset') {
+            if (prompt('To reset order of items write word "reset". The page will be reloaded!') == 'reset') {
                 $('input[name="woof_settings[items_order]"]').val('');
                 $('#mainform').submit();
             }
         });
+
 
         $('.js_cache_count_data_clear').click(function () {
             $(this).next('span').html('clearing ...');
@@ -294,8 +321,8 @@ var woof_sort_order = [];
 
             return false;
         });
-        
-        
+
+
         $('.js_cache_terms_clear').click(function () {
             $(this).next('span').html('clearing ...');
             var _this = this;
@@ -346,12 +373,53 @@ var woof_sort_order = [];
             return false;
         });
 
-        //loader
-        $(window).load(function () {
-            // Animate loader off screen
-            $(".se-pre-con").fadeOut("slow");
+        //***
+
+        $('.woof_ext_remove').life('click', function () {
+            if (confirm('Sure?')) {
+                woof_show_info_popup('Extension removing ...');
+                var _this = this;
+                var data = {
+                    action: "woof_remove_ext",
+                    idx: $(this).data('idx')
+                };
+                $.post(ajaxurl, data, function () {
+                    woof_show_info_popup('Extension is removed!');
+                    $(_this).parents('.woof_ext_li').remove();
+                    woof_hide_info_popup();
+                });
+            }
+
+            return false;
         });
+
+        //***
+
+        $('#toggle_type').change(function () {
+            if ($(this).val() == 'text') {
+                $('.toggle_type_text').show(200);
+                $('.toggle_type_image').hide(200);
+            } else {
+                $('.toggle_type_image').show(200);
+                $('.toggle_type_text').hide(200);
+            }
+        });
+
+        //loader
+        $(".woof-admin-preloader").fadeOut("slow");
 
     });
 
 })(jQuery);
+
+
+function woof_show_info_popup(text) {
+    jQuery("#woof_html_buffer").text(text);
+    jQuery("#woof_html_buffer").fadeTo(333, 0.9);
+}
+
+function woof_hide_info_popup() {
+    window.setTimeout(function () {
+        jQuery("#woof_html_buffer").fadeOut(500);
+    }, 333);
+}

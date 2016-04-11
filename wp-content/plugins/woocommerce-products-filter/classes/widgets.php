@@ -23,13 +23,10 @@ class WOOF_Widget extends WP_Widget
         $args['sidebar_name'] = $args['name'];
         //+++
         global $WOOF;
+        $price_filter=0;
         if (isset($WOOF->settings['by_price']['show']))
         {
-            //just for compatibility from 2.1.2 to 2.1.3
             $price_filter = (int) $WOOF->settings['by_price']['show'];
-        } else
-        {
-            $price_filter = (int) get_option('woof_show_price_search', 0);
         }
 
 
@@ -51,7 +48,7 @@ class WOOF_Widget extends WP_Widget
                 } else
                 {
                     ?>
-                    <h3 class="widget-title"><?php echo $instance['title'] ?></h3>
+                    <<?php echo apply_filters('woof_widget_title_tag', 'h3'); ?> class="widget-title"><?php echo $instance['title'] ?></<?php echo apply_filters('woof_widget_title_tag', 'h3'); ?>>
                     <?php
                 }
             }

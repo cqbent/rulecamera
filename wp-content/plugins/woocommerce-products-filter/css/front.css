@@ -11,6 +11,14 @@
     margin-bottom: 11px !important;
 }
 
+.woof_container label{
+    display: inline-block !important;
+}
+
+ul.woof_list{
+    margin: 0 !important;
+}
+
 .woof_list li{
     list-style: none !important;
     padding: 0 0 5px 0 !important;
@@ -27,6 +35,8 @@
 .woof_childs_list{
     margin: 7px 0 0 15px !important;
 }
+
+
 
 /**********************/
 .woof_auto_show{
@@ -87,6 +97,7 @@ div.woof_info_popup {
 p.woof_tooltip {
     position: relative;
     display: inline;
+    line-height: normal !important;
 }
 p.woof_tooltip span.woof_tooltip_data {
     position: absolute;
@@ -143,7 +154,7 @@ p:hover.woof_tooltip span.woof_tooltip_data {
 
 .woof_products_top_panel li{
     float: left;
-    margin: 0 15px 0 0;
+    margin: 0 15px 0 0 !important;
     list-style: none !important;
 }
 
@@ -276,6 +287,7 @@ p:hover.woof_tooltip span.woof_tooltip_data {
 .woof_childs_list_opener{
     vertical-align: middle;
     margin-left: 4px;
+    display: inline-block !important;
 }
 
 .woof_childs_list_opener span{
@@ -292,7 +304,7 @@ p:hover.woof_tooltip span.woof_tooltip_data {
 }
 
 .woof_childs_list_opener span.woof_is_opened{
-    background: url(../img/minus.png);
+    background: url(../img/minus2.png);
 }
 
 
@@ -517,6 +529,14 @@ p:hover.woof_tooltip span.woof_tooltip_data {
     margin-left: 7px;
 }
 
+.woof_checkbox_label_selected{
+    font-weight: bold;
+}
+
+.woof_radio_label_selected{
+    font-weight: bold;
+}
+
 .woof_checkbox_count{
     margin-left: 3px;
 }
@@ -528,3 +548,39 @@ p:hover.woof_tooltip span.woof_tooltip_data {
 .woof_radio_count{
     margin-left: 2px;
 }
+
+a.woof_front_toggle{
+    float:right;
+}
+
+/*
+a.woof_front_toggle{
+    float:right;
+    text-decoration: none;
+    display: block;
+    padding: 0 3px 0 3px;
+    border: solid 1px #000;
+    border-radius: 20px;
+    line-height: normal !important;
+    text-align: center;
+    vertical-align: middle;
+    min-width: 20px;
+    min-height: 20px;
+}
+
+a.woof_front_toggle:hover{
+    border: solid 1px #bbb;
+}
+
+*/
+
+.woof_closed_block{
+    display: none;
+}
+
+.woof_radio_term_reset_visible{
+    display: inline-block !important;
+}
+
+
+

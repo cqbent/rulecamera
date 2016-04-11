@@ -447,18 +447,13 @@ nav ul {  display: block; }
 
 /******************************************/
 
-.woof_color_list{
-    margin: 9px 0 9px 34px;
-}
-
-.woof_color_list .wp-color-result { margin: 5px 6px 6px 0; }
-
 .woof_setting_select{
     width: 170px;
 }
 
 .js_woof_options, .js_woof_add_options{
     color: green !important;
+
 }
 
 #woof_options > li {
@@ -490,12 +485,6 @@ nav ul {  display: block; }
 
 #woof_options li > .button { margin: 0 5px; }
 
-#woof_options li.woof-options-highlight {
-    min-height: 58px;
-    border: 2px dashed #ccc;
-    background-color: transparent;
-}
-
 .woof_extensions li.woof_ext_li{
     padding: 9px;
     float: left;
@@ -503,8 +492,15 @@ nav ul {  display: block; }
     border: solid 2px #000;
     margin: 5px 5px 0 0;
     width: 30%;
-    height: 120px;
+    height: 150px;
 }
+
+#woof_options li.woof-options-highlight {
+    min-height: 58px;
+    border: 2px dashed #ccc;
+    background-color: transparent;
+}
+
 
 .woof_extensions li.woof_ext_li:nth-child(2n) {
     background: #eee;
@@ -789,16 +785,71 @@ nav ul {  display: block; }
 .woof-modal .woof-element-checkbox .woof-form-element 	   { width: 30px; }
 .woof-modal .woof-element-checkbox .woof-name-description { width:100%; }
 /******************************************/        
-.no-js #loader { display: none;  }
-.js #loader { display: block; position: absolute; left: 100px; top: 0; }
-.se-pre-con {
+.woof_ext_remove{
+    position: absolute;
+    right: 0;
+    top:0;
+}
+
+div.woof_info_popup {
+    position: fixed;
+    top: 50%;
+    left: 39%;
+    z-index: 10001;
+    display: none;
+    overflow: hidden;
+    padding: 20px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background-color: rgba(0,0,0,.6);
+    -webkit-box-shadow:
+        inset 0 0 0 1px rgba(0,0,0,.6),
+        inset 0 0 0 2px rgba(255,255,255,.2);
+    -moz-box-shadow:
+        inset 0 0 0 1px rgba(0,0,0,.6),
+        inset 0 0 0 2px rgba(255,255,255,.2);
+    box-shadow:
+        inset 0 0 0 1px rgba(0,0,0,.6),
+        inset 0 0 0 2px rgba(255,255,255,.2);
+    color: #fff;
+    font-size: 22px;
+    font-family: 'Oswald',sans-serif;
+}
+
+.woof-admin-preloader {
     position: fixed;
     left: 0px;
     top: 0px;
     width: 100%;
     height: 100%;
     z-index: 9999;
-    background: url(../img/loaders/loader-64x/Preloader_3.gif) center no-repeat #fff;
+    background: url(../img/plugin_options/admin_preloader.gif) center no-repeat #fff;
+}
+
+.woof_ext_nav{
+    float: left; width: 20%;
+    overflow: hidden;
+}
+
+.woof_ext_opt{
+    float: right; width: 80%;
+}
+
+#tabs-72 nav.woof_ext_nav ul{
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+#tabs-72 nav.woof_ext_nav ul li{
+    display: block;
+    width: 100%;
+    clear: both;
+    flex:none;
+}
+
+.woof_ext_opt section{
+    padding-top: 0 !important;
 }
 
 .woof_premium_only{
@@ -811,4 +862,3 @@ label[for=woof_hide_dynamic_empty_pos],label[for=hide_terms_count_txt]
 {
     color:red;
 }
-

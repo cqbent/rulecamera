@@ -22,7 +22,7 @@ class Vimeography_Gallery_List_Table extends WP_List_Table {
    */
   public function set_pagination() {
     global $wpdb;
-    $number_of_galleries = $wpdb->get_results('SELECT COUNT(*) as count from '. VIMEOGRAPHY_GALLERY_TABLE);
+    $number_of_galleries = $wpdb->get_results('SELECT COUNT(*) as count from '. $wpdb->vimeography_gallery);
 
     $this->set_pagination_args( array(
       'total_items' => $number_of_galleries[0]->count,
@@ -41,13 +41,20 @@ class Vimeography_Gallery_List_Table extends WP_List_Table {
     $offset = ($this->get_pagenum() - 1) * $this->_per_page;
 
     if ( isset( $_GET['s'] ) && ! empty( $_GET['s'] ) ) {
-      $filter = 'WHERE gallery.title LIKE "%' . sanitize_text_field( $_GET['s'] ) . '%" ';
+      $term = sanitize_text_field( $_GET['s'] );
+
+      if ( intval( $term ) == 0 ) {
+        $filter = 'WHERE gallery.title LIKE "%' . $term . '%" ';
+      } else {
+        $filter = 'WHERE gallery.id = "' . $term . '" ';
+      }
+
     } else {
       $filter = '';
     }
 
     $sort = $this->_get_sort();
-    $result = $wpdb->get_results('SELECT * from '.VIMEOGRAPHY_GALLERY_META_TABLE.' AS meta JOIN '.VIMEOGRAPHY_GALLERY_TABLE.' AS gallery ON meta.gallery_id = gallery.id ' . $filter . $sort . ' LIMIT '.$this->_per_page.' OFFSET '.$offset.';', ARRAY_A);
+    $result = $wpdb->get_results('SELECT * from '.$wpdb->vimeography_gallery_meta.' AS meta JOIN '.$wpdb->vimeography_gallery.' AS gallery ON meta.gallery_id = gallery.id ' . $filter . $sort . ' LIMIT '.$this->_per_page.' OFFSET '.$offset.';', ARRAY_A);
     // echo '<pre>';
     // var_dump($result);
     // echo '</pre>';

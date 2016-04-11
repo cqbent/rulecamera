@@ -2,27 +2,6 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-// Once new plugin update is out, we should return a 401 from
-//
-// http://vimeography.com/api/activate/[key]
-//
-// with a JSON response that has a "message" key which will be displayed
-// when a user tries to activate a plugin in an old version of Vimeography.
-//
-// http_response_code(401);
-// status_header(401);
-// $response['status'] = 'error';
-// $response['message'] = __('Please update to the latest version of Vimeography to activate your Vimeography Addon');
-// $to_send = json_encode($response);
-// echo $to_send;
-// die;
-//
-// Always return a 304 response code from the old update endpoint API
-// updates will only work if you have the latest version of the Vimeography plugin.
-// This also will take care of the remote info request for the view_version_details screen
-//
-// http://vimeography.com/api/update/[key]
-
 class Vimeography_Update {
   /**
    * All of the Vimeography activation keys that the user has stored.
@@ -53,7 +32,7 @@ class Vimeography_Update {
    *
    * @var string
    */
-  private $_endpoint = 'http://vimeography.com';
+  private $_endpoint = 'https://vimeography.com';
 
   /**
    * [__construct description]
@@ -127,8 +106,9 @@ class Vimeography_Update {
     );
 
     // Make sure there are no errors
-    if ( is_wp_error( $response ) )
-      return;
+    if ( is_wp_error( $response ) ) {
+      throw new Exception( __('The HTTP Request failed: ' . $response->get_error_message(), 'vimeography') );
+    }
 
     // Decode license data
     $license_data = json_decode( wp_remote_retrieve_body( $response ) );
@@ -147,6 +127,8 @@ class Vimeography_Update {
           throw new Exception( __('The license key you entered has expired. Please visit http://vimeography.com to renew it.', 'vimeography') );
         case 'key_mismatch':
           throw new Exception( __('The license key you entered does not match the one we have on file.', 'vimeography') );
+        case 'license_not_activable':
+          throw new Exception( __('Looks like you are trying to activate your bundle license. Please activate each of the products in your bundle separately by using their respective individual licenses.', 'vimeography') );
         default:
           throw new Exception( __('Unknown error: ' . $license_data->error, 'vimeography') );
       }

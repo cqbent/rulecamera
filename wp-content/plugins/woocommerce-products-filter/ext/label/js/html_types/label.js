@@ -1,7 +1,3 @@
-jQuery(function () {
-    //woof_init_labels();    
-});
-
 function woof_init_labels() {
     jQuery('.woof_label_term').click(function () {
 
@@ -21,19 +17,19 @@ function woof_init_labels() {
 function woof_label_process_data(_this, is_checked) {
     var tax = jQuery(_this).data('tax');
     var name = jQuery(_this).attr('name');
-    woof_label_direct_search(name, tax, is_checked);
+    var term_id = jQuery(_this).data('term-id');
+    woof_label_direct_search(term_id, name, tax, is_checked);
 }
-function woof_label_direct_search(name, tax, is_checked) {
-
+function woof_label_direct_search(term_id, name, tax, is_checked) {
     var values = '';
-
+    var checked = true;
     if (is_checked) {
         if (tax in woof_current_values) {
             woof_current_values[tax] = woof_current_values[tax] + ',' + name;
         } else {
             woof_current_values[tax] = name;
         }
-        jQuery('input.woof_label_term[name=' + name + ']').attr('checked', true);
+        checked = true;
     } else {
         values = woof_current_values[tax];
         values = values.split(',');
@@ -49,9 +45,9 @@ function woof_label_direct_search(name, tax, is_checked) {
         } else {
             delete woof_current_values[tax];
         }
-        jQuery('input.woof_label_term[name=' + name + ']').attr('checked', false);
+        checked = false;
     }
-
+    jQuery('.woof_label_term_' + term_id).attr('checked', checked);
     woof_ajax_page_num = 1;
     if (woof_autosubmit) {
         woof_submit_link(woof_get_submit_link());

@@ -1,19 +1,21 @@
 === WooCommerce Products Filter ===
 Contributors: RealMag777
 Donate link: http://codecanyon.net/item/woof-woocommerce-products-filter/11498469?ref=realmag777
-Tags: woocommerce products filter, woocommerce product filter, products filter, ajax products filter, filter for woocommerce, filter, shortcode, widget, woocommerce, products, ajax
+Tags: woocommerce filter, ajax products filter, woocommerce products filter, woocommerce product filter, products filter, ajax products filter, filter for woocommerce, filter, shortcode, widget, woocommerce, products, ajax
 Requires at least: 4.1.0
-Tested up to: 4.4.0
-Stable tag: 1.1.3.1
+Tested up to: 4.4.2
+Stable tag: 1.1.4.1
 
-WooCommerce Products Filter – Quick&Easy products filter
+WooCommerce Products Filter – flexible and easy professional filter for products in the WooCommerce store
 
 == Description ==
 
-WooCommerce Products Filter – is a plugin that allows you filter products by products categories, products attributes, products tags, products custom taxonomies.
+WOOF – WooCommerce Products Filter – is a WooCommerce plugin that allows you to filter products by products categories, products attributes, products tags, products CUSTOM taxonomies and by price price. Maximum flexibility! 
 Supports latest version of the WooCommerce plugin.
 
-ATTENTION: before update from v.1.1.2 to v.1.1.3 read this please http://www.woocommerce-filter.com/migration-v-2-1-2-or-1-1-2-and-lower-to-2-1-3-or-1-1-3-and-higher/
+If you are WP+PHP developer and you want to create something unusual – Welcome – using WOOF extension API and default extensions as an examples you can create any html-items for the search form and even custom woo-products loop template for your own purposes. 
+
+ATTENTION: before update from v.1.1.2 to v.1.1.4 read this please http://www.woocommerce-filter.com/migration-v-2-1-2-or-1-1-2-and-lower-to-2-1-3-or-1-1-3-and-higher/
 
 ### The Plugin Features:
 
@@ -27,10 +29,12 @@ ATTENTION: before update from v.1.1.2 to v.1.1.3 read this please http://www.woo
 * Simple options
 * Compatible with WooCommerce Currency Switcher - https://wordpress.org/plugins/woocommerce-currency-switcher/
 * Compatible with WooCommerce Brands - http://codecanyon.net/item/woocommerce-brands/8039481?ref=realmag777
+* Compatible with WooCommerce Products Per Page - https://wordpress.org/plugins/woocommerce-products-per-page/
 * WPML compatibility
+* Possibility to create any extensions for the plugin (for developers only) 
 * Demo site is: http://demo.woocommerce-filter.com
-* Documentation: http://www.woocommerce-filter.com/documentation/
-* Premium version: http://codecanyon.net/item/woof-woocommerce-products-filter/11498469?ref=realmag777
+* Documentation: http://www.woocommerce-filter.com/documentation/ and http://www.woocommerce-filter.com/codex/
+* The premium version: http://codecanyon.net/item/woof-woocommerce-products-filter/11498469?ref=realmag777
 
 
 https://www.youtube.com/watch?v=jZPtdWgAxKk
@@ -59,7 +63,7 @@ Q: FAQ?
 R: http://www.woocommerce-filter.com/category/faq/
 
 Q: Documentation?
-R: http://www.woocommerce-filter.com/documentation/ and http://www.woocommerce-filter.com/interaction/
+R: http://www.woocommerce-filter.com/documentation/ and http://www.woocommerce-filter.com/codex/
 
 
 == Screenshots ==
@@ -70,6 +74,45 @@ R: http://www.woocommerce-filter.com/documentation/ and http://www.woocommerce-f
 5. The plugin settings
 
 == Changelog ==
+
+= 1.1.4.1 =
+* Fixed 1 bug with hiding terms from options
+
+= 1.1.4 =
+* Fixed bugs from customers
+* A lot of the code has been remade
+* Extension installation functionality from backend is added and its API is finished and can be used in production
+* Using default extension php developers can create: types of filter elements using any 
+  custom html templates, any products loop templates
+* Possibility to write custom templates for woocommerce products loop using extensions
+* Improved SKU searching for variable products and autocomplete added
+add_filter('woof_text_autocomplete_items', function($count){       
+       return 2;
+}); (enabled optionally from admin panel)
+* Improved by Text searching and autocomplete added
+add_filter('woof_sku_autocomplete_items', function($count){       
+   return 2;
+}); (enabled optionally from admin panel)
+* Improved InStock searching for variable products
+* Toggles for taxonomies on the front added
+* New attribute: [woof_author_filter role="author"]
+* New attribute: custom_tpl for [woof_products]. Example: [woof_products custom_tpl='themes/twentytwelve/woo_tpl_1.php' per_page=8 columns=3 is_ajax=0 taxonomies=product_cat:9]
+* New attribute: [woof_products get_args_only=1] - possibility get array of arguments only
+* New attribute: [woof excluded_terms="33,44,55,66,77"]
+* New attribute: [woof_products predict_ids_and_continue=1]
+[woof_products_ids_prediction taxonomies=product_cat:8] - use for AJAX mode only for correct price range slider work
+* New option: Range-slider skin - tab Design
+* New option: Init plugin on the next site pages only - tab Advanced
+* New option: <strong>In the terms slugs uses non-latin characters</strong> - from now doesn matter which language uses in slug names - tab Advanced
+* New hook added: add_filter('woof_title_tag', function($tag){       
+       return 'h3';
+   });
+* New hook added: add_filter('woof_widget_title_tag', function($tag){       
+       return 'h3';
+   });
+* New hook added: $price_slider_html = apply_filters('woof_price_slider_html', $price_slider_html, $price_slider_data);  
+* New hook added: $orderby = apply_filters('woof_get_terms_orderby', $taxonomy);
+* New hook added: $order = apply_filters('woof_get_terms_order', $taxonomy, $orderby);
 
 = 1.1.3.1 =
 * Hot js fix: https://wordpress.org/support/topic/variable-products-not-working-3
@@ -167,4 +210,4 @@ WARRANTY. See the GNU General Public License for more details.
 
 == Upgrade Notice ==
 Old v.1.1.2: http://www.woocommerce-filter.com/wp-content/uploads/2015/12/woocommerce-products-filter-112.zip
-
+Old v.1.1.3.1: http://www.woocommerce-filter.com/wp-content/uploads/2016/03/woocommerce-products-filter-1131.zip
