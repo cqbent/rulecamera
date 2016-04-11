@@ -40,18 +40,7 @@ get_header( 'shop' );
 		do_action( 'woocommerce_before_main_content' );
 	?>
 
-
-		<ul class="staff-list">
-			<li>
-				<div class="image">
-					<img width="150" height="150" src="/wp-content/uploads/2016/03/TomTalbot_Web-150x150.jpg" alt="Sales questions" />
-				</div>
-				<div class="info">
-					<span class="tel" href="tel:800.785.3200">800.785.3200</span>
-					<span class="email"><a href="mailto:sales@rule.com">sales@rule.com</a></span>
-				</div>
-			</li>
-		</ul>
+		
 		<?php
 			/**
 			 * woocommerce_archive_description hook
@@ -83,7 +72,11 @@ get_header( 'shop' );
 		</div>
 
 	<!-- close div tags -->
-	</div></div>
+	</div>
+
+	<?php get_sidebar('rule'); ?>
+
+	</div>
 
 	</div>
 

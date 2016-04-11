@@ -46,7 +46,7 @@ get_header(); ?>
 			<div class="home-banner">
 
 			</div>
-			
+
 
 			<?php
 				//dynamic_sidebar('content_area_widget');

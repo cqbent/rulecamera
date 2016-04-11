@@ -569,6 +569,17 @@ body {
     column-count: 3;
     -webkit-column-count: 3;
     -moz-column-count: 3; }
+    .content-container.production-outfitters .po-list .column-list h3 {
+      margin: 0;
+      text-transform: none;
+      font-size: 1em; }
+    .content-container.production-outfitters .po-list .column-list ul {
+      list-style: none;
+      margin: 0 0 20px 0;
+      padding: 0; }
+      .content-container.production-outfitters .po-list .column-list ul li {
+        margin: 0;
+        padding: 0; }
   .content-container.production-outfitters .columns-3 .products li.product:nth-child(3n+3) {
     margin-right: 0; } }
 
@@ -615,24 +626,32 @@ body {
     .term-rentals .product-categories ul li ul li a, .term-sales .product-categories ul li ul li a {
       font-weight: normal; }
 @media screen and (min-width: 769px) {
-  .term-rentals #primary, .term-sales #primary {
-    width: 100%;
-    float: none;
-    margin-right: 0;
-    padding-right: 15%;
-    box-sizing: border-box;
-    position: relative; }
-  .term-rentals .product-categories > ul, .term-sales .product-categories > ul {
-    column-count: 4;
-    -webkit-column-count: 4;
-    -moz-column-count: 4; }
-  .term-rentals .staff-list, .term-sales .staff-list {
-    position: absolute;
-    right: 0; }
-    .term-rentals .staff-list li .image, .term-sales .staff-list li .image {
-      float: none; }
-    .term-rentals .staff-list li .info span, .term-sales .staff-list li .info span {
-      display: block; } }
+  .term-rentals, .term-sales {
+    /*
+    #primary {
+      width: 100%;
+      float: none;
+      margin-right: 0;
+      padding-right: 15%;
+      box-sizing: border-box;
+      position: relative;
+    }
+    */ }
+    .term-rentals #primary, .term-sales #primary {
+      width: 80%; }
+    .term-rentals #secondary, .term-sales #secondary {
+      width: 15%; }
+    .term-rentals .product-categories > ul, .term-sales .product-categories > ul {
+      column-count: 4;
+      -webkit-column-count: 4;
+      -moz-column-count: 4; }
+    .term-rentals .staff-list, .term-sales .staff-list {
+      position: absolute;
+      right: 0; }
+      .term-rentals .staff-list li .image, .term-sales .staff-list li .image {
+        float: none; }
+      .term-rentals .staff-list li .info span, .term-sales .staff-list li .info span {
+        display: block; } }
 
 .product_cat-rentals .sku_wrapper {
   display: none !important; }
@@ -706,30 +725,36 @@ body {
     .page.sidebar-both .site-content .sidebar-right:last-child, .page.sidebar-both #content .sidebar-right:last-child {
       margin-right: 0; } }
 
-.staff-list {
+.staff-list, .staff-contact {
   margin: 0;
   padding: 0;
   list-style: none; }
-  .staff-list li {
+  .staff-list li, .staff-contact li {
     margin: 0 0 20px 0;
     clear: both; }
-    .staff-list li:after {
+    .staff-list li:after, .staff-contact li:after {
       content: "";
       display: table;
       clear: both; }
-    .staff-list li .image {
-      width: 100px;
-      float: left;
-      margin-right: 20px; }
-      .staff-list li .image img {
-        border-radius: 50%; }
-    .staff-list li .info span {
-      display: inline-block; }
-    .staff-list li .info .name {
-      font-weight: bold;
-      float: left; }
-    .staff-list li .info .extension {
-      display: block; }
+  .staff-list .image img, .staff-contact .image img {
+    border-radius: 50%; }
+  .staff-list .info span, .staff-contact .info span {
+    display: inline-block; }
+  .staff-list .info .name, .staff-contact .info .name {
+    font-weight: bold;
+    float: left; }
+  .staff-list .info .extension, .staff-contact .info .extension {
+    display: block; }
+
+.staff-list .image {
+  width: 100px;
+  float: left;
+  margin-right: 20px; }
+
+.staff-contact {
+  text-align: center; }
+  .staff-contact .info {
+    margin-top: 10px; }
 
 .credits-list, .page-list {
   margin: 0;

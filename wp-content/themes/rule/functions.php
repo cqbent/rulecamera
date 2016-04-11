@@ -377,10 +377,12 @@ remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_r
 // alter price language
 add_filter( 'woocommerce_price_html', 'filter_woocommerce_price_html', 10, 2 );
 function filter_woocommerce_price_html($price, $instance) {
-    return 'Buy for '.$price;
+    $price_message = get_field('for_rent') ? 'Rent for '.$price.' per day': 'Buy for '.$price;
+    return $price_message;
 }
 
 // add rental price
+/*
 add_action('woocommerce_single_product_summary', 'rule_rental_price', 16);
 add_action('woocommerce_after_shop_loop_item_title', 'rule_rental_price', 20);
 function rule_rental_price() {
@@ -388,7 +390,7 @@ function rule_rental_price() {
         echo '<span class="price">Rent for $'.get_field('rental_price').' per day</span>';
     }
 }
-
+*/
 // remove popularity from sort options
 // Options: menu_order, popularity, rating, date, price, price-desc
 function rule_woocommerce_catalog_orderby( $orderby ) {
@@ -611,6 +613,7 @@ function display_people_list($atts) {
                     </div>
                     <div class="info">
                         <span class="name">'.get_the_title().'</span>, <span class="position">'.get_field('position').'</span>
+                        <span class="tel" href="tel:800.785.3200">800.785.3200</span>
                         <span class="extension">x '.get_field('extension').'</span>
                         <span class="email"><a href="'.get_field('email').'">'.get_field('email').'</a></span>
 
