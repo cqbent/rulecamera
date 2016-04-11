@@ -45,6 +45,8 @@ body {
         width: 100%;
         margin: 0;
         padding: 0; } }
+  .site-header #cc-signup, .site-footer #cc-signup {
+    display: none; }
 
 .site-header .social-links {
   font-size: 25px; }

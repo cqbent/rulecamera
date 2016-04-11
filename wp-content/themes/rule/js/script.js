@@ -32,4 +32,13 @@ jQuery(document).ready(function($) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
+    // CC signup form colorbox
+    $("a.signup").colorbox({
+        width:"60%",
+        height:"600px",
+        inline:true,
+        href:"#cc-signup"
+    });
+
+
 });
