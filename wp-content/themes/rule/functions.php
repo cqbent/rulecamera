@@ -12,6 +12,8 @@ function rule_enqueue_styles() {
     wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
     wp_enqueue_style( 'FontAwesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css' );
     wp_enqueue_style('open-sans-fonts', 'https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic');
+    wp_enqueue_style( 'flexslider-css', get_stylesheet_directory_uri() . '/flexslider/flexslider.css' );
+    wp_enqueue_script('flexslider', get_stylesheet_directory_uri() . '/flexslider/jquery.flexslider.js', array('jquery'));
     wp_enqueue_script('script.js', get_stylesheet_directory_uri() . '/js/script.js', array('jquery'));
 }
 
@@ -284,6 +286,23 @@ function custom_nav_menu_objects_sub_menu( $sorted_menu_items, $args ) {
     }
 }
 
+function show_sub_menu() {
+    $args = array(
+        'sub_menu'=>1,
+        'show_parent'=>1,
+        'container_class'=>'sidebar-navigation',
+        'menu_class' =>'menu-sidebar-menu',
+        'echo'=>false,
+    );
+    $output = '
+        <div class="sidebar-left aside">
+            '.wp_nav_menu($args);'
+        </div>
+    ';
+    return $output;
+}
+add_shortcode('show_sub_menu','show_sub_menu');
+
 // add category_body field to product category pages
 function category_body_field() {
     $pcobj = get_queried_object();
@@ -294,6 +313,8 @@ function category_body_field() {
     }
 }
 add_action('woocommerce_archive_description', 'category_body_field', 15);
+
+
 
 function get_sidebar_menu($atts) {
     extract(shortcode_atts(array(
@@ -515,7 +536,8 @@ function display_child_pages() {
     $args = array(
         'post_type' => 'page',
         'child_of' => $id,
-        'orderby' => 'menu_order'
+        'sort_order' => 'asc',
+        'sort_column' => 'menu_order'
     );
     $pages_array = get_pages($args);
     $output = '<ul class="page-list">';
@@ -617,7 +639,7 @@ function display_people_list($atts) {
                         <span class="name">'.get_the_title().'</span>, <span class="position">'.get_field('position').'</span>
                         <span class="tel" href="tel:800.785.3200">800.785.3200</span>
                         <span class="extension">x '.get_field('extension').'</span>
-                        <span class="email"><a href="'.get_field('email').'">'.get_field('email').'</a></span>
+                        <span class="email"><a href="mailto:'.get_field('email').'">'.get_field('email').'</a></span>
 
                     </div>
                 </li>';
@@ -651,6 +673,7 @@ function get_menu_parent($objId) {
     $locations = get_nav_menu_locations();
     $menu_id   = $locations['primary'];
     $menu_items = wp_get_nav_menu_items($menu_id);  // get the main menu items
+    //var_dump($menu_items);
     /* filter by menu object id and get its menu parent  */
     $parent_item_id = wp_filter_object_list($menu_items,array('object_id'=>$objId),'and','menu_item_parent');
     $parent_item_id = array_shift( $parent_item_id );

@@ -444,9 +444,27 @@ body {
       margin: 0;
     }
     .home-banner {
-      height: 400px;
       background-size: cover;
-      background-image:url(images/home_banner_1.jpg);
+      //background-image:url(images/home_banner_1.jpg);
+      margin: 0;
+      padding: 0;
+      border: none;
+      box-shadow: none;
+      .slides {
+        li {
+          height: 400px;
+          overflow: hidden;
+          img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: auto;
+            transform: translate(-50%, -50%)
+          }
+        }
+
+      }
     }
     .buy-rent-learn {
       .col {
@@ -459,6 +477,30 @@ body {
           height: 250px;
           padding:20px;
           text-align: center;
+          h3 {
+            -webkit-transform: rotate(-5deg);
+            -moz-transform: rotate(-5deg);
+            -ms-transform: rotate(-5deg);
+            -o-transform: rotate(-5deg);
+            transform: rotate(-5deg);
+            display: inline-block;
+            font-weight: 700;
+            color: $white;
+            font-size: 2em;
+            a {
+              color: $white;
+            }
+            &:before, &:after {
+              font-size: 1.25em;
+              font-weight:400;
+            }
+            &:before {
+              content: "[";
+            }
+            &:after {
+              content: "]";
+            }
+          }
           img {
             width: 100px;
             margin: 0 auto;
@@ -734,16 +776,16 @@ body {
 
   }
   .sidebar-left {
+    font-size: 1.25em;
     .parent-link {
       font-weight: bold;
       font-size: 1.3em;
       text-transform: uppercase;
     }
-    .menu-sidebar-menu {
+    .menu-sidebar-menu, .sub-menu {
       list-style: none;
       margin-left: 0;
       li {
-        font-size: 1.25em;
         line-height: normal;
         margin-bottom: 10px;
         a {
@@ -757,8 +799,14 @@ body {
             color: $gray;
           }
         }
+        &.current_page_ancestor > a {
+          text-transform: uppercase;
+          font-weight: bold;
+          font-size: 1.3em;
+        }
       }
     }
+
   }
   #secondary {
     .how-to-link {

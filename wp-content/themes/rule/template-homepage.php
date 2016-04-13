@@ -43,10 +43,6 @@ get_header(); ?>
 
 			<?php endwhile; // end of the loop. ?>
 
-			<div class="home-banner">
-
-			</div>
-
 
 			<?php
 				//dynamic_sidebar('content_area_widget');

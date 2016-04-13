@@ -38,7 +38,7 @@
 					</p>
 					<p>
 						<strong>Email:</strong>	<a href="mailto:answers@rule.com">answers@rule.com</a><br />
-						<strong>Staff Extensions:</strong>	See our staff directory<br />
+						<strong>Staff Extensions:</strong>	<a href="/about-us/staff">See our staff directory</a><br />
 						<strong>Hours:</strong>	Monday-Friday<br />
 						8:00am-5:30pm
 					</p>

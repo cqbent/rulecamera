@@ -63,9 +63,13 @@ get_header(); ?>
 
 		//do_action( 'storefront_sidebar' );
 		echo do_shortcode('[sidebar_menu child_of="'.$parent_title.'" parent_id="'.$parent_id.'"]');
+		//print wp_nav_menu(array('sub_menu'=>1,'show_parent'=>1));
+		//print do_shortcode('[show_sub_menu]');
 		?>
 
 
 	</div>
+
+</div>
 
 <?php get_footer(); ?>

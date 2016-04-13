@@ -26,18 +26,28 @@ jQuery(document).ready(function($) {
     });
 
     // home banner random generator
+    /*
     $('.page-template-template-homepage #main .home-banner')
         .css('background-image','url(/wp-content/themes/rule/images/home_banner_'+getRandomIntInclusive(1, 4)+'.jpg');
     function getRandomIntInclusive(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
-
+    */
     // CC signup form colorbox
     $("a.signup").colorbox({
         width:"60%",
         height:"600px",
         inline:true,
         href:"#cc-signup"
+    });
+
+    // load flexslider for home page banner
+    $('.home-banner.flexslider').flexslider({
+        controlNav: false,
+        directionNav: false,
+        slideshowSpeed: 4500,
+        animation: 'fade',
+        pauseOnHover: true,
     });
 
 
