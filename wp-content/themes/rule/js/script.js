@@ -42,6 +42,11 @@ jQuery(document).ready(function($) {
     });
 
     // load flexslider for home page banner
+    var imgtmp;
+    $('.home-banner.flexslider li span').each(function() {
+        imgtmp = $(this).find('img').attr('src');
+        $(this).css('background-image','url('+imgtmp+')');
+    });
     $('.home-banner.flexslider').flexslider({
         controlNav: false,
         directionNav: false,

@@ -278,9 +278,14 @@ body {
     border: none;
     box-shadow: none; }
     .page-template-template-homepage #main .home-banner .slides li {
-      height: 400px;
       overflow: hidden; }
+      .page-template-template-homepage #main .home-banner .slides li span {
+        display: block;
+        height: 400px;
+        background-size: cover;
+        background-position: center center; }
       .page-template-template-homepage #main .home-banner .slides li img {
+        display: none;
         position: absolute;
         top: 50%;
         left: 50%;
