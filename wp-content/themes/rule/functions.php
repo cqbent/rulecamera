@@ -306,7 +306,7 @@ add_shortcode('show_sub_menu','show_sub_menu');
 // add category_body field to product category pages
 function category_body_field() {
     $pcobj = get_queried_object();
-    if (isset($pjobj->term_id)) {
+    if (isset($pcobj->term_id)) {
         if (get_field('category_body', $pcobj)) {
             echo '<div class="category-body">' . get_field('category_body', $pcobj) . '</div>';
         }

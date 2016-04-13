@@ -351,6 +351,14 @@ body {
       clear: both;
     }
   }
+  .widget-area {
+    .widget {
+      a {
+        color: $blue;
+        font-weight: 700;
+      }
+    }
+  }
 }
 
 .site-footer {
@@ -1110,6 +1118,9 @@ body {
     .extension {
       display: block;
     }
+  }
+  a {
+    font-weight:700;
   }
 }
 .staff-list {

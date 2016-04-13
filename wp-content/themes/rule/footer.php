@@ -43,7 +43,7 @@
 						8:00am-5:30pm
 					</p>
 					<p>
-						We accept Visa, PayPal, Mastercard, <br />Discover, American Express
+						We accept Visa, Mastercard, American Express, <br />Discover, PayPal
 					</p>
 				</li>
 				<li class="col-3">

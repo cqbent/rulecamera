@@ -223,6 +223,9 @@ body {
   @media screen and (max-width: 768px) {
     #content #secondary {
       clear: both; } }
+  #content .widget-area .widget a {
+    color: #0077c5;
+    font-weight: 700; }
 
 .site-footer .footer-columns {
   list-style: none;
@@ -783,6 +786,8 @@ body {
     float: left; }
   .staff-list .info .extension, .staff-contact .info .extension {
     display: block; }
+  .staff-list a, .staff-contact a {
+    font-weight: 700; }
 
 .staff-list .image {
   width: 100px;
