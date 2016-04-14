@@ -637,7 +637,6 @@ function display_people_list($atts) {
                     </div>
                     <div class="info">
                         <span class="name">'.get_the_title().'</span>, <span class="position">'.get_field('position').'</span>
-                        <span class="tel" href="tel:800.785.3200">800.785.3200</span>
                         <span class="extension">x '.get_field('extension').'</span>
                         <span class="email"><a href="mailto:'.get_field('email').'">'.get_field('email').'</a></span>
 
