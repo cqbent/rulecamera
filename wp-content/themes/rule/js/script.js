@@ -35,8 +35,10 @@ jQuery(document).ready(function($) {
     */
     // CC signup form colorbox
     $("a.signup").colorbox({
-        width:"60%",
-        height:"600px",
+        width:"100%",
+        height: "100%",
+        maxWidth: "600px",
+        maxHeight:"600px",
         inline:true,
         href:"#cc-signup"
     });
@@ -49,7 +51,7 @@ jQuery(document).ready(function($) {
     });
     $('.home-banner.flexslider').flexslider({
         controlNav: false,
-        directionNav: false,
+        directionNav: true,
         slideshowSpeed: 4500,
         animation: 'fade',
         pauseOnHover: true,

@@ -174,9 +174,16 @@ body {
             a {
               padding: 5px 20px;
             }
-          }
-          .sub-menu .children {
-            display: none;
+            .sub-menu li {
+              .children {
+                display: none;
+              }
+              &:hover {
+                .children {
+                  display: block;
+                }
+              }
+            }
           }
         }
       }
@@ -477,7 +484,33 @@ body {
             transform: translate(-50%, -50%)
           }
         }
-
+      }
+      .flex-direction-nav {
+        a {
+          opacity: .5;
+          text-shadow: none;
+          padding: 0 5px;
+          &:hover {
+            opacity: 1;
+          }
+          &:before {
+            font-family: FontAwesome;
+            line-height: 40px;
+            color: $white;
+          }
+          &.flex-prev {
+            left: 20px;
+            &:before {
+              content: "\f0a8";
+            }
+          }
+          &.flex-next {
+            right: 20px;
+            &:before {
+              content: "\f0a9";
+            }
+          }
+        }
       }
     }
     .buy-rent-learn {
